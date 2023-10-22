@@ -2,6 +2,7 @@ import { Container, Main, Presentation } from "./style"
 
 import Header from "../../components/header"
 import Section from "../../components/section"
+import Card from "../../components/card"
 
 import cookieFruit from "../../assets/images/cookieFruit.png"
 
@@ -19,7 +20,9 @@ export function Home() {
           </div>
         </Presentation>
 
-        <Section title="Refeições"></Section>
+        <Section title="Refeições">
+          <Card/>
+        </Section>
 
         <Section title="Sobremesas"></Section>
 
