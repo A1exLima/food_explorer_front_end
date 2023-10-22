@@ -7,7 +7,7 @@ import ButtonText from "../../components/buttonText"
 
 import polygon from "../../assets/icons/polygon.svg"
 
-export function SignUp() {
+export function SignIn() {
   return (
     <Container>
       <Brand>
@@ -16,16 +16,9 @@ export function SignUp() {
       </Brand>
 
       <Content>
-        <h2>Crie sua Conta</h2>
+        <h2>Faça login</h2>
 
         <form>
-          <Input
-            identifier="name"
-            label="Seu nome"
-            id="name"
-            type="text"
-            placeholder="Exemplo: Maria da Silva"
-          />
           <Input
             identifier="email"
             label="Email"
@@ -43,11 +36,11 @@ export function SignUp() {
             placeholder="No mínimo 6 caracteres"
           />
 
-          <Button title="Criar Conta" />
+          <Button title="Entrar" />
         </form>
 
-        <Link to="/">
-          <ButtonText title="Já tenho uma conta" />
+        <Link to="/register">
+          <ButtonText title="Criar uma conta" />
         </Link>
       </Content>
     </Container>
