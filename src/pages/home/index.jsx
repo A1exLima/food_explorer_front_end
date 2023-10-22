@@ -1,6 +1,7 @@
 import { Container, Main, Presentation } from "./style"
 
 import Header from "../../components/header"
+import Section from "../../components/section"
 
 import cookieFruit from "../../assets/images/cookieFruit.png"
 
@@ -10,7 +11,6 @@ export function Home() {
       <Header />
 
       <Main>
-
         <Presentation>
           <img src={cookieFruit} alt="Biscoito de Frutas" />
           <div>
@@ -19,7 +19,11 @@ export function Home() {
           </div>
         </Presentation>
 
-        
+        <Section title="Refeições"></Section>
+
+        <Section title="Sobremesas"></Section>
+
+        <Section title="Bebidas"></Section>
       </Main>
     </Container>
   )
