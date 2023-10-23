@@ -8,6 +8,7 @@ export const Container = styled.div`
 export const Main = styled.main`
   max-width: 112rem;
   margin: 0 auto;
+  padding: 0 2rem;
 `
 
 export const Presentation = styled.figure`

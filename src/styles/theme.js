@@ -19,7 +19,8 @@ export default {
     Dark900: "#0D1D25",
     Dark1000: "#192227",
 
-    Gradients100: "linear-gradient(90deg, rgba(0, 10, 15, 0.27) 0%, #000A0F 100%)",
+    Gradients50: "linear-gradient(90deg, rgba(0, 10, 15, -0.75) 85%, #000A0F 100%)",
+    Gradients100: "linear-gradient(90deg, rgba(0, 10, 15, -0.75) 50%, #000A0F 100%)",
     Gradients200: "linear-gradient(180deg, #091E26 0%, #00131C 100%)",
 
     TintsTomato100: "#750310",

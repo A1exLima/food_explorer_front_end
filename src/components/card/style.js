@@ -13,6 +13,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  cursor: pointer;
 
   > img:nth-child(1) {
     width: 2.4rem;
