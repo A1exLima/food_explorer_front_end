@@ -1,6 +1,7 @@
 import { styled } from "styled-components"
+import { Link } from "react-router-dom"
 
-export const Container = styled.div`
+export const Container = styled(Link)`
   position: relative;
   width: fit-content;
   height: 46.2rem;
@@ -58,3 +59,5 @@ export const Container = styled.div`
     gap:1.6rem;
   }
 `
+
+

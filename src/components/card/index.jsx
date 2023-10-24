@@ -9,7 +9,8 @@ import IncludeButton from "../../components/includeButton"
 
 export default function Card() {
   return (
-    <Container>
+    <Container to="/dish">
+      
       <img src={heart} alt="Botão Favorito" />
       <img src={image1} alt="Prato 1" />
 
