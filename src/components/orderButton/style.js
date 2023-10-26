@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.button`
   border-radius: 0.5rem;
@@ -8,7 +9,7 @@ export const Container = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .8rem;
+  gap: 0.8rem;
 
   width: 21.6rem;
   padding: 1.2rem 3.2rem;
@@ -23,5 +24,9 @@ export const Container = styled.button`
 
   &:hover {
     transform: scale(0.985);
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    display: none;
   }
 `

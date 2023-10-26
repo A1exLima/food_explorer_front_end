@@ -1,8 +1,10 @@
 import { styled } from "styled-components"
 import { Link } from "react-router-dom"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.header`
   width: 100%;
+  height: 11.4rem;
   display: flex;
   justify-content: center;
   background: ${({ theme }) => theme.COLORS.Dark600};
@@ -15,7 +17,21 @@ export const Content = styled.div`
   justify-content: center;
   gap: 3.2rem;
   padding: 2.4rem 12.3rem;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    width: 100%;
+    justify-content: space-between;
+    padding: 2.4rem 2rem;
+    //height: 11.4rem;
+  }
 `
+export const SideBar = styled.div`
+
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    display: none;
+  }
+`
+
 
 export const Brand = styled(Link)`
   width: fit-content;

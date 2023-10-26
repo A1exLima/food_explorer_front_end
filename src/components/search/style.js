@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100%;
@@ -35,5 +36,9 @@ export const Container = styled.div`
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.Light500};
     }
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    display: none;
   }
 `
