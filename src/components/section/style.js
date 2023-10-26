@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100%;
@@ -38,5 +39,12 @@ export const Container = styled.div`
 
   .swiper {
     z-index: auto;
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: none;
+    }
   }
 `

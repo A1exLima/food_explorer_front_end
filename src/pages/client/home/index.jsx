@@ -16,7 +16,7 @@ import "swiper/css/navigation"
 export function Home() {
   return (
     <Container>
-      <Header/>
+      <Header />
 
       <Main>
         <Presentation>
@@ -66,10 +66,6 @@ export function Home() {
                 spaceBetween: 27,
               },
               950: {
-                slidesPerView: 3.4,
-                spaceBetween: 27,
-              },
-              1136: {
                 slidesPerView: 3.4,
                 spaceBetween: 27,
               },
@@ -226,7 +222,7 @@ export function Home() {
         </Section>
       </Main>
 
-      <Footer/>
+      <Footer />
     </Container>
   )
 }
