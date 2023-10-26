@@ -29,7 +29,7 @@ export const Content = styled.div`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    padding: 2.4rem 1rem;
+    padding: 2.4rem 2rem;
   }
 `
 

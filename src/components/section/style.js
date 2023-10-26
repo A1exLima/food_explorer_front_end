@@ -39,6 +39,12 @@ export const Container = styled.div`
 
   .swiper {
     z-index: auto;
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    flex-shrink: 1;
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {

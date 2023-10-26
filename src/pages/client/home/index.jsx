@@ -8,10 +8,11 @@ import Card from "../../../components/card"
 import cookieFruit from "../../../assets/images/cookieFruit.png"
 
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Pagination, Navigation } from "swiper/modules"
 import "swiper/css"
-import "swiper/css/pagination"
+import "swiper/css/free-mode"
 import "swiper/css/navigation"
+
+import {Navigation, FreeMode } from "swiper/modules"
 
 export function Home() {
   return (
@@ -29,49 +30,16 @@ export function Home() {
 
         <Section title="Refeições">
           <Swiper
-            slidesPerView={3.4}
-            centeredSlides={false}
+            slidesPerView={3}
             spaceBetween={27}
+            freeMode={true}
+            navigation={true}
             breakpoints={{
               300: {
-                slidesPerView: 1.4,
-                spaceBetween: 27,
-              },
-              370: {
-                slidesPerView: 1.6,
-                spaceBetween: 27,
-              },
-              410: {
-                slidesPerView: 1.8,
-                spaceBetween: 27,
-              },
-              500: {
-                slidesPerView: 2.2,
-                spaceBetween: 27,
-              },
-              580: {
-                slidesPerView: 2.6,
-                spaceBetween: 27,
-              },
-              660: {
-                slidesPerView: 3,
-                spaceBetween: 27,
-              },
-              769: {
-                slidesPerView: 2.6,
-                spaceBetween: 27,
-              },
-              850: {
-                slidesPerView: 3,
-                spaceBetween: 27,
-              },
-              950: {
-                slidesPerView: 3.4,
-                spaceBetween: 27,
+                slidesPerView: 1,
               },
             }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
+            modules={[Navigation, FreeMode]}
             className="mySwiper"
           >
             <SwiperSlide>
@@ -91,53 +59,16 @@ export function Home() {
 
         <Section title="Sobremesas">
           <Swiper
-            slidesPerView={3.4}
-            centeredSlides={false}
+            slidesPerView={3}
             spaceBetween={27}
+            freeMode={true}
+            navigation={true}
             breakpoints={{
               300: {
-                slidesPerView: 1.4,
-                spaceBetween: 27,
-              },
-              370: {
-                slidesPerView: 1.6,
-                spaceBetween: 27,
-              },
-              410: {
-                slidesPerView: 1.8,
-                spaceBetween: 27,
-              },
-              500: {
-                slidesPerView: 2.2,
-                spaceBetween: 27,
-              },
-              580: {
-                slidesPerView: 2.6,
-                spaceBetween: 27,
-              },
-              660: {
-                slidesPerView: 3,
-                spaceBetween: 27,
-              },
-              769: {
-                slidesPerView: 2.6,
-                spaceBetween: 27,
-              },
-              850: {
-                slidesPerView: 3,
-                spaceBetween: 27,
-              },
-              950: {
-                slidesPerView: 3.4,
-                spaceBetween: 27,
-              },
-              1136: {
-                slidesPerView: 3.4,
-                spaceBetween: 27,
+                slidesPerView: 1,
               },
             }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
+            modules={[Navigation, FreeMode]}
             className="mySwiper"
           >
             <SwiperSlide>
@@ -157,53 +88,16 @@ export function Home() {
 
         <Section title="Bebidas">
           <Swiper
-            slidesPerView={3.4}
-            centeredSlides={false}
+            slidesPerView={3}
             spaceBetween={27}
+            freeMode={true}
+            navigation={true}
             breakpoints={{
               300: {
-                slidesPerView: 1.4,
-                spaceBetween: 27,
-              },
-              370: {
-                slidesPerView: 1.6,
-                spaceBetween: 27,
-              },
-              410: {
-                slidesPerView: 1.8,
-                spaceBetween: 27,
-              },
-              500: {
-                slidesPerView: 2.2,
-                spaceBetween: 27,
-              },
-              580: {
-                slidesPerView: 2.6,
-                spaceBetween: 27,
-              },
-              660: {
-                slidesPerView: 3,
-                spaceBetween: 27,
-              },
-              769: {
-                slidesPerView: 2.6,
-                spaceBetween: 27,
-              },
-              850: {
-                slidesPerView: 3,
-                spaceBetween: 27,
-              },
-              950: {
-                slidesPerView: 3.4,
-                spaceBetween: 27,
-              },
-              1136: {
-                slidesPerView: 3.4,
-                spaceBetween: 27,
+                slidesPerView: 1,
               },
             }}
-            navigation={true}
-            modules={[Pagination, Navigation]}
+            modules={[Navigation, FreeMode]}
             className="mySwiper"
           >
             <SwiperSlide>
