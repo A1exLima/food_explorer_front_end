@@ -10,9 +10,9 @@ export const Container = styled.div`
 `
 
 export const Main = styled.main`
-  max-width: 112rem;
   height: 100%;
   margin: 2.4rem auto 0;
+  padding: 0 2rem;
 
   > a {
     width: fit-content;

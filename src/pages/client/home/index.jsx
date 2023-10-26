@@ -1,11 +1,11 @@
 import { Container, Main, Presentation } from "./style"
 
-import Header from "../../components/header"
-import Footer from "../../components/footer"
-import Section from "../../components/section"
-import Card from "../../components/card"
+import Header from "../../../components/header"
+import Footer from "../../../components/footer"
+import Section from "../../../components/section"
+import Card from "../../../components/card"
 
-import cookieFruit from "../../assets/images/cookieFruit.png"
+import cookieFruit from "../../../assets/images/cookieFruit.png"
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper/modules"
@@ -16,12 +16,12 @@ import "swiper/css/navigation"
 export function Home() {
   return (
     <Container>
-      <Header />
+      <Header/>  
 
       <Main>
         <Presentation>
-          <img src={cookieFruit} alt="Biscoito de Frutas" />
           <div>
+            <img src={cookieFruit} alt="Biscoito de Frutas" />
             <h2>Sabores inigualáveis</h2>
             <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
           </div>

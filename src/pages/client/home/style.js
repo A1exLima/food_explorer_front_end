@@ -14,47 +14,50 @@ export const Main = styled.main`
 export const Presentation = styled.figure`
   position: relative;
   width: 100%;
-  height: 26rem;
+  height: clamp(9.5rem, 23vw, 26rem);
   margin-top: 16.4rem;
-  padding-right: 10rem;
+  padding-right: clamp(2.1rem, 7vw, 7rem);
   border-radius: 0.8rem;
   background: ${({ theme }) => theme.COLORS.Gradients200};
 
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: end;
+  justify-content: flex-end;
+  align-items: center;
 
   > div {
+    width: fit-content;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: end;
+    justify-content: center;
+
+    > img {
+      position: absolute;
+      bottom: 0;
+      left: -2.1rem;
+      z-index: 1;
+      width: clamp(19.1rem, 56vw, 63.2rem);
+    }
 
     h2 {
+      z-index: 1;
+      white-space: nowrap;
       color: ${({ theme }) => theme.COLORS.Light300};
       font-family: var(--poppins-font-family);
-      font-size: 4rem;
+      font-size: clamp(1.2rem, 3.5vw, 4rem);
       font-weight: 500;
       line-height: 140%;
     }
 
     p {
+      z-index: 1;
+      width: clamp(55%, 37vw, 100%);
       color: ${({ theme }) => theme.COLORS.Light300};
       font-family: var(--roboto-font-family);
-      font-size: 1.6rem;
+      font-size: clamp(.88rem, 1.4vw, 1.6rem);
       font-weight: 400;
       line-height: 100%;
     }
   }
-
-  > img {
-    position: absolute;
-    top: -14.6rem;
-    left: -5.4rem;
-    z-index: 1;
-    width: 63.2rem;
-    height: 40.6rem;
-  }
 `
-
-

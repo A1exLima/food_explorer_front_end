@@ -1,14 +1,14 @@
 import { Container, Main, Content } from "./style"
 
-import Header from "../../components/header"
-import Footer from "../../components/footer"
-import Counter from "../../components/counter"
-import Button from "../../components/button"
+import Header from "../../../components/header"
+import Footer from "../../../components/footer"
+import Counter from "../../../components/counter"
+import Button from "../../../components/button"
 
 import { TbPointFilled } from "react-icons/tb"
 import { IoIosArrowBack } from "react-icons/io"
 
-import img2 from "../../assets/images/dish/Mask group.png"
+import img2 from "../../../assets/images/dish/Mask group.png"
 
 import { Link } from "react-router-dom"
 
