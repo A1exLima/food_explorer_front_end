@@ -16,7 +16,7 @@ import "swiper/css/navigation"
 export function Home() {
   return (
     <Container>
-      <Header/>  
+      <Header/>
 
       <Main>
         <Presentation>
@@ -33,36 +33,40 @@ export function Home() {
             centeredSlides={false}
             spaceBetween={27}
             breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 27,
-              },
-              340: {
-                slidesPerView: 1.1,
-                spaceBetween: 27,
-              },
-              410: {
-                slidesPerView: 1.2,
-                spaceBetween: 27,
-              },
-              476: {
+              300: {
                 slidesPerView: 1.4,
                 spaceBetween: 27,
               },
-              592: {
+              370: {
+                slidesPerView: 1.6,
+                spaceBetween: 27,
+              },
+              410: {
                 slidesPerView: 1.8,
                 spaceBetween: 27,
               },
-              728: {
+              500: {
                 slidesPerView: 2.2,
                 spaceBetween: 27,
               },
-              864: {
+              580: {
                 slidesPerView: 2.6,
                 spaceBetween: 27,
               },
-              1000: {
+              660: {
                 slidesPerView: 3,
+                spaceBetween: 27,
+              },
+              769: {
+                slidesPerView: 2.6,
+                spaceBetween: 27,
+              },
+              850: {
+                slidesPerView: 3,
+                spaceBetween: 27,
+              },
+              950: {
+                slidesPerView: 3.4,
                 spaceBetween: 27,
               },
               1136: {
@@ -74,9 +78,6 @@ export function Home() {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
             <SwiperSlide>
               <Card />
             </SwiperSlide>
@@ -98,36 +99,40 @@ export function Home() {
             centeredSlides={false}
             spaceBetween={27}
             breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 27,
-              },
-              340: {
-                slidesPerView: 1.1,
-                spaceBetween: 27,
-              },
-              410: {
-                slidesPerView: 1.2,
-                spaceBetween: 27,
-              },
-              476: {
+              300: {
                 slidesPerView: 1.4,
                 spaceBetween: 27,
               },
-              592: {
+              370: {
+                slidesPerView: 1.6,
+                spaceBetween: 27,
+              },
+              410: {
                 slidesPerView: 1.8,
                 spaceBetween: 27,
               },
-              728: {
+              500: {
                 slidesPerView: 2.2,
                 spaceBetween: 27,
               },
-              864: {
+              580: {
                 slidesPerView: 2.6,
                 spaceBetween: 27,
               },
-              1000: {
+              660: {
                 slidesPerView: 3,
+                spaceBetween: 27,
+              },
+              769: {
+                slidesPerView: 2.6,
+                spaceBetween: 27,
+              },
+              850: {
+                slidesPerView: 3,
+                spaceBetween: 27,
+              },
+              950: {
+                slidesPerView: 3.4,
                 spaceBetween: 27,
               },
               1136: {
@@ -139,9 +144,6 @@ export function Home() {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
             <SwiperSlide>
               <Card />
             </SwiperSlide>
@@ -163,36 +165,40 @@ export function Home() {
             centeredSlides={false}
             spaceBetween={27}
             breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 27,
-              },
-              340: {
-                slidesPerView: 1.1,
-                spaceBetween: 27,
-              },
-              410: {
-                slidesPerView: 1.2,
-                spaceBetween: 27,
-              },
-              476: {
+              300: {
                 slidesPerView: 1.4,
                 spaceBetween: 27,
               },
-              592: {
+              370: {
+                slidesPerView: 1.6,
+                spaceBetween: 27,
+              },
+              410: {
                 slidesPerView: 1.8,
                 spaceBetween: 27,
               },
-              728: {
+              500: {
                 slidesPerView: 2.2,
                 spaceBetween: 27,
               },
-              864: {
+              580: {
                 slidesPerView: 2.6,
                 spaceBetween: 27,
               },
-              1000: {
+              660: {
                 slidesPerView: 3,
+                spaceBetween: 27,
+              },
+              769: {
+                slidesPerView: 2.6,
+                spaceBetween: 27,
+              },
+              850: {
+                slidesPerView: 3,
+                spaceBetween: 27,
+              },
+              950: {
+                slidesPerView: 3.4,
                 spaceBetween: 27,
               },
               1136: {
@@ -204,9 +210,6 @@ export function Home() {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
             <SwiperSlide>
               <Card />
             </SwiperSlide>

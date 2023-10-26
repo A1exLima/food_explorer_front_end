@@ -19,7 +19,7 @@ export default createGlobalStyle`
     --poppins-font-family: 'Poppins', sans-serif;
     --roboto-font-family: 'Roboto', sans-serif;
     --swiper-theme-color: #E1E1E6;
-    --swiper-navigation-size: 4rem;
+    --swiper-navigation-size: clamp(2rem, 4vw, 4rem);
   }
 
   body{

@@ -1,10 +1,11 @@
 import { styled } from "styled-components"
 import { Link } from "react-router-dom"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled(Link)`
   position: relative;
   width: fit-content;
-  height: 46.2rem;
+  height: fit-content;
   padding: 2.4rem;
   border-radius: 0.8rem;
   border: 1px solid ${({ theme }) => theme.COLORS.Dark300};
@@ -26,19 +27,20 @@ export const Container = styled(Link)`
   }
 
   > img:nth-child(2) {
-    width: 17.6rem;
-    height: 17.6rem;
+    width: clamp(8.8rem, 16vw, 17.6rem);
+    height: clamp(8.8rem, 16vw, 17.6rem);
   }
 
   > h2 {
+    white-space: nowrap;
     color: ${({ theme }) => theme.COLORS.Light300};
     font-family: var(--poppins-font-family);
-    font-size: 2.4rem;
+    font-size: clamp(1.4rem, 2vw, 2.4rem);
     font-weight: 700;
   }
 
   > p:nth-child(4) {
-    width: 25.6rem;
+    width: clamp(12.5rem, 20vw, 25.6rem);
     color: ${({ theme }) => theme.COLORS.Light400};
     text-align: center;
     font-family: var(--roboto-font-family);
@@ -50,13 +52,27 @@ export const Container = styled(Link)`
   > p:nth-child(5) {
     color: ${({ theme }) => theme.COLORS.TintsCake200};
     font-family: var(--roboto-font-family);
-    font-size: 3.2rem;
+    font-size: clamp(1.6rem, 3.1vw, 3.2rem);
     font-weight: 400;
   }
 
   > div {
+    width: 100%;
     display: flex;
-    gap:1.6rem;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+
+    > p:nth-child(4) {
+      display: none;
+    }
+
+    > div {
+      flex-direction: column;
+    }
   }
 `
 

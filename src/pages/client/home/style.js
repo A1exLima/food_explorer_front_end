@@ -15,7 +15,7 @@ export const Presentation = styled.figure`
   position: relative;
   width: 100%;
   height: clamp(9.5rem, 23vw, 26rem);
-  margin-top: 16.4rem;
+  margin-top: clamp(4.4rem, 14vw, 16.4rem);
   padding-right: clamp(2.1rem, 7vw, 7rem);
   border-radius: 0.8rem;
   background: ${({ theme }) => theme.COLORS.Gradients200};

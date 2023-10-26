@@ -1,14 +1,14 @@
 import { styled } from "styled-components"
 import { Link } from "react-router-dom"
 
-export const Container = styled.div`
+export const Container = styled.header`
   width: 100%;
   display: flex;
   justify-content: center;
   background: ${({ theme }) => theme.COLORS.Dark600};
 `
 
-export const Content = styled.header`
+export const Content = styled.div`
   width: 136.8rem;
   display: flex;
   align-items: center;
