@@ -35,12 +35,12 @@ export const Container = styled(Link)`
     white-space: nowrap;
     color: ${({ theme }) => theme.COLORS.Light300};
     font-family: var(--poppins-font-family);
-    font-size: clamp(1.4rem, 2vw, 2.4rem);
+    font-size: clamp(1.4rem, 2.2vw, 2.4rem);
     font-weight: 700;
   }
 
   > p:nth-child(4) {
-    width: clamp(12.5rem, 20vw, 25.6rem);
+    width: 100%;
     color: ${({ theme }) => theme.COLORS.Light400};
     text-align: center;
     font-family: var(--roboto-font-family);
@@ -65,7 +65,6 @@ export const Container = styled(Link)`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-
     > p:nth-child(4) {
       display: none;
     }
