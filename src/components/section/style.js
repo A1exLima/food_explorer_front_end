@@ -42,11 +42,7 @@ export const Container = styled.div`
     width: 100%;
     height: 100%;
   }
-
-  .swiper-slide {
-    flex-shrink: 1;
-  }
-
+  
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     .swiper-button-prev,
     .swiper-button-next {

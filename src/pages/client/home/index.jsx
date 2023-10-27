@@ -30,13 +30,55 @@ export function Home() {
 
         <Section title="Refeições">
           <Swiper
-            slidesPerView={3}
+            slidesPerView={3.4}
             spaceBetween={27}
             freeMode={true}
             navigation={true}
             breakpoints={{
               300: {
-                slidesPerView: 1,
+                slidesPerView: 1.4,
+              },
+              350: {
+                slidesPerView: 1.5,
+              },
+              370: {
+                slidesPerView: 1.6,
+              },
+              415: {
+                slidesPerView: 1.8,
+              },
+              455: {
+                slidesPerView: 2,
+              },
+              500: {
+                slidesPerView: 2.2,
+              },
+              540: {
+                slidesPerView: 2.4,
+              },
+              620: {
+                slidesPerView: 2.8,
+              },
+              668: {
+                slidesPerView: 3,
+              },
+              769: {
+                slidesPerView: 2.6,
+              },
+              800: {
+                slidesPerView: 2.6,
+              },
+              860: {
+                slidesPerView: 2.8,
+              },
+              900: {
+                slidesPerView: 3,
+              },
+              940: {
+                slidesPerView: 3.4,
+              },
+              1136: {
+                slidesPerView: 3.4,
               },
             }}
             modules={[Navigation, FreeMode]}
@@ -59,13 +101,55 @@ export function Home() {
 
         <Section title="Sobremesas">
           <Swiper
-            slidesPerView={3}
+            slidesPerView={3.4}
             spaceBetween={27}
             freeMode={true}
             navigation={true}
             breakpoints={{
               300: {
-                slidesPerView: 1,
+                slidesPerView: 1.4,
+              },
+              350: {
+                slidesPerView: 1.5,
+              },
+              370: {
+                slidesPerView: 1.6,
+              },
+              415: {
+                slidesPerView: 1.8,
+              },
+              455: {
+                slidesPerView: 2,
+              },
+              500: {
+                slidesPerView: 2.2,
+              },
+              540: {
+                slidesPerView: 2.4,
+              },
+              620: {
+                slidesPerView: 2.8,
+              },
+              668: {
+                slidesPerView: 3,
+              },
+              769: {
+                slidesPerView: 2.6,
+              },
+              800: {
+                slidesPerView: 2.6,
+              },
+              860: {
+                slidesPerView: 2.8,
+              },
+              900: {
+                slidesPerView: 3,
+              },
+              940: {
+                slidesPerView: 3.4,
+              },
+              1136: {
+                slidesPerView: 3.4,
               },
             }}
             modules={[Navigation, FreeMode]}
@@ -88,13 +172,55 @@ export function Home() {
 
         <Section title="Bebidas">
           <Swiper
-            slidesPerView={3}
+            slidesPerView={3.4}
             spaceBetween={27}
             freeMode={true}
             navigation={true}
             breakpoints={{
               300: {
-                slidesPerView: 1,
+                slidesPerView: 1.4,
+              },
+              350: {
+                slidesPerView: 1.5,
+              },
+              370: {
+                slidesPerView: 1.6,
+              },
+              415: {
+                slidesPerView: 1.8,
+              },
+              455: {
+                slidesPerView: 2,
+              },
+              500: {
+                slidesPerView: 2.2,
+              },
+              540: {
+                slidesPerView: 2.4,
+              },
+              620: {
+                slidesPerView: 2.8,
+              },
+              668: {
+                slidesPerView: 3,
+              },
+              769: {
+                slidesPerView: 2.6,
+              },
+              800: {
+                slidesPerView: 2.6,
+              },
+              860: {
+                slidesPerView: 2.8,
+              },
+              900: {
+                slidesPerView: 3,
+              },
+              940: {
+                slidesPerView: 3.4,
+              },
+              1136: {
+                slidesPerView: 3.4,
               },
             }}
             modules={[Navigation, FreeMode]}
