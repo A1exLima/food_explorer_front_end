@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components"
-import {DEVICE_BREAKPOINTS} from "../styles/deviceBreakPoints"
 
 export default createGlobalStyle`
   *{
@@ -12,14 +11,8 @@ export default createGlobalStyle`
   :root{
     font-size: 62.5%;
 
-    @media(max-width: ${DEVICE_BREAKPOINTS.MD}){
-      //font-size: 52.5%;
-    }
-
     --poppins-font-family: 'Poppins', sans-serif;
     --roboto-font-family: 'Roboto', sans-serif;
-    --swiper-theme-color: #E1E1E6;
-    --swiper-navigation-size: clamp(2rem, 4vw, 4rem);
   }
 
   body{

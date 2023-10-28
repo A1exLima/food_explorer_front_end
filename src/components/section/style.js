@@ -11,7 +11,7 @@ export const Container = styled.div`
     position: absolute;
     top: clamp(4rem, 4vw, 6.8rem);
     left: 0;
-    z-index: 2;
+    z-index: 1;
     width: 5.4rem;
     height: 92%;
     transform: scaleX(-1);
@@ -22,7 +22,7 @@ export const Container = styled.div`
     position: absolute;
     top: clamp(4rem, 4vw, 6.8rem);
     right: 0rem;
-    z-index: 2;
+    z-index: 0;
     width: 5.4rem;
     height: 92%;
     background: ${({ theme }) => theme.COLORS.Gradients50};
@@ -37,24 +37,14 @@ export const Container = styled.div`
     margin-bottom: 2.3rem;
   }
 
-  .swiper {
-    z-index: auto;
-    width: 100%;
-    height: 100%;
-  }
-
-  .swiper-slide {
-    flex-shrink: 0;
-  }
-
-  .swiper-slide > a {
-    width: 100%;
-    height: fit-content;
+  .splide__arrow svg {
+    fill: ${({ theme }) => theme.COLORS.Light100};
+    width: clamp(2rem, 4vw, 4rem);
+    height: clamp(2rem, 4vw, 4rem);
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    .swiper-button-prev,
-    .swiper-button-next {
+    .splide__arrow svg {
       display: none;
     }
   }

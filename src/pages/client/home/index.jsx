@@ -7,16 +7,10 @@ import Card from "../../../components/card"
 
 import cookieFruit from "../../../assets/images/cookieFruit.png"
 
-import { Swiper, SwiperSlide } from "swiper/react"
-import {Navigation, FreeMode } from "swiper/modules"
-import { SWIPER_BREAKPOINTS } from "../../../styles/swiperBreakPoints"
-import "swiper/css"
-import "swiper/css/free-mode"
-import "swiper/css/navigation"
-
+import { Splide, SplideSlide } from "@splidejs/react-splide"
+import "@splidejs/react-splide/css/skyblue"
 
 export function Home() {
-  
   return (
     <Container>
       <Header />
@@ -31,84 +25,99 @@ export function Home() {
         </Presentation>
 
         <Section title="Refeições">
-          <Swiper
-            spaceBetween={27}
-            freeMode={true}
-            navigation={true}
-            breakpoints={SWIPER_BREAKPOINTS}
-            modules={[Navigation, FreeMode]}
-            className="mySwiper"
+          <Splide
+            options={{
+              fixedWidth: "fit-content",
+              gap: "2.7rem",
+              rewind: false,
+              pagination: false,
+            }}
+            aria-label="dish carousel"
           >
-            <SwiperSlide>
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-          </Swiper>
+            </SplideSlide>
+          </Splide>
         </Section>
 
         <Section title="Sobremesas">
-          <Swiper
-            spaceBetween={27}
-            freeMode={true}
-            navigation={true}
-            breakpoints={SWIPER_BREAKPOINTS}
-            modules={[Navigation, FreeMode]}
-            className="mySwiper"
+          <Splide
+            options={{
+              fixedWidth: "fit-content",
+              gap: "2.7rem",
+              rewind: false,
+              pagination: false,
+            }}
+            aria-label="dish carousel"
           >
-            <SwiperSlide>
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-          </Swiper>
+            </SplideSlide>
+          </Splide>
         </Section>
 
         <Section title="Bebidas">
-          <Swiper
-            spaceBetween={27}
-            freeMode={true}
-            navigation={true}
-            breakpoints={SWIPER_BREAKPOINTS}
-            modules={[Navigation, FreeMode]}
-            className="mySwiper"
+          <Splide
+            options={{
+              fixedWidth: "fit-content",
+              gap: "2.7rem",
+              rewind: false,
+              pagination: false,
+            }}
+            aria-label="dish carousel"
           >
-            <SwiperSlide>
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-            <SwiperSlide>
+            </SplideSlide>
+
+            <SplideSlide>
               <Card />
-            </SwiperSlide>
-          </Swiper>
+            </SplideSlide>
+          </Splide>
         </Section>
       </Main>
 

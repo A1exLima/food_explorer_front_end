@@ -4,8 +4,8 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled(Link)`
   position: relative;
-  width: fit-content;
-  height: fit-content;
+  width: 100%;
+  max-height: 46.2rem;
   padding: 2.4rem;
   border-radius: 0.8rem;
   border: 1px solid ${({ theme }) => theme.COLORS.Dark300};
@@ -14,6 +14,7 @@ export const Container = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 1.5rem;
   cursor: pointer;
 
@@ -40,7 +41,8 @@ export const Container = styled(Link)`
   }
 
   > p:nth-child(4) {
-    width: 100%;
+    max-width: clamp(12.5rem, 23.5vw, 25.5rem);
+    height: auto;
     color: ${({ theme }) => theme.COLORS.Light400};
     text-align: center;
     font-family: var(--roboto-font-family);
