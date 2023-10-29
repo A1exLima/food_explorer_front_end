@@ -4,6 +4,7 @@ import Header from "../../../components/header"
 import Footer from "../../../components/footer"
 import Counter from "../../../components/counter"
 import Button from "../../../components/button"
+import Tag from "../../../components/tag"
 
 import { TbPointFilled } from "react-icons/tb"
 import { IoIosArrowBack } from "react-icons/io"
@@ -11,6 +12,15 @@ import { IoIosArrowBack } from "react-icons/io"
 import img2 from "../../../assets/images/dish/Mask group.png"
 
 import { Link } from "react-router-dom"
+
+const tags = [
+  { id: "1", name: "alface" },
+  { id: "2", name: "cebola" },
+  { id: "3", name: "pão naan" },
+  { id: "4", name: "pepino" },
+  { id: "5", name: "rabanete" },
+  { id: "6", name: "tomate" },
+]
 
 export function Dish() {
   return (
@@ -29,11 +39,19 @@ export function Dish() {
           </figure>
 
           <div>
-            <h2>Salada Ravanello</h2>
-            <p>
-              Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
-              O pão naan dá um toque especial.
-            </p>
+            <div>
+              <h2>Salada Ravanello</h2>
+
+              <p>
+                Rabanetes, folhas verdes e molho agridoce salpicados com
+                gergelim. O pão naan dá um toque especial.
+              </p>
+
+              <div>
+                {tags &&
+                  tags.map((tag) => <Tag key={tag.id} title={tag.name} />)}
+              </div>
+            </div>
 
             <div>
               <Counter value="10" />
