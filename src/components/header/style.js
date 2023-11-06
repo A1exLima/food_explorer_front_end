@@ -38,12 +38,19 @@ export const Brand = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: end;
-  
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: .8rem;
+  }
 
   > div:first-child {
     display: flex;
     gap: 1rem;
-    
+
     > img {
       width: 3rem;
       height: 3rem;
@@ -75,5 +82,9 @@ export const Logout = styled.div`
 
   &:hover {
     transform: scale(0.95);
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    display: none;
   }
 `
