@@ -4,7 +4,7 @@ export const Container = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .1rem;
+  gap: 0.1rem;
   width: 100%;
   height: 4.8rem;
   border-radius: 0.8rem;
@@ -24,6 +24,12 @@ export const Container = styled.button`
   }
 
   > svg {
-    font-size: .8rem;
+    font-size: 0.8rem;
+  }
+
+  > img {
+    width: 2.1633rem;
+    height: 2.1633rem;
+    margin-right: .541rem;
   }
 `

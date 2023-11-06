@@ -7,7 +7,7 @@ import polygon from "../../assets/icons/polygon.svg"
 import signOut from "../../assets/icons/signOut.svg"
 import menu from "../../assets/icons/menu.svg"
 
-export default function Header() {
+export default function Header({ admin }) {
   return (
     <Container>
       <Content>
@@ -16,8 +16,12 @@ export default function Header() {
         </SideBar>
 
         <Brand to="/">
-          <img src={polygon} alt="logo food explorer" />
-          <h1>food explorer</h1>
+          <div>
+            <img src={polygon} alt="logo food explorer" />
+            <h1>food explorer</h1>
+          </div>
+
+          <div>{admin ? <p>Admin</p> : ""}</div>
         </Brand>
 
         <Search
@@ -26,12 +30,16 @@ export default function Header() {
           placeholder="Busque por pratos ou ingredientes"
         />
 
-        <OrderButton
-          iconAndAmount={true}
-          type="button"
-          title="Pedidos"
-          value="10"
-        />
+        {admin ? (
+          <OrderButton iconAndAmount={false} type="button" title="Novo Prato" />
+        ) : (
+          <OrderButton
+            iconAndAmount={true}
+            type="button"
+            title="Pedidos"
+            value="10"
+          />
+        )}
 
         <Logout>
           <img src={signOut} alt="Logout" />

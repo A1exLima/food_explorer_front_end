@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 
-import { Home } from "../pages/client/home"
-import { Dish } from "../pages/client/dish"
+import { Home } from "../pages/home"
+import { Dish } from "../pages/dish"
 
 export function AppRoutes() {
   return (

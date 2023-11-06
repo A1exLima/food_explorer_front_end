@@ -11,7 +11,7 @@ export const Container = styled.button`
   justify-content: center;
   gap: 0.8rem;
 
-  width: 21.6rem;
+  min-width: 21.6rem;
   padding: 1.2rem 3.2rem;
 
   color: ${({ theme }) => theme.COLORS.Light100};
@@ -19,6 +19,8 @@ export const Container = styled.button`
   font-family: var(--poppins-font-family);
   font-size: 1.4rem;
   font-weight: 500;
+  white-space: nowrap;
+  
 
   transition: transform 0.4s ease-in-out;
 

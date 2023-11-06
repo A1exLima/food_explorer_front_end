@@ -1,15 +1,17 @@
 import { Container, Main, Content } from "./style"
 
-import Header from "../../../components/header"
-import Footer from "../../../components/footer"
-import Counter from "../../../components/counter"
-import Button from "../../../components/button"
-import Tag from "../../../components/tag"
+import Header from "../../components/header"
+import Footer from "../../components/footer"
+import Counter from "../../components/counter"
+import Button from "../../components/button"
+import Tag from "../../components/tag"
 
 import { TbPointFilled } from "react-icons/tb"
 import { IoIosArrowBack } from "react-icons/io"
 
-import img2 from "../../../assets/images/dish/Mask group.png"
+import img2 from "../../assets/images/dish/Mask group.png"
+
+import receipt from "../../assets/icons/receipt.svg"
 
 import { Link } from "react-router-dom"
 
@@ -20,6 +22,10 @@ const tags = [
   { id: "4", name: "pepino" },
   { id: "5", name: "rabanete" },
   { id: "6", name: "tomate" },
+  { id: "7", name: "rabanete" },
+  { id: "8", name: "tomate" },
+  { id: "9", name: "rabanete" },
+  { id: "10", name: "tomate" },
 ]
 
 export function Dish() {
@@ -56,9 +62,10 @@ export function Dish() {
             <div>
               <Counter value="10" />
               <Button
+                img={receipt}
                 icon={TbPointFilled}
                 type="button"
-                title="incluir"
+                title="pedir"
                 value="R$25,00"
               />
             </div>

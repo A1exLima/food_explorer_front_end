@@ -1,19 +1,24 @@
 import { Container, Main, Presentation } from "./style"
 
-import Header from "../../../components/header"
-import Footer from "../../../components/footer"
-import Section from "../../../components/section"
-import Card from "../../../components/card"
+import Header from "../../components/header"
+import Footer from "../../components/footer"
+import Section from "../../components/section"
+import Card from "../../components/card"
 
-import cookieFruit from "../../../assets/images/cookieFruit.png"
+import cookieFruit from "../../assets/images/cookieFruit.png"
 
 import { Splide, SplideSlide } from "@splidejs/react-splide"
 import "@splidejs/react-splide/css/skyblue"
 
+import { useState } from "react"
+
 export function Home() {
+
+  const [admin, setAdmin] = useState(true)
+  
   return (
     <Container>
-      <Header />
+      <Header admin={admin} />
 
       <Main>
         <Presentation>
@@ -35,23 +40,23 @@ export function Home() {
             aria-label="dish carousel"
           >
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
           </Splide>
         </Section>
@@ -67,23 +72,23 @@ export function Home() {
             aria-label="dish carousel"
           >
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
           </Splide>
         </Section>
@@ -99,23 +104,23 @@ export function Home() {
             aria-label="dish carousel"
           >
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
 
             <SplideSlide>
-              <Card />
+              <Card admin={admin} />
             </SplideSlide>
           </Splide>
         </Section>

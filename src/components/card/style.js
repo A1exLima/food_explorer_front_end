@@ -4,8 +4,9 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled(Link)`
   position: relative;
+  z-index: 0;
   width: 100%;
-  max-height: 46.2rem;
+  height: clamp(29.2rem, 48vw, 46.2rem);
   padding: 2.4rem;
   border-radius: 0.8rem;
   border: 1px solid ${({ theme }) => theme.COLORS.Dark300};
@@ -20,7 +21,7 @@ export const Container = styled(Link)`
 
   > img:nth-child(1) {
     width: 2.4rem;
-    height: 2.2rem;
+    height: 2.4rem;
     position: absolute;
     z-index: 1;
     right: 1.8rem;

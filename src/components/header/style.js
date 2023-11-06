@@ -22,34 +22,49 @@ export const Content = styled.div`
     width: 100%;
     justify-content: space-between;
     padding: 2.4rem 2rem;
-    //height: 11.4rem;
   }
 `
+
 export const SideBar = styled.div`
-
-  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
-    display: none;
+  display: none;
+  
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    display: block;
   }
 `
-
 
 export const Brand = styled(Link)`
   width: fit-content;
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: end;
+  
 
-  > img {
-    width: 3rem;
-    height: 3rem;
+  > div:first-child {
+    display: flex;
+    gap: 1rem;
+    
+    > img {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    > h1 {
+      color: ${({ theme }) => theme.COLORS.Light100};
+      font-family: var(--roboto-font-family);
+      font-size: 2.4rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
   }
 
-  > h1 {
-    color: ${({ theme }) => theme.COLORS.Light100};
-    font-family: var(--roboto-font-family);
-    font-size: 2.4rem;
-    font-weight: 700;
-    white-space: nowrap;
+  > div:last-child {
+    > p {
+      color: ${({ theme }) => theme.COLORS.TintsCake200};
+      font-family: var(--roboto-font-family);
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
   }
 `
 
