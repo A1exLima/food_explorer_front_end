@@ -14,6 +14,7 @@ import img2 from "../../assets/images/dish/Mask group.png"
 import receipt from "../../assets/icons/receipt.svg"
 
 import { Link } from "react-router-dom"
+import { useState } from "react"
 
 const tags = [
   { id: "1", name: "alface" },
@@ -29,9 +30,11 @@ const tags = [
 ]
 
 export function Dish() {
+  const [admin, setAdmin] = useState(true)
+
   return (
     <Container>
-      <Header />
+      <Header admin={admin} />
 
       <Main>
         <Link to="/">
@@ -59,16 +62,22 @@ export function Dish() {
               </div>
             </div>
 
-            <div>
-              <Counter value="10" />
-              <Button
-                img={receipt}
-                icon={TbPointFilled}
-                type="button"
-                title="pedir"
-                value="R$25,00"
-              />
-            </div>
+            {admin ? (
+              <div>
+                <Button type="button" title="Editar prato" />
+              </div>
+            ) : (
+              <div>
+                <Counter value="10" />
+                <Button
+                  img={receipt}
+                  icon={TbPointFilled}
+                  type="button"
+                  title="pedir"
+                  value="R$25,00"
+                />
+              </div>
+            )}
           </div>
         </Content>
       </Main>
