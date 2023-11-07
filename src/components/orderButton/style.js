@@ -20,7 +20,6 @@ export const Container = styled.button`
   font-size: 1.4rem;
   font-weight: 500;
   white-space: nowrap;
-  
 
   transition: transform 0.4s ease-in-out;
 

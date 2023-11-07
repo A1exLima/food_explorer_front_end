@@ -34,7 +34,8 @@ export default function Header({ admin }) {
           <OrderButton 
             iconAndAmount={false} 
             type="button" 
-            title="Novo Prato" 
+            title="Novo Prato"
+            link="/new_dish" 
           />
         ) : (
           <OrderButton
