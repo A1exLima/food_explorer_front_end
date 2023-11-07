@@ -31,7 +31,11 @@ export default function Header({ admin }) {
         />
 
         {admin ? (
-          <OrderButton iconAndAmount={false} type="button" title="Novo Prato" />
+          <OrderButton 
+            iconAndAmount={false} 
+            type="button" 
+            title="Novo Prato" 
+          />
         ) : (
           <OrderButton
             iconAndAmount={true}

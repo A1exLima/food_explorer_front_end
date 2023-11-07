@@ -2,6 +2,7 @@ import { Container, Main, Content } from "./style"
 
 import Header from "../../components/header"
 import Footer from "../../components/footer"
+import ToGoBack from "../../components/toGoBack"
 import Counter from "../../components/counter"
 import Button from "../../components/button"
 import Tag from "../../components/tag"
@@ -37,10 +38,7 @@ export function Dish() {
       <Header admin={admin} />
 
       <Main>
-        <Link to="/">
-          <IoIosArrowBack />
-          voltar
-        </Link>
+        <ToGoBack link="/"/>
 
         <Content>
           <figure>

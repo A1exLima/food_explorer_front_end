@@ -14,28 +14,6 @@ export const Main = styled.main`
   height: 100%;
   margin: 2.4rem auto 3.357rem;
   padding: 0 2rem;
-
-  > a {
-    width: fit-content;
-    display: flex;
-    align-items: center;
-
-    color: ${({ theme }) => theme.COLORS.Light300};
-    font-family: var(--poppins-font-family);
-    font-size: 2.4rem;
-    font-weight: 700;
-
-    > svg {
-      font-size: 3.2rem;
-      padding-top: 0.1rem;
-    }
-
-    transition: filter 0.4s ease-in-out;
-
-    &:hover {
-      filter: brightness(70%);
-    }
-  }
 `
 
 export const Content = styled.div`

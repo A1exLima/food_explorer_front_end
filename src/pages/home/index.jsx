@@ -19,7 +19,6 @@ export function Home() {
   return (
     <Container>
       <Header admin={admin} />
-
       <Main>
         <Presentation>
           <div>
