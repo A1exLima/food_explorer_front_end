@@ -17,6 +17,7 @@ export const Container = styled.button`
   font-family: var(--poppins-font-family);
   font-size: 1.4rem;
   font-weight: 500;
+  white-space: nowrap;
 
   transition: transform 0.4s ease-in-out;
 
@@ -26,6 +27,5 @@ export const Container = styled.button`
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     width: 100%;
-    
   }
 `
