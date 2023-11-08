@@ -1,13 +1,14 @@
 import { styled } from "styled-components"
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
+import { Link } from "react-router-dom"
 
-export const Container = styled.button`
+export const Container = styled(Link)`
   width: fit-content;
   height: 4.8rem;
   border-radius: 0.5rem;
   padding: 1.2rem 2.4rem;
   border: none;
-  background: ${({ theme }) => theme.COLORS.TintsTomato400};
+  background: ${({ theme }) => theme.COLORS.Dark800};
 
   display: flex;
   align-items: center;
@@ -17,6 +18,7 @@ export const Container = styled.button`
   font-family: var(--poppins-font-family);
   font-size: 1.4rem;
   font-weight: 500;
+  white-space: nowrap;
 
   transition: transform 0.4s ease-in-out;
 
@@ -26,6 +28,5 @@ export const Container = styled.button`
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     width: 100%;
-    
   }
 `

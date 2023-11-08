@@ -1,18 +1,21 @@
 import { Container } from "./style"
 
 import Counter from "../../components/counter"
+import IncludeButton from "../../components/includeButton"
 
 import image1 from "../../assets/images/dish/img1.png"
 import heart from "../../assets/icons/Heart.svg"
 import pencil from "../../assets/icons/pencil.svg"
 
-import IncludeButton from "../../components/includeButton"
+import { Link } from "react-router-dom"
 
 export default function Card({ admin = false }) {
   return (
     <Container to="/dish">
       {admin ? (
-        <img src={pencil} alt="Editar Prato" />
+        <Link to="/edit_dish">
+          <img src={pencil} alt="Editar Prato" />
+        </Link>
       ) : (
         <img src={heart} alt="Favoritar Prato" />
       )}

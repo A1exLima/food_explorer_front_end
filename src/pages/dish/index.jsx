@@ -38,7 +38,7 @@ export function Dish() {
       <Header admin={admin} />
 
       <Main>
-        <ToGoBack link="/"/>
+        <ToGoBack link="/" />
 
         <Content>
           <figure>
@@ -62,7 +62,7 @@ export function Dish() {
 
             {admin ? (
               <div>
-                <Button type="button" title="Editar prato" />
+                <Button to="/edit_dish" type="button" title="Editar prato" />
               </div>
             ) : (
               <div>
