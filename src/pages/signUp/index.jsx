@@ -21,7 +21,7 @@ export function SignUp() {
         <form>
           <Input
             identifier="name"
-            label="Seu nome"
+            label="Nome"
             id="name"
             type="text"
             placeholder="Exemplo: Maria da Silva"
@@ -43,12 +43,19 @@ export function SignUp() {
             placeholder="No mínimo 6 caracteres"
           />
 
+<Input
+            identifier="confirmPassword"
+            label="Confirme a senha"
+            id="confirmPassword"
+            type="password"
+            autoComplete="current-password"
+            placeholder="No mínimo 6 caracteres"
+          />
+
           <Button title="Criar Conta" />
         </form>
 
-        <Link to="/">
-          <ButtonText title="Já tenho uma conta" />
-        </Link>
+        <ButtonText to="/" title="Já tenho uma conta" />
       </Content>
     </Container>
   )

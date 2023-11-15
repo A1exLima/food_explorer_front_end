@@ -14,7 +14,7 @@ import { useState } from "react"
 
 export function Home() {
 
-  const [admin, setAdmin] = useState(true)
+  const [admin, setAdmin] = useState(false)
   
   return (
     <Container>

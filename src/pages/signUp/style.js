@@ -29,7 +29,7 @@ export const Brand = styled.div`
 
 export const Content = styled.div`
   width: 47.6rem;
-  padding: 6.4rem;
+  padding: 4.6rem;
   border-radius: 1.6rem;
   background: ${({ theme }) => theme.COLORS.Dark700};
 

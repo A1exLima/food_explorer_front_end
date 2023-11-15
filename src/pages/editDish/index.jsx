@@ -14,7 +14,7 @@ import { IoIosArrowDown } from "react-icons/io"
 import { useState } from "react"
 
 export function EditDish() {
-  const [admin, setAdmin] = useState(true)
+  const [admin, setAdmin] = useState(false)
 
   return (
     <Container>

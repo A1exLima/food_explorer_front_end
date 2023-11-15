@@ -34,6 +34,21 @@ export const Container = styled(Link)`
     }
   }
 
+  img:nth-child(1) {
+    width: 2.4rem;
+    height: 2.4rem;
+    position: absolute;
+    z-index: 1;
+    right: 1.8rem;
+    top: 1.6rem;
+
+    transition: transform 0.4s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
   > img:nth-child(2) {
     width: clamp(8.8rem, 16vw, 17.6rem);
     height: clamp(8.8rem, 16vw, 17.6rem);
