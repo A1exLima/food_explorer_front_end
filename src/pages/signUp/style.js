@@ -8,7 +8,8 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-evenly;
   padding: 2rem;
-
+  position: relative;
+  overflow: hidden;
 `
 
 export const Brand = styled.div`

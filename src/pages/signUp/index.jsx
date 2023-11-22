@@ -20,7 +20,7 @@ export function SignUp() {
 
   const [alertMessage, setAlertMessage] = useState("")
   const [color, setColor] = useState("")
-  const [messageDisplayTime, setMessageDisplayTime] = useState(2500)
+  const [messageDisplayTime, setMessageDisplayTime] = useState(3000)
 
   const navigate = useNavigate()
 

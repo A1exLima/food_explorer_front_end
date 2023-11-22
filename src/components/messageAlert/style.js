@@ -1,48 +1,64 @@
 import { styled } from "styled-components"
 
 export const Container = styled.div`
-  display: ${({ $displayHide }) => ($displayHide ? "block" : "none")};
   position: absolute;
   top: 0;
   right: 0;
+  margin: 2rem;
+`
 
-  animation: hide linear forwards;
-  animation-duration: ${({ $messageDisplayTime }) =>
-    `${$messageDisplayTime}ms`};
+export const Content = styled.div`
+  display: ${({ $displayHide }) => ($displayHide ? "block" : "none")};
+  width: 32rem;
+  height: 6.5rem;
+  padding: 2rem;
+  position: absolute;
+  border-radius: 0.8rem;
+  background: ${({ theme }) => theme.COLORS.Dark700};
 
-  @keyframes hide {
-    to {
-      display: none;
+  animation: ${({ $messageDisplayTime }) =>
+    `right-to-left-shift 0.3s linear forwards, hide 0.3s forwards ${$messageDisplayTime}ms`};
+
+  @keyframes right-to-left-shift {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: -31.5rem;
     }
   }
 
-  border-radius: 0.8rem;
-  background: ${({ theme }) => theme.COLORS.Dark700};
-  width: fit-content;
-  height: 6.5rem;
-  margin: 2rem;
-  padding: 2rem;
+  @keyframes hide {
+    to {
+      left: 5rem;
+      display: none;
+    }
+  }
 
   > div:first-child {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     gap: 2rem;
 
     > svg {
       font-size: 2.2rem;
-      margin-top: 0.1rem;
+      margin-top: -0.2rem;
 
       color: ${({ $color, theme }) =>
         $color ? theme.COLORS.TintsCake200 : theme.COLORS.TintsCarrot200};
     }
 
     > p {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       font-weight: 400;
       font-family: var(--poppins-font-family);
+      //width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      //border: 1px solid red;
     }
   }
 
