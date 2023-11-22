@@ -1,10 +1,11 @@
 import {Container} from "./style"
+import { FaRotate } from "react-icons/fa6"
 
-export default function Button({icon : Icon, img, value, title, ...rest}){
+export default function Button({icon : Icon, img, value, title, $loading = false, ...rest}){
   return (
-    <Container {...rest}>
+    <Container $loading={$loading} {...rest}>
       {img && <img src={img} alt="Pedir um prato" />}
-      {title}
+      {$loading ? <FaRotate /> : title}
       {Icon && <Icon />}
       {value && value}
     </Container>

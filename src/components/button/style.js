@@ -25,12 +25,22 @@ export const Container = styled(Link)`
   }
 
   > svg {
-    font-size: 0.8rem;
+    font-size: ${({ $loading }) => ($loading ? "1.9rem" : ".8rem")};
+    animation: rotate .7s linear infinite;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   > img {
     width: 2.1633rem;
     height: 2.1633rem;
-    margin-right: .541rem;
+    margin-right: 0.541rem;
   }
 `

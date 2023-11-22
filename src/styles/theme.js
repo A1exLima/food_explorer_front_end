@@ -29,6 +29,7 @@ export default {
     TintsTomato400: "#AB4D55",
 
     TintsCarrot100: "#FBA94C",
+    TintsCarrot200:"#D37F1F",
     
     TintsMint100: "#04D361",
     
