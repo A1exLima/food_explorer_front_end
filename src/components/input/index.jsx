@@ -1,8 +1,8 @@
 import { Container } from "./style"
 
-export default function Input({ identifier, label, ...rest }) {
+export default function Input({$margin, identifier, label, ...rest }) {
   return (
-    <Container>
+    <Container $margin={$margin}>
       <label htmlFor={identifier}>{label}</label>
       <input {...rest} />
     </Container>

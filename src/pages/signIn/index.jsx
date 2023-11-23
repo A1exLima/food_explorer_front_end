@@ -1,29 +1,38 @@
+import { useEffect, useState } from "react"
+
 import { Container, Brand, Content } from "./style"
 
 import Input from "../../components/input"
 import Button from "../../components/button"
 import ButtonText from "../../components/buttonText"
 import MessageAlert from "../../components/messageAlert"
-import {displayTimeMessageAlert} from "../../configs/messageAlert"
 
 import polygon from "../../assets/icons/polygon.svg"
 
-import { useEffect, useState } from "react"
+import { configDisplayTimeMessageAlert } from "../../configs/messageAlert"
+
 import { useAuth } from "../../hooks/auth"
+import { validateEmail, validatePassword } from "../../hooks/validatingFormInputs"
 
 export function SignIn() {
   const { signIn, user, alertMessage, setAlertMessage, color } = useAuth()
-  
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
 
-  const [messageDisplayTime, setMessageDisplayTime] = useState(displayTimeMessageAlert.timer)
+  const [email, setEmail] = useState("")
+  const [validEmail, setValidEmail] = useState(true)
+  const [password, setPassword] = useState("")
+  const [validPassword, setValidPassword] = useState(true)
+
+  const [messageDisplayTime, setMessageDisplayTime] = useState(
+    configDisplayTimeMessageAlert.timer
+  )
   const [waiting, setWaiting] = useState(true)
 
-  useEffect(() => {
-    setAlertMessage("")
-  }, [setAlertMessage])
-  
+  function handleClick() {
+    if (waiting) {
+      handleSignIn()
+    }
+  }
+
   function handleSignIn() {
     signIn({ email, password })
     setWaiting(false)
@@ -33,11 +42,19 @@ export function SignIn() {
     }, messageDisplayTime)
   }
 
-  function handleClick() {
-    if (waiting) {
-      handleSignIn()
-    }
+  function handleValidateEmail(e) {
+    const newEmail = e.target.value
+    validateEmail(newEmail, setEmail, setValidEmail)
   }
+
+  function handleValidatePassword(e) {
+    const newPassword = e.target.value
+    validatePassword(newPassword, setPassword, setValidPassword)
+  }
+
+  useEffect(() => {
+    setAlertMessage("")
+  }, [setAlertMessage])
 
   return (
     <Container>
@@ -61,10 +78,13 @@ export function SignIn() {
             label="Email"
             id="email"
             type="email"
-            autoComplete="username"
+            autoComplete="email"
             placeholder="Exemplo: exemplo@exemplo.com.br"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleValidateEmail}
+            $margin={validEmail}
           />
+          {!validEmail && <p>Por favor, insira um email válido.</p>}
+
           <Input
             identifier="password"
             label="Senha"
@@ -72,8 +92,10 @@ export function SignIn() {
             type="password"
             autoComplete="current-password"
             placeholder="No mínimo 6 caracteres"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleValidatePassword}
+            $margin={validPassword}
           />
+          {!validPassword && <p>A senha deve conter no mínimo 4 caracteres.</p>}
 
           <Button
             title="Entrar"

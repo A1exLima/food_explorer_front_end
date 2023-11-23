@@ -6,7 +6,7 @@ export const Container = styled.div`
   background: transparent;
   display: flex;
   flex-direction: column;
-  margin-bottom: 3.2rem;
+  margin-bottom: ${({$margin}) => $margin ? "3.2rem" : "1rem"};
 
   > label {
     color: ${({ theme }) => theme.COLORS.Light400};

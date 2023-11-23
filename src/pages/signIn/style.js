@@ -10,7 +10,6 @@ export const Container = styled.div`
   padding: 2rem;
   position: relative;
   overflow: hidden;
-
 `
 
 export const Brand = styled.div`
@@ -45,5 +44,13 @@ export const Content = styled.div`
     font-family: var(--poppins-font-family);
     font-weight: 500;
     color: ${({ theme }) => theme.COLORS.Light100};
+  }
+
+  > form > p {
+    margin-bottom: 2.2rem;
+    font-size: 1.2rem;
+    font-family: var(--poppins-font-family);
+    font-weight: 500;
+    color: ${({ theme }) => theme.COLORS.TintsTomato400};
   }
 `

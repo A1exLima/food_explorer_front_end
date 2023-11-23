@@ -9,7 +9,7 @@ import Input from "../../components/input"
 import Button from "../../components/button"
 import ButtonText from "../../components/buttonText"
 import MessageAlert from "../../components/messageAlert"
-import { displayTimeMessageAlert } from "../../configs/messageAlert"
+import { configDisplayTimeMessageAlert } from "../../configs/messageAlert"
 
 import polygon from "../../assets/icons/polygon.svg"
 
@@ -21,7 +21,7 @@ export function SignUp() {
 
   const [alertMessage, setAlertMessage] = useState("")
   const [color, setColor] = useState("")
-  const [messageDisplayTime, setMessageDisplayTime] = useState(displayTimeMessageAlert.timer)
+  const [messageDisplayTime, setMessageDisplayTime] = useState(configDisplayTimeMessageAlert.timer)
   const [waiting, setWaiting] = useState(true)
 
   const navigate = useNavigate()
