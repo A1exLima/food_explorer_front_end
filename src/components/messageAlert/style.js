@@ -55,10 +55,9 @@ export const Content = styled.div`
       font-size: 1.4rem;
       font-weight: 400;
       font-family: var(--poppins-font-family);
-      //width: 100%;
       text-align: center;
       white-space: nowrap;
-      //border: 1px solid red;
+
     }
   }
 

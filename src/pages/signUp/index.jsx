@@ -9,6 +9,7 @@ import Input from "../../components/input"
 import Button from "../../components/button"
 import ButtonText from "../../components/buttonText"
 import MessageAlert from "../../components/messageAlert"
+import { displayTimeMessageAlert } from "../../configs/messageAlert"
 
 import polygon from "../../assets/icons/polygon.svg"
 
@@ -20,7 +21,8 @@ export function SignUp() {
 
   const [alertMessage, setAlertMessage] = useState("")
   const [color, setColor] = useState("")
-  const [messageDisplayTime, setMessageDisplayTime] = useState(3000)
+  const [messageDisplayTime, setMessageDisplayTime] = useState(displayTimeMessageAlert.timer)
+  const [waiting, setWaiting] = useState(true)
 
   const navigate = useNavigate()
 
@@ -45,6 +47,18 @@ export function SignUp() {
           setColor(false)
         }
       })
+
+      setWaiting(false)
+
+      setTimeout(() => {
+        setWaiting(true)
+      }, messageDisplayTime)
+  }
+
+  function handleClick() {
+    if (waiting) {
+      handleSignUp()
+    }
   }
 
   return (
@@ -101,7 +115,11 @@ export function SignUp() {
             placeholder="No mínimo 6 caracteres"
           />
 
-          <Button onClick={handleSignUp} title="Criar Conta" />
+          <Button
+            $loading={!waiting}
+            onClick={waiting ? handleClick : ""}
+            title="Criar Conta"
+          />
         </form>
         <ButtonText to="/" title="Já tenho uma conta" />
       </Content>
