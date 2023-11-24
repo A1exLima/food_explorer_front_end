@@ -3,34 +3,34 @@ import { styled } from "styled-components"
 export const Container = styled.div`
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   margin: 2rem;
 `
 
 export const Content = styled.div`
   display: ${({ $displayHide }) => ($displayHide ? "block" : "none")};
-  width: 32rem;
+  width: 33rem;
   height: 6.5rem;
   padding: 2rem;
   position: absolute;
   border-radius: 0.8rem;
-  background: ${({ theme }) => theme.COLORS.Dark700};
+  background: ${({ theme }) => theme.COLORS.Dark600};
 
   animation: ${({ $messageDisplayTime }) =>
     `right-to-left-shift 0.3s linear forwards, hide 0.3s forwards ${$messageDisplayTime}ms`};
 
   @keyframes right-to-left-shift {
     0% {
-      left: 0;
+      right: 0;
     }
     100% {
-      left: -31.5rem;
+      right: -32.5rem;
     }
   }
 
   @keyframes hide {
     to {
-      left: 5rem;
+      right: 5rem;
       display: none;
     }
   }
@@ -57,7 +57,6 @@ export const Content = styled.div`
       font-family: var(--poppins-font-family);
       text-align: center;
       white-space: nowrap;
-
     }
   }
 
