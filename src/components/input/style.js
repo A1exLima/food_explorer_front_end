@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100%;
@@ -6,7 +7,11 @@ export const Container = styled.div`
   background: transparent;
   display: flex;
   flex-direction: column;
-  margin-bottom: ${({$margin}) => $margin ? "3.2rem" : "1rem"};
+  margin-bottom: ${({ $margin }) => ($margin ? "3.2rem" : "1rem")};
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    margin-bottom: ${({ $margin }) => ($margin ? "2.2rem" : "1rem")};
+  }
 
   > label {
     color: ${({ theme }) => theme.COLORS.Light400};

@@ -39,6 +39,7 @@ export function SignUp() {
   const [messageDisplayTime, setMessageDisplayTime] = useState(
     configDisplayTimerMessageAlert.timer
   )
+  
   const [waiting, setWaiting] = useState(true)
 
   const navigate = useNavigate()
@@ -129,7 +130,7 @@ export function SignUp() {
             placeholder="Exemplo: Maria da Silva"
             $margin={validName}
           />
-          {!validName && <p>A nome deve conter no mínimo 3 caracteres.</p>}
+          {!validName && <p>O nome deve conter no mínimo 3 caracteres.</p>}
 
           <Input
             onChange={handleValidateEmail}
