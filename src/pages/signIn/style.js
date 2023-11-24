@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100vw;
@@ -10,6 +11,15 @@ export const Container = styled.div`
   padding: 2rem;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    padding: 3.5rem;
+  }
 `
 
 export const Brand = styled.div`
@@ -26,11 +36,27 @@ export const Brand = styled.div`
     color: ${({ theme }) => theme.COLORS.Light100};
     white-space: nowrap;
   }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    padding-right: 0;
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+
+    > img {
+      width: 4.33rem;
+      height: 4.33rem;
+    }
+
+    > h1 {
+      font-size: clamp(3.72rem, 9vw, 4.2rem);
+    }
+  }
 `
 
 export const Content = styled.div`
   width: 47.6rem;
-  padding: 6.4rem;
+  padding: 4.6rem;
   border-radius: 1.6rem;
   background: ${({ theme }) => theme.COLORS.Dark700};
 
@@ -52,5 +78,19 @@ export const Content = styled.div`
     font-family: var(--poppins-font-family);
     font-weight: 500;
     color: ${({ theme }) => theme.COLORS.TintsTomato400};
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    max-width: 100%;
+    background: transparent;
+    padding: 0 4.6rem;
+
+    > h2 {
+      display: none;
+    }
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    padding: 0;
   }
 `

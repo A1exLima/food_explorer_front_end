@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   position: absolute;
@@ -79,5 +80,9 @@ export const Content = styled.div`
     to {
       width: 100%;
     }
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    background: ${({ theme }) => theme.COLORS.Dark900};
   }
 `

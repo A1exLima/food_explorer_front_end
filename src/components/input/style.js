@@ -9,10 +9,6 @@ export const Container = styled.div`
   flex-direction: column;
   margin-bottom: ${({ $margin }) => ($margin ? "3.2rem" : "1rem")};
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
-    margin-bottom: ${({ $margin }) => ($margin ? "2.2rem" : "1rem")};
-  }
-
   > label {
     color: ${({ theme }) => theme.COLORS.Light400};
     font-family: var(--roboto-font-family);

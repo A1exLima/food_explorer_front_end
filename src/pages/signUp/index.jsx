@@ -45,7 +45,6 @@ export function SignUp() {
   const navigate = useNavigate()
 
   async function handleSignUp() {
-    setAlertMessage("")
     if (validName && validEmail && validPassword && validConfirmPassword) {
       await api
         .post("/users", {

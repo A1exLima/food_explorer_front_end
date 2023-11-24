@@ -47,7 +47,6 @@ export const Brand = styled.div`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
-    margin-bottom: 5rem;
 
     > img {
       width: 4.33rem;
