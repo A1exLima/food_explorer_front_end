@@ -3,7 +3,7 @@ import { styled } from "styled-components"
 export const Container = styled.div`
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   margin: 2rem;
 `
 
@@ -17,20 +17,20 @@ export const Content = styled.div`
   background: ${({ theme }) => theme.COLORS.Dark700};
 
   animation: ${({ $messageDisplayTime }) =>
-    `right-to-left-shift 0.3s linear forwards, hide 0.3s forwards ${$messageDisplayTime}ms`};
+    `right-to-left-shift .3s linear forwards, hide .3s forwards ${$messageDisplayTime}ms`};
 
   @keyframes right-to-left-shift {
     0% {
-      right: 0;
+      left: 0;
     }
     100% {
-      right: -32.5rem;
+      left: -32.5rem;
     }
   }
 
   @keyframes hide {
     to {
-      right: 5rem;
+      left: 5rem;
       display: none;
     }
   }
@@ -46,7 +46,6 @@ export const Content = styled.div`
     > svg {
       font-size: 2.2rem;
       margin-top: -0.2rem;
-
       color: ${({ $color, theme }) =>
         $color ? theme.COLORS.TintsCake200 : theme.COLORS.TintsCarrot200};
     }
@@ -70,6 +69,7 @@ export const Content = styled.div`
     bottom: 0;
     right: 0;
     border-radius: 0 0 0.8rem 0;
+
     animation: left-to-right-no-fill linear forwards reverse;
     animation-duration: ${({ $messageDisplayTime }) =>
       `${$messageDisplayTime}ms`};

@@ -45,7 +45,7 @@ export function SignUp() {
   const navigate = useNavigate()
 
   async function handleSignUp() {
-
+    setAlertMessage("")
     if (validName && validEmail && validPassword && validConfirmPassword) {
       await api
         .post("/users", {
@@ -80,7 +80,7 @@ export function SignUp() {
     setTimeout(() => {
       setWaiting(true)
       setAlertMessage("")
-    }, messageDisplayTime)
+    }, messageDisplayTime + 150)
   }
 
   function handleClick() {

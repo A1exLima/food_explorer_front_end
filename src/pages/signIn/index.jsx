@@ -49,7 +49,7 @@ export function SignIn() {
     setTimeout(() => {
       setWaiting(true)
       setAlertMessage("")
-    }, messageDisplayTime)
+    }, messageDisplayTime + 150)
   }
 
   function handleValidateEmail(e) {
