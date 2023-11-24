@@ -1,4 +1,4 @@
-export function validateName(newName, setName, setValidName) {
+function useValidateName(newName, setName, setValidName) {
   function checkName(newName) {
     const validation = newName.length >= 3
 
@@ -10,7 +10,7 @@ export function validateName(newName, setName, setValidName) {
   setValidName(checkName(newName))
 }
 
-export function validateEmail(newEmail, setEmail, setValidEmail) {
+function useValidateEmail(newEmail, setEmail, setValidEmail) {
   function checkEmail(newEmail) {
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     const validation = regexEmail.test(newEmail)
@@ -23,7 +23,7 @@ export function validateEmail(newEmail, setEmail, setValidEmail) {
   setValidEmail(checkEmail(newEmail))
 }
 
-export function validatePassword(newPassword, setPassword, setValidPassword) {
+function useValidatePassword(newPassword, setPassword, setValidPassword) {
   function checkPassword(newPassword) {
     const validation = newPassword.length >= 6
 
@@ -35,7 +35,7 @@ export function validatePassword(newPassword, setPassword, setValidPassword) {
   setValidPassword(checkPassword(newPassword))
 }
 
-export function validateConfirmPassword(
+function useValidateConfirmPassword(
   password,
   newConfirmPassword,
   setConfirmPassword,
@@ -53,4 +53,11 @@ export function validateConfirmPassword(
 
   setConfirmPassword(newConfirmPassword)
   setValidConfirmPassword(checkConfirmPassword(newConfirmPassword))
+}
+
+export {
+  useValidateName,
+  useValidateEmail,
+  useValidatePassword,
+  useValidateConfirmPassword,
 }

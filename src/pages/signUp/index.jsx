@@ -15,10 +15,10 @@ import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
 import polygon from "../../assets/icons/polygon.svg"
 
 import {
-  validateName,
-  validateEmail,
-  validatePassword,
-  validateConfirmPassword,
+  useValidateName,
+  useValidateEmail,
+  useValidatePassword,
+  useValidateConfirmPassword,
 } from "../../hooks/validatingFormInputs"
 
 export function SignUp() {
@@ -90,22 +90,22 @@ export function SignUp() {
 
   function handleValidateName(e) {
     const newName = e.target.value
-    validateName(newName, setName, setValidName)
+    useValidateName(newName, setName, setValidName)
   }
 
   function handleValidateEmail(e) {
     const newEmail = e.target.value
-    validateEmail(newEmail, setEmail, setValidEmail)
+    useValidateEmail(newEmail, setEmail, setValidEmail)
   }
 
   function handleValidatePassword(e) {
     const newPassword = e.target.value
-    validatePassword(newPassword, setPassword, setValidPassword)
+    useValidatePassword(newPassword, setPassword, setValidPassword)
   }
 
   function handleValidateConfirmPassword(e) {
     const newConfirmPassword = e.target.value
-    validateConfirmPassword(
+    useValidateConfirmPassword(
       password,
       newConfirmPassword,
       setConfirmPassword,

@@ -13,8 +13,8 @@ import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
 
 import { useAuth } from "../../hooks/auth"
 import {
-  validateEmail,
-  validatePassword,
+  useValidateEmail,
+  useValidatePassword,
 } from "../../hooks/validatingFormInputs"
 
 export function SignIn() {
@@ -54,12 +54,12 @@ export function SignIn() {
 
   function handleValidateEmail(e) {
     const newEmail = e.target.value
-    validateEmail(newEmail, setEmail, setValidEmail)
+    useValidateEmail(newEmail, setEmail, setValidEmail)
   }
 
   function handleValidatePassword(e) {
     const newPassword = e.target.value
-    validatePassword(newPassword, setPassword, setValidPassword)
+    useValidatePassword(newPassword, setPassword, setValidPassword)
   }
 
   useEffect(() => {
