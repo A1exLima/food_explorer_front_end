@@ -12,13 +12,17 @@ import polygon from "../../assets/icons/polygon.svg"
 import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
 
 import { useAuth } from "../../hooks/auth"
-import { validateEmail, validatePassword } from "../../hooks/validatingFormInputs"
+import {
+  validateEmail,
+  validatePassword,
+} from "../../hooks/validatingFormInputs"
 
 export function SignIn() {
   const { signIn, user, alertMessage, setAlertMessage, color } = useAuth()
 
   const [email, setEmail] = useState("")
   const [validEmail, setValidEmail] = useState(true)
+
   const [password, setPassword] = useState("")
   const [validPassword, setValidPassword] = useState(true)
 
@@ -34,11 +38,17 @@ export function SignIn() {
   }
 
   function handleSignIn() {
-    signIn({ email, password })
+    if (validEmail && validPassword) {
+      signIn({ email, password })
+    } else {
+      setAlertMessage("Verifique os campos em validação")
+    }
+
     setWaiting(false)
 
     setTimeout(() => {
       setWaiting(true)
+      setAlertMessage("")
     }, messageDisplayTime)
   }
 

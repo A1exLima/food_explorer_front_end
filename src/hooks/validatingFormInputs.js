@@ -54,5 +54,3 @@ export function validateConfirmPassword(
   setConfirmPassword(newConfirmPassword)
   setValidConfirmPassword(checkConfirmPassword(newConfirmPassword))
 }
-
-

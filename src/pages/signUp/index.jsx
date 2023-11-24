@@ -39,37 +39,47 @@ export function SignUp() {
   const [messageDisplayTime, setMessageDisplayTime] = useState(
     configDisplayTimerMessageAlert.timer
   )
-  
+
   const [waiting, setWaiting] = useState(true)
 
   const navigate = useNavigate()
 
   async function handleSignUp() {
-    setAlertMessage("")
 
-    await api
-      .post("/users", { name, email, password, confirmPassword })
-      .then((response) => {
-        setAlertMessage(response.data.message)
-        setColor(true)
-        setTimeout(() => {
-          return navigate("/")
-        }, messageDisplayTime)
-      })
-      .catch((error) => {
-        if (error.response) {
-          setAlertMessage(error.response.data.message)
-          setColor(false)
-        } else {
-          setAlertMessage("Não foi possível cadastrar o usuário")
-          setColor(false)
-        }
-      })
+    if (validName && validEmail && validPassword && validConfirmPassword) {
+      await api
+        .post("/users", {
+          name,
+          email,
+          password,
+          confirmPassword,
+        })
+        .then((response) => {
+          setAlertMessage(response.data.message)
+          setColor(true)
+          setTimeout(() => {
+            return navigate("/")
+          }, messageDisplayTime)
+        })
+        .catch((error) => {
+          if (error.response) {
+            setAlertMessage(error.response.data.message)
+            setColor(false)
+          } else {
+            setAlertMessage("Não foi possível cadastrar o usuário")
+            setColor(false)
+          }
+        })
+
+    } else {
+      setAlertMessage("Verifique os campos em validação")
+    }
 
     setWaiting(false)
 
     setTimeout(() => {
       setWaiting(true)
+      setAlertMessage("")
     }, messageDisplayTime)
   }
 

@@ -8,8 +8,6 @@ function AuthProvider({ children }) {
   const [color, setColor] = useState("")
 
   async function signIn({ email, password }) {
-    setAlertMessage("")
-
     try {
       const response = await api.post("/sessions", { email, password })
       const { user, token } = response.data

@@ -14,7 +14,7 @@ export const Content = styled.div`
   padding: 2rem;
   position: absolute;
   border-radius: 0.8rem;
-  background: ${({ theme }) => theme.COLORS.Dark600};
+  background: ${({ theme }) => theme.COLORS.Dark700};
 
   animation: ${({ $messageDisplayTime }) =>
     `right-to-left-shift 0.3s linear forwards, hide 0.3s forwards ${$messageDisplayTime}ms`};
