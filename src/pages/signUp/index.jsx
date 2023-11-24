@@ -9,19 +9,36 @@ import Input from "../../components/input"
 import Button from "../../components/button"
 import ButtonText from "../../components/buttonText"
 import MessageAlert from "../../components/messageAlert"
-import { configDisplayTimeMessageAlert } from "../../configs/messageAlert"
+
+import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
 
 import polygon from "../../assets/icons/polygon.svg"
 
+import {
+  validateName,
+  validateEmail,
+  validatePassword,
+  validateConfirmPassword,
+} from "../../hooks/validatingFormInputs"
+
 export function SignUp() {
   const [name, setName] = useState("")
+  const [validName, setValidName] = useState(true)
+
   const [email, setEmail] = useState("")
+  const [validEmail, setValidEmail] = useState(true)
+
   const [password, setPassword] = useState("")
+  const [validPassword, setValidPassword] = useState(true)
+
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [validConfirmPassword, setValidConfirmPassword] = useState(true)
 
   const [alertMessage, setAlertMessage] = useState("")
   const [color, setColor] = useState("")
-  const [messageDisplayTime, setMessageDisplayTime] = useState(configDisplayTimeMessageAlert.timer)
+  const [messageDisplayTime, setMessageDisplayTime] = useState(
+    configDisplayTimerMessageAlert.timer
+  )
   const [waiting, setWaiting] = useState(true)
 
   const navigate = useNavigate()
@@ -48,17 +65,42 @@ export function SignUp() {
         }
       })
 
-      setWaiting(false)
+    setWaiting(false)
 
-      setTimeout(() => {
-        setWaiting(true)
-      }, messageDisplayTime)
+    setTimeout(() => {
+      setWaiting(true)
+    }, messageDisplayTime)
   }
 
   function handleClick() {
     if (waiting) {
       handleSignUp()
     }
+  }
+
+  function handleValidateName(e) {
+    const newName = e.target.value
+    validateName(newName, setName, setValidName)
+  }
+
+  function handleValidateEmail(e) {
+    const newEmail = e.target.value
+    validateEmail(newEmail, setEmail, setValidEmail)
+  }
+
+  function handleValidatePassword(e) {
+    const newPassword = e.target.value
+    validatePassword(newPassword, setPassword, setValidPassword)
+  }
+
+  function handleValidateConfirmPassword(e) {
+    const newConfirmPassword = e.target.value
+    validateConfirmPassword(
+      password,
+      newConfirmPassword,
+      setConfirmPassword,
+      setValidConfirmPassword
+    )
   }
 
   return (
@@ -79,41 +121,51 @@ export function SignUp() {
 
         <form>
           <Input
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleValidateName}
             identifier="name"
             label="Nome"
             id="name"
             type="text"
             placeholder="Exemplo: Maria da Silva"
+            $margin={validName}
           />
+          {!validName && <p>A nome deve conter no mínimo 3 caracteres.</p>}
+
           <Input
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleValidateEmail}
             identifier="email"
             label="Email"
             id="email"
             type="email"
             autoComplete="username"
             placeholder="Exemplo: exemplo@exemplo.com.br"
+            $margin={validEmail}
           />
+          {!validEmail && <p>Por favor, insira um email válido.</p>}
+
           <Input
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleValidatePassword}
             identifier="password"
             label="Senha"
             id="password"
             type="password"
             autoComplete="current-password"
             placeholder="No mínimo 6 caracteres"
+            $margin={validPassword}
           />
+          {!validPassword && <p>A senha deve conter no mínimo 6 caracteres.</p>}
 
           <Input
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={handleValidateConfirmPassword}
             identifier="confirmPassword"
             label="Confirme a senha"
             id="confirmPassword"
             type="password"
             autoComplete="current-password"
             placeholder="No mínimo 6 caracteres"
+            $margin={validConfirmPassword}
           />
+          {!validConfirmPassword && <p>A senha não confere.</p>}
 
           <Button
             $loading={!waiting}

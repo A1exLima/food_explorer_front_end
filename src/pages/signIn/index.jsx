@@ -9,7 +9,7 @@ import MessageAlert from "../../components/messageAlert"
 
 import polygon from "../../assets/icons/polygon.svg"
 
-import { configDisplayTimeMessageAlert } from "../../configs/messageAlert"
+import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
 
 import { useAuth } from "../../hooks/auth"
 import { validateEmail, validatePassword } from "../../hooks/validatingFormInputs"
@@ -23,7 +23,7 @@ export function SignIn() {
   const [validPassword, setValidPassword] = useState(true)
 
   const [messageDisplayTime, setMessageDisplayTime] = useState(
-    configDisplayTimeMessageAlert.timer
+    configDisplayTimerMessageAlert.timer
   )
   const [waiting, setWaiting] = useState(true)
 
@@ -78,7 +78,7 @@ export function SignIn() {
             label="Email"
             id="email"
             type="email"
-            autoComplete="email"
+            autoComplete="username"
             placeholder="Exemplo: exemplo@exemplo.com.br"
             onChange={handleValidateEmail}
             $margin={validEmail}
@@ -95,7 +95,7 @@ export function SignIn() {
             onChange={handleValidatePassword}
             $margin={validPassword}
           />
-          {!validPassword && <p>A senha deve conter no mínimo 4 caracteres.</p>}
+          {!validPassword && <p>A senha deve conter no mínimo 6 caracteres.</p>}
 
           <Button
             title="Entrar"
