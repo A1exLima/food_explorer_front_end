@@ -1,14 +1,13 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useLayoutEffect, useState } from "react"
 import { api } from "../services/index"
 import { configDisplayTimerMessageAlert } from "../configs/messageAlert"
 
 export const AuthContext = createContext({})
 
-
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
   const [alertMessage, setAlertMessage] = useState("")
-  const [color, setColor] = useState("")
+  const [color, setColor] = useState(false)
 
   async function signIn({ email, password }) {
     try {
@@ -20,11 +19,13 @@ function AuthProvider({ children }) {
         setColor(true)
       }
 
+      localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
+      localStorage.setItem("@foodExplorer:token", token)
+
       setTimeout(() => {
-        api.defaults.headers.authorization = `Bearer ${token}`
+        api.defaults.headers.common["Authorization"] = `Bearer ${token}`
         setData({ user, token })
       }, configDisplayTimerMessageAlert.timer + 250)
-
     } catch (error) {
       if (error.response) {
         setAlertMessage(error.response.data.message)
@@ -35,6 +36,20 @@ function AuthProvider({ children }) {
       }
     }
   }
+
+  useLayoutEffect(() => {
+    const user = localStorage.getItem("@foodExplorer:user")
+    const token = localStorage.getItem("@foodExplorer:token")
+
+    if (token && user) {
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`
+
+      setData({
+        token,
+        user: JSON.parse(user),
+      })
+    }
+  }, [])
 
   return (
     <AuthContext.Provider
@@ -50,4 +65,5 @@ function useAuth() {
   return context
 }
 
-export { AuthProvider, useAuth }
+export default AuthProvider
+export { useAuth }
