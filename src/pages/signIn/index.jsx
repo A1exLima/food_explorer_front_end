@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useLayoutEffect, useState } from "react"
 
 import { Container, Brand, Content } from "./style"
 
@@ -62,7 +62,7 @@ export function SignIn() {
     useValidatePassword(newPassword, setPassword, setValidPassword)
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setAlertMessage("")
   }, [setAlertMessage])
 

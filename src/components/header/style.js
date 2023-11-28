@@ -12,6 +12,7 @@ export const Container = styled.header`
 
 export const Content = styled.div`
   width: 136.8rem;
+  height: 11.4rem;
   display: flex;
   align-items: center;
   justify-content: center;

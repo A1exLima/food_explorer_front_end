@@ -6,10 +6,13 @@ export const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
+  const [address, setAddress] = useState("")
   const [alertMessage, setAlertMessage] = useState("")
-  const [color, setColor] = useState(false)
+  const [color, setColor] = useState("")
 
   async function signIn({ email, password }) {
+    setAlertMessage("")
+
     try {
       const response = await api.post("/sessions", { email, password })
       const { user, token } = response.data
@@ -37,6 +40,32 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function searchCep(cep) {
+    setAlertMessage("")
+    try {
+      const response = await api.post("/search_cep", { cep })
+      const address = response.data
+      setAddress(address)
+    } catch (error) {
+      if (error.response.data.message === "Cep não encontrado") {
+        setAlertMessage(error.response.data.message)
+        setColor(false)
+      }
+    }
+  }
+
+  function signOut() {
+    setTimeout(() => {
+      setAlertMessage("Volte sempre !")
+      setColor(false)
+    }, 200)
+
+    const user = localStorage.removeItem("@foodExplorer:user")
+    const token = localStorage.removeItem("@foodExplorer:token")
+
+    setData({ user, token })
+  }
+
   useLayoutEffect(() => {
     const user = localStorage.getItem("@foodExplorer:user")
     const token = localStorage.getItem("@foodExplorer:token")
@@ -53,7 +82,16 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ signIn, user: data.user, alertMessage, setAlertMessage, color }}
+      value={{
+        signIn,
+        searchCep,
+        signOut,
+        address,
+        user: data.user,
+        alertMessage,
+        setAlertMessage,
+        color,
+      }}
     >
       {children}
     </AuthContext.Provider>

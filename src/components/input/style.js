@@ -1,5 +1,4 @@
 import { styled } from "styled-components"
-import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100%;
@@ -30,6 +29,7 @@ export const Container = styled.div`
     font-family: var(--roboto-font-family);
     font-weight: 400;
     color: ${({ theme }) => theme.COLORS.Light100};
+    
 
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.Light500};

@@ -4,10 +4,22 @@ import Search from "../../components/search"
 import OrderButton from "../../components/orderButton"
 
 import polygon from "../../assets/icons/polygon.svg"
-import signOut from "../../assets/icons/signOut.svg"
+import logOff from "../../assets/icons/signOut.svg"
 import menu from "../../assets/icons/menu.svg"
 
+import { useAuth } from "../../hooks/auth"
+import { useNavigate } from "react-router-dom"
+
+
 export default function Header({ admin }) {
+  const { signOut } = useAuth()
+  const navigate = useNavigate()
+
+  function handleClickLogOut() {
+    signOut()
+    navigate("/")
+  }
+
   return (
     <Container>
       <Content>
@@ -31,11 +43,11 @@ export default function Header({ admin }) {
         />
 
         {admin ? (
-          <OrderButton 
-            iconAndAmount={false} 
-            type="button" 
+          <OrderButton
+            iconAndAmount={false}
+            type="button"
             title="Novo Prato"
-            link="/new_dish" 
+            link="/new_dish"
           />
         ) : (
           <OrderButton
@@ -47,7 +59,7 @@ export default function Header({ admin }) {
         )}
 
         <Logout>
-          <img src={signOut} alt="Logout" />
+          <img src={logOff} alt="Logout" onClick={handleClickLogOut} />
         </Logout>
       </Content>
     </Container>

@@ -15,7 +15,7 @@ export const Content = styled.div`
   padding: 2rem;
   position: absolute;
   border-radius: 0.8rem;
-  background: ${({ theme }) => theme.COLORS.Dark700};
+  background: ${({ theme }) => theme.COLORS.Dark900};
 
   animation: ${({ $messageDisplayTime }) =>
     `right-to-left-shift .3s linear forwards, hide .3s forwards ${$messageDisplayTime}ms`};
@@ -80,9 +80,5 @@ export const Content = styled.div`
     to {
       width: 100%;
     }
-  }
-
-  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    background: ${({ theme }) => theme.COLORS.Dark900};
   }
 `

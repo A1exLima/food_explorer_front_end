@@ -10,9 +10,9 @@ import Button from "../../components/button"
 import ButtonText from "../../components/buttonText"
 import MessageAlert from "../../components/messageAlert"
 
-import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
-
 import polygon from "../../assets/icons/polygon.svg"
+
+import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
 
 import {
   useValidateName,
@@ -69,7 +69,6 @@ export function SignUp() {
             setColor(false)
           }
         })
-
     } else {
       setAlertMessage("Verifique os campos em validação")
     }

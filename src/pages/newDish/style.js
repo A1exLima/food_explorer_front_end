@@ -11,7 +11,8 @@ export const Container = styled.div`
 
 export const Main = styled.main`
   width: 100%;
-  margin-top: 4rem;
+  margin-top: 2.4rem;
+  flex-grow: 1;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     margin-top: 1.092rem;
@@ -19,7 +20,7 @@ export const Main = styled.main`
 `
 
 export const Content = styled.div`
-  max-width: 112rem;
+  max-width: 115rem;
   margin: 0 auto;
   padding: 0 2rem;
 
@@ -28,7 +29,7 @@ export const Content = styled.div`
     font-family: var(--poppins-font-family);
     font-size: clamp(2.2rem, 4vw, 3.2rem);
     font-weight: 500;
-    margin-top: 2.4rem;
+    margin-top: 2.2rem;
     margin-bottom: 3.2rem;
   }
 
@@ -42,7 +43,7 @@ export const Content = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
+  gap: 3rem;
 
   > div:nth-child(1) {
     display: flex;

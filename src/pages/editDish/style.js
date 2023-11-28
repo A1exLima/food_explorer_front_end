@@ -5,13 +5,14 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
+  justify-content: space-between;
 `
 
 export const Main = styled.main`
   width: 100%;
-  margin-top: 4rem;
+  margin-top: 2.4rem;
+  flex-grow: 1;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     margin-top: 1.092rem;
@@ -19,7 +20,7 @@ export const Main = styled.main`
 `
 
 export const Content = styled.div`
-  max-width: 112rem;
+  max-width: 115rem;
   margin: 0 auto;
   padding: 0 2rem;
 
@@ -42,13 +43,13 @@ export const Content = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
+  gap: 3rem;
 
   > div:nth-child(1) {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 3.2rem;
+    gap: 3rem;
 
     > div {
       margin-bottom: 0;

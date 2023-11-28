@@ -10,7 +10,7 @@ export const Container = styled.div`
   justify-content: space-evenly;
   padding: 2rem;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     flex-direction: column;
