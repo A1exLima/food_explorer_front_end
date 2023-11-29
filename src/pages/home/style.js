@@ -6,9 +6,10 @@ export const Container = styled.div`
 `
 
 export const Main = styled.main`
-  max-width: 112rem;
+  max-width: 115rem;
   margin: 0 auto;
   padding: 0 2rem;
+  flex-grow: 1;
 `
 
 export const Presentation = styled.figure`

@@ -11,13 +11,13 @@ export const Container = styled.header`
 `
 
 export const Content = styled.div`
-  width: 136.8rem;
+  width: 117rem;
   height: 11.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 3.2rem;
-  padding: 2.4rem 12.3rem;
+  padding: 2.4rem 4rem;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     width: 100%;
@@ -28,7 +28,7 @@ export const Content = styled.div`
 
 export const SideBar = styled.div`
   display: none;
-  
+
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     display: block;
   }
@@ -45,7 +45,7 @@ export const Brand = styled(Link)`
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    gap: .8rem;
+    gap: 0.8rem;
   }
 
   > div:first-child {
@@ -77,12 +77,63 @@ export const Brand = styled(Link)`
 `
 
 export const Logout = styled.div`
-  cursor: pointer;
+  position: relative;
 
-  transition: transform 0.5s ease-in-out;
+  > svg {
+    font-size: 4.2rem;
+    margin-top: 0.6rem;
+    cursor: pointer;
+  }
 
-  &:hover {
-    transform: scale(0.95);
+  > div {
+    display: ${({ $hideAvatarMenu }) => ($hideAvatarMenu ? "none" : "block")};
+    width: 8rem;
+    height: 11rem;
+    padding: 1rem;
+
+    position: absolute;
+    left: -1.9rem;
+
+    background: ${({ theme }) => theme.COLORS.Gradients245};
+    backdrop-filter: blur(1px);
+    border-radius: 0.5rem;
+
+    > ul {
+      width: 100%;
+      text-align: center;
+      border-radius: 0.3rem;
+
+      > li {
+        height: 2.4rem;
+
+        a {
+          font-size: 1.4rem;
+          font-family: var(--poppins-font-family);
+          font-weight: 400;
+          color: ${({ theme }) => theme.COLORS.Light400};
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          transition: all 0.4s ease-in-out;
+          &:hover {
+            filter: brightness(150%);
+            color: ${({ theme }) => theme.COLORS.Light200};
+          }
+        }
+
+        > svg {
+          font-size: 1.8rem;
+          color: ${({ theme }) => theme.COLORS.Light400};
+          cursor: pointer;
+
+          transition: all 0.4s ease-in-out;
+          &:hover {
+            color: ${({ theme }) => theme.COLORS.TintsCarrot200};
+          }
+        }
+      }
+    }
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {

@@ -73,7 +73,8 @@ export const Form = styled.form`
       #address,
       #name,
       #oldPassword,
-      #complement {
+      #complement,
+      #city {
         min-width: 0;
       }
 

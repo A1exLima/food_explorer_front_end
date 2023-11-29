@@ -19,9 +19,12 @@ export default {
     Dark900: "#0D1D25",
     Dark1000: "#192227",
 
-    Gradients50: "linear-gradient(90deg, rgba(0, 10, 15, -0.75) 85%, #000A0F 100%)",
-    Gradients100: "linear-gradient(90deg, rgba(0, 10, 15, -0.75) 50%, #000A0F 100%)",
+    Gradients50:
+      "linear-gradient(90deg, rgba(0, 10, 15, -0.75) 85%, #000A0F 100%)",
+    Gradients100:
+      "linear-gradient(90deg, rgba(0, 10, 15, -0.75) 50%, #000A0F 100%)",
     Gradients200: "linear-gradient(180deg, #091E26 0%, #00131C 100%)",
+    Gradients245: "linear-gradient(245deg, #091E26 0%, #00131C 100%)",
 
     TintsTomato100: "#750310",
     TintsTomato200: "#92000E",
@@ -29,10 +32,10 @@ export default {
     TintsTomato400: "#AB4D55",
 
     TintsCarrot100: "#FBA94C",
-    TintsCarrot200:"#D37F1F",
-    
+    TintsCarrot200: "#D37F1F",
+
     TintsMint100: "#04D361",
-    
+
     TintsCake100: "#065E7C",
     TintsCake200: "#82F3FF",
   },

@@ -179,7 +179,7 @@ export function Profile() {
                   label="Número"
                   id="number"
                   type="number"
-                  placeholder="Exemplo: 28"
+                  placeholder="Exemplo: 48"
                   autoComplete="none"
                 />
 
@@ -189,7 +189,7 @@ export function Profile() {
                     label="Cep"
                     id="cep"
                     type="number"
-                    placeholder="Exemplo: 08223590"
+                    placeholder="Exemplo: 08223580"
                     autoComplete="none"
                     onChange={handleCep}
                   />
