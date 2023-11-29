@@ -46,14 +46,19 @@ export const Form = styled.form`
     display: flex;
     gap: 2rem;
 
+    > div {
+      width: 100%;
+    }
+
     #cep {
-      width: 25rem;
+      width: 23rem;
     }
 
     #address,
     #name,
     #oldPassword,
-    #complement {
+    #complement,
+    #city {
       min-width: 40rem;
     }
 

@@ -16,6 +16,11 @@ import { useAuth } from "../../hooks/auth"
 
 import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
 
+import {
+  useValidatePassword,
+  useValidateOldPassword,
+} from "../../hooks/validatingFormInputs"
+
 export function Profile() {
   const [messageDisplayTime, setMessageDisplayTime] = useState(
     configDisplayTimerMessageAlert.timer
@@ -25,6 +30,13 @@ export function Profile() {
 
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
+
+  const [oldPassword, setOldPassword] = useState("")
+  const [validOldPassword, setValidOldPassword] = useState(true)
+
+  const [newPassword, setNewPassword] = useState("")
+  const [validNewPassword, setValidPassword] = useState(true)
+
   const [street, setStreet] = useState("")
   const [district, setDistrict] = useState("")
   const [city, setCity] = useState("")
@@ -47,6 +59,16 @@ export function Profile() {
         searchCep(cep)
         break
     }
+  }
+
+  function handleValidateNewPassword(e) {
+    const newPassword = e.target.value
+    useValidatePassword(newPassword, setNewPassword, setValidPassword)
+  }
+
+  function handleValidateOldPassword(e) {
+    const oldPassword = e.target.value
+    useValidateOldPassword(oldPassword, setOldPassword, setValidOldPassword)
   }
 
   useEffect(() => {
@@ -109,23 +131,35 @@ export function Profile() {
               </div>
 
               <div>
-                <Input
-                  identifier="oldPassword"
-                  label="Senha antiga"
-                  id="oldPassword"
-                  type="password"
-                  placeholder="No mínimo 6 caracteres"
-                  autoComplete="none"
-                />
+                <div>
+                  <Input
+                    identifier="oldPassword"
+                    label="Senha antiga"
+                    id="oldPassword"
+                    type="password"
+                    placeholder="No mínimo 6 caracteres"
+                    autoComplete="none"
+                    onChange={handleValidateOldPassword}
+                  />
+                  {!validOldPassword && (
+                    <p>A senha deve conter no mínimo 6 caracteres.</p>
+                  )}
+                </div>
 
-                <Input
-                  identifier="newPassword"
-                  label="Nova Senha"
-                  id="newPassword"
-                  type="password"
-                  placeholder="No mínimo 6 caracteres"
-                  autoComplete="none"
-                />
+                <div>
+                  <Input
+                    identifier="newPassword"
+                    label="Nova Senha"
+                    id="newPassword"
+                    type="password"
+                    placeholder="No mínimo 6 caracteres"
+                    autoComplete="none"
+                    onChange={handleValidateNewPassword}
+                  />
+                  {!validNewPassword && (
+                    <p>A senha deve conter no mínimo 6 caracteres.</p>
+                  )}
+                </div>
               </div>
 
               <div>

@@ -35,6 +35,18 @@ function useValidatePassword(newPassword, setPassword, setValidPassword) {
   setValidPassword(checkPassword(newPassword))
 }
 
+function useValidateOldPassword(oldPassword, setOldPassword, setValidOldPassword) {
+  function checkPassword(oldPassword) {
+    const validation = oldPassword.length >= 6
+
+    setOldPassword(oldPassword)
+
+    return validation
+  }
+
+  setValidOldPassword(checkPassword(oldPassword))
+}
+
 function useValidateConfirmPassword(
   password,
   newConfirmPassword,
@@ -60,4 +72,5 @@ export {
   useValidateEmail,
   useValidatePassword,
   useValidateConfirmPassword,
+  useValidateOldPassword,
 }
