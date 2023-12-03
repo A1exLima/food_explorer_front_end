@@ -1,26 +1,39 @@
 function useValidateName(newName, setName, setValidName) {
-  function checkName(newName) {
-    const validation = newName.length >= 3
+  switch (true) {
+    case newName == "":
+      setName(newName)
+      setValidName("Nome obrigatório")
+      break
 
-    setName(newName)
+    case newName.length < 3:
+      setName(newName)
+      setValidName("O nome deve conter no mínimo 3 caracteres.")
+      break
 
-    return validation
+    default:
+      setName(newName)
+      setValidName(true)
   }
-
-  setValidName(checkName(newName))
 }
 
 function useValidateEmail(newEmail, setEmail, setValidEmail) {
-  function checkEmail(newEmail) {
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const validation = regexEmail.test(newEmail)
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-    setEmail(newEmail)
+  switch (true) {
+    case newEmail == "":
+      setEmail(newEmail)
+      setValidEmail("Email obrigatório")
+      break
 
-    return validation
+    case !regexEmail.test(newEmail):
+      setEmail(newEmail)
+      setValidEmail("Por favor, insira um email válido.")
+      break
+
+    default:
+      setEmail(newEmail)
+      setValidEmail(true)
   }
-
-  setValidEmail(checkEmail(newEmail))
 }
 
 function useValidatePassword(newPassword, setPassword, setValidPassword) {
@@ -35,7 +48,11 @@ function useValidatePassword(newPassword, setPassword, setValidPassword) {
   setValidPassword(checkPassword(newPassword))
 }
 
-function useValidateOldPassword(oldPassword, setOldPassword, setValidOldPassword) {
+function useValidateOldPassword(
+  oldPassword,
+  setOldPassword,
+  setValidOldPassword
+) {
   function checkPassword(oldPassword) {
     const validation = oldPassword.length >= 6
 

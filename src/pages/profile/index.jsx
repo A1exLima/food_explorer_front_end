@@ -16,72 +16,273 @@ import { useAuth } from "../../hooks/auth"
 
 import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
 
+import { api } from "../../services"
+
 import {
   useValidatePassword,
   useValidateOldPassword,
+  useValidateEmail,
+  useValidateName,
 } from "../../hooks/validatingFormInputs"
 
 export function Profile() {
-  const [messageDisplayTime, setMessageDisplayTime] = useState(
-    configDisplayTimerMessageAlert.timer
-  )
-  const { user, searchCep, address, alertMessage, color } = useAuth()
-  const [admin, setAdmin] = useState(user.isAdmin)
+  const { user, updateProfile } = useAuth()
+  const [admin, setAdmin] = useState(user.isAdmin === "true")
 
   const [name, setName] = useState(user.name)
-  const [email, setEmail] = useState(user.email)
+  const [validName, setValidName] = useState(true)
 
-  const [oldPassword, setOldPassword] = useState("")
+  const [email, setEmail] = useState(user.email)
+  const [validEmail, setValidEmail] = useState(true)
+
+  const [oldPassword, setOldPassword] = useState(user.password)
   const [validOldPassword, setValidOldPassword] = useState(true)
 
-  const [newPassword, setNewPassword] = useState("")
-  const [validNewPassword, setValidPassword] = useState(true)
+  const [newPassword, setNewPassword] = useState(user.password)
+  const [validNewPassword, setValidNewPassword] = useState(true)
 
   const [street, setStreet] = useState("")
+  const [number, setNumber] = useState("")
+
+  const [cep, setCep] = useState("")
+  const [validCep, setValidCep] = useState("")
+
+  const [complement, setComplement] = useState("")
   const [district, setDistrict] = useState("")
   const [city, setCity] = useState("")
   const [country, setCountry] = useState("")
 
-  const [alertCep, setAlertCep] = useState("")
+  const [address, setAddress] = useState("")
+  const [validDataAddress, setValidDataAddress] = useState(true)
+  const [statusAddress, setStatusAddress] = useState("")
+
+  const [color, setColor] = useState(false)
+  const [alertMessage, setAlertMessage] = useState("")
+  const [messageDisplayTime, setMessageDisplayTime] = useState(configDisplayTimerMessageAlert.timer)
+
+  const [waiting, setWaiting] = useState(true)
 
   function handleCep(e) {
-    setAlertCep("")
+    setAlertMessage("")
+    setColor(false)
+
     const cep = e.target.value
+    setCep(cep)
 
     switch (true) {
       case cep === "":
-        setAlertCep("Digite somente números")
+        setValidCep(true)
+        setStreet("")
+        setNumber("")
+        setComplement("")
+        setDistrict("")
+        setCity("")
+        setCountry("")
         break
+
+      case /\D/.test(cep):
+        setValidCep("Digite somente números")
+        setStreet("")
+        setNumber("")
+        setComplement("")
+        setDistrict("")
+        setCity("")
+        setCountry("")
+        break
+
       case cep.length < 8 || cep.length > 8:
-        setAlertCep("Deve conter no mínimo 8 caracteres.")
+        setValidCep("Deve conter no mínimo 8 caracteres.")
+        setStreet("")
+        setNumber("")
+        setComplement("")
+        setDistrict("")
+        setCity("")
+        setCountry("")
         break
+
       case cep.length === 8:
+        setCep(cep)
         searchCep(cep)
         break
     }
   }
 
-  function handleValidateNewPassword(e) {
-    const newPassword = e.target.value
-    useValidatePassword(newPassword, setNewPassword, setValidPassword)
+  async function searchCep(cep) {
+    setAlertMessage("")
+
+    try {
+      const response = await api.post("/search_cep", { cep })
+      setAddress(response.data)
+      setValidCep(true)
+      setAlertMessage("Cep localizado")
+      setColor(true)
+    } catch (error) {
+      if (error.response.data.message === "Cep não localizado") {
+        setAlertMessage(error.response.data.message)
+        setColor(false)
+        setValidCep("Cep não localizado")
+      }
+    }
+  }
+
+  function handleValidateName(e) {
+    const name = e.target.value
+    useValidateName(name, setName, setValidName)
+  }
+
+  function handleValidateEmail(e) {
+    const email = e.target.value
+    useValidateEmail(email, setEmail, setValidEmail)
   }
 
   function handleValidateOldPassword(e) {
+    setAlertMessage("")
     const oldPassword = e.target.value
-    useValidateOldPassword(oldPassword, setOldPassword, setValidOldPassword)
+
+    if (oldPassword === "") {
+      setValidOldPassword(true)
+      setValidNewPassword(true)
+      setOldPassword(user.password)
+    } else {
+      if (newPassword === user.password) {
+        setValidNewPassword(false)
+      }
+
+      useValidateOldPassword(oldPassword, setOldPassword, setValidOldPassword)
+    }
+  }
+
+  function handleValidateNewPassword(e) {
+    setAlertMessage("")
+    const newPassword = e.target.value
+
+    if (newPassword === "") {
+      setValidNewPassword(true)
+      setValidOldPassword(true)
+      setNewPassword(user.password)
+    } else {
+      if (oldPassword === user.password) {
+        setValidOldPassword(false)
+      }
+
+      useValidatePassword(newPassword, setNewPassword, setValidNewPassword)
+    }
+  }
+
+  async function showAddress() {
+    try {
+      const response = await api.get("/address")
+
+      setAddress(response.data)
+      setValidDataAddress(false)
+      setStatusAddress(true)
+
+      return response.data
+    } catch (error) {
+      setStatusAddress(false)
+      return error.response.data.message
+    }
+  }
+
+  async function updateAddress(formAddress) {
+    try {
+      const response = await api.put("/address", formAddress)
+      return response.data
+    } catch (error) {
+      setWaiting(false)
+      setAlertMessage(error.response.data.message)
+    }
+  }
+
+  async function createAddress(formAddress) {
+    try {
+      const response = await api.post("/address", formAddress)
+      setStatusAddress(true)
+      return response.data
+    } catch (error) {
+      setWaiting(false)
+      setAlertMessage(error.response.data.message)
+    }
+  }
+
+  async function handleFormSaving() {
+    setWaiting(false)
+    setAlertMessage("")
+
+    if (
+      validName === true &&
+      validEmail === true &&
+      validOldPassword &&
+      validNewPassword &&
+      validCep == true
+    ) {
+      const formUser = {
+        admin: admin.toString(),
+        name,
+        email,
+        oldPassword,
+        newPassword,
+      }
+      const user = await updateProfile(formUser)
+
+      if (typeof user === "object") {
+        if (validCep && address) {
+          const formAddress = {
+            street,
+            number,
+            cep,
+            complement,
+            district,
+            city,
+            country,
+          }
+
+          if (statusAddress) {
+            updateAddress(formAddress)
+          } else if (cep) {
+            createAddress(formAddress)
+          }
+
+          setAlertMessage("Perfil atualizado com sucesso")
+          setColor(true)
+        } else if (!address) {
+          setAlertMessage("Perfil atualizado com sucesso1")
+          setColor(true)
+        }
+      } else {
+        setAlertMessage(user)
+        setColor(false)
+      }
+    } else {
+      setAlertMessage("Verifique os campos em validação")
+      setColor(false)
+    }
+
+    setTimeout(() => {
+      setWaiting(true)
+      setAlertMessage("")
+    }, messageDisplayTime + 250)
   }
 
   useEffect(() => {
+    if (validDataAddress) {
+      showAddress()
+      setValidCep(true)
+    }
+
     if (address) {
       setStreet(address.street ?? "")
+      setNumber(address.number ?? "")
+      setCep(address.cep ?? "")
+      setComplement(address.complement ?? "")
       setDistrict(address.district ?? "")
       setCity(address.city ?? "")
       setCountry(address.country ?? "")
     }
-  }, [address])
+  }, [address, validDataAddress])
 
   return (
-    <Container $alert={alertCep}>
+    <Container>
       <MessageAlert
         message={alertMessage}
         $color={color}
@@ -107,27 +308,33 @@ export function Profile() {
 
             <Form>
               <div>
-                <Input
-                  identifier="name"
-                  label="Nome"
-                  id="name"
-                  type="text"
-                  placeholder="Exemplo: Maria da Silva"
-                  autoComplete="none"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+                <div>
+                  <Input
+                    identifier="name"
+                    label="Nome"
+                    id="name"
+                    type="text"
+                    placeholder="Exemplo: Maria da Silva"
+                    autoComplete="off"
+                    value={name}
+                    onChange={handleValidateName}
+                  />
+                  {validName && <p>{validName}</p>}
+                </div>
 
-                <Input
-                  identifier="email"
-                  label="Email"
-                  id="email"
-                  type="email"
-                  placeholder="Exemplo: exemplo@exemplo.com.br"
-                  autoComplete="none"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                <div>
+                  <Input
+                    identifier="email"
+                    label="Email"
+                    id="email"
+                    type="email"
+                    placeholder="Exemplo: exemplo@exemplo.com.br"
+                    autoComplete="off"
+                    value={email}
+                    onChange={handleValidateEmail}
+                  />
+                  {validEmail && <p>{validEmail}</p>}
+                </div>
               </div>
 
               <div>
@@ -138,7 +345,7 @@ export function Profile() {
                     id="oldPassword"
                     type="password"
                     placeholder="No mínimo 6 caracteres"
-                    autoComplete="none"
+                    autoComplete="off"
                     onChange={handleValidateOldPassword}
                   />
                   {!validOldPassword && (
@@ -153,7 +360,7 @@ export function Profile() {
                     id="newPassword"
                     type="password"
                     placeholder="No mínimo 6 caracteres"
-                    autoComplete="none"
+                    autoComplete="off"
                     onChange={handleValidateNewPassword}
                   />
                   {!validNewPassword && (
@@ -164,12 +371,12 @@ export function Profile() {
 
               <div>
                 <Input
-                  identifier="address"
+                  identifier="street"
                   label="Endereço"
-                  id="address"
+                  id="street"
                   type="text"
                   placeholder="Exemplo: Rua Mario Eliseu Faria"
-                  autoComplete="none"
+                  autoComplete="off"
                   value={street}
                   onChange={(e) => setStreet(e.target.value)}
                 />
@@ -180,7 +387,9 @@ export function Profile() {
                   id="number"
                   type="number"
                   placeholder="Exemplo: 48"
-                  autoComplete="none"
+                  autoComplete="off"
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
                 />
 
                 <div>
@@ -188,12 +397,14 @@ export function Profile() {
                     identifier="cep"
                     label="Cep"
                     id="cep"
-                    type="number"
+                    type="text"
                     placeholder="Exemplo: 08223580"
-                    autoComplete="none"
+                    autoComplete="off"
+                    maxLength={8}
+                    value={cep}
                     onChange={handleCep}
                   />
-                  {alertCep && <p>{alertCep}</p>}
+                  {validCep && <p>{validCep}</p>}
                 </div>
               </div>
 
@@ -204,7 +415,9 @@ export function Profile() {
                   id="complement"
                   type="text"
                   placeholder="Exemplo: Próximo a estação"
-                  autoComplete="none"
+                  autoComplete="off"
+                  value={complement}
+                  onChange={(e) => setComplement(e.target.value)}
                 />
 
                 <Input
@@ -213,7 +426,7 @@ export function Profile() {
                   id="district"
                   type="text"
                   placeholder="Exemplo: Belém"
-                  autoComplete="none"
+                  autoComplete="off"
                   value={district}
                   onChange={(e) => setDistrict(e.target.value)}
                 />
@@ -226,7 +439,7 @@ export function Profile() {
                   id="city"
                   type="text"
                   placeholder="Exemplo: São Tomé"
-                  autoComplete="none"
+                  autoComplete="off"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                 />
@@ -237,13 +450,17 @@ export function Profile() {
                   id="country"
                   type="text"
                   placeholder="Exemplo: MG"
-                  autoComplete="none"
+                  autoComplete="off"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                 />
               </div>
 
-              <Button title="Salvar alterações" />
+              <Button
+                $loading={!waiting}
+                onClick={waiting ? handleFormSaving : ""}
+                title="Salvar alterações"
+              />
             </Form>
           </div>
         </Content>

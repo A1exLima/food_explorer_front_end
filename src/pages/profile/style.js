@@ -54,7 +54,7 @@ export const Form = styled.form`
       width: 23rem;
     }
 
-    #address,
+    #street,
     #name,
     #oldPassword,
     #complement,
@@ -70,7 +70,7 @@ export const Form = styled.form`
     }
 
     @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-      #address,
+      #street,
       #name,
       #oldPassword,
       #complement,

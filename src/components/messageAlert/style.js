@@ -1,8 +1,8 @@
 import { styled } from "styled-components"
-import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   position: fixed;
+  z-index: 1;
   top: 0;
   right: 0;
   margin: 2rem;

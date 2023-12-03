@@ -38,7 +38,7 @@ export function SignIn() {
   }
 
   function handleSignIn() {
-    if (validEmail && validPassword) {
+    if (validEmail === true && validPassword) {
       signIn({ email, password })
     } else {
       setAlertMessage("Verifique os campos em validação")
@@ -49,7 +49,7 @@ export function SignIn() {
     setTimeout(() => {
       setWaiting(true)
       setAlertMessage("")
-    }, messageDisplayTime + 150)
+    }, messageDisplayTime + 250)
   }
 
   function handleValidateEmail(e) {
@@ -91,9 +91,9 @@ export function SignIn() {
             autoComplete="username"
             placeholder="Exemplo: exemplo@exemplo.com.br"
             onChange={handleValidateEmail}
-            $margin={validEmail}
+            $margin={!validEmail}
           />
-          {!validEmail && <p>Por favor, insira um email válido.</p>}
+          {validEmail && <p>{validEmail}</p>}
 
           <Input
             identifier="password"

@@ -6,9 +6,9 @@ export const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
-  const [address, setAddress] = useState("")
+
   const [alertMessage, setAlertMessage] = useState("")
-  const [color, setColor] = useState("")
+  const [color, setColor] = useState(false)
 
   async function signIn({ email, password }) {
     setAlertMessage("")
@@ -19,7 +19,7 @@ function AuthProvider({ children }) {
 
       if (user && token) {
         setAlertMessage("Login efetuado com sucesso")
-        setColor(true)
+        setColor((prevState) => !prevState)
       }
 
       localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
@@ -32,38 +32,40 @@ function AuthProvider({ children }) {
     } catch (error) {
       if (error.response) {
         setAlertMessage(error.response.data.message)
-        setColor(false)
       } else {
         setAlertMessage("Não foi possível efetuar o login")
-        setColor(false)
-      }
-    }
-  }
-
-  async function searchCep(cep) {
-    setAlertMessage("")
-    try {
-      const response = await api.post("/search_cep", { cep })
-      const address = response.data
-      setAddress(address)
-    } catch (error) {
-      if (error.response.data.message === "Cep não encontrado") {
-        setAlertMessage(error.response.data.message)
-        setColor(false)
       }
     }
   }
 
   function signOut() {
-    setTimeout(() => {
-      setAlertMessage("Volte sempre !")
-      setColor(false)
-    }, 200)
-
     const user = localStorage.removeItem("@foodExplorer:user")
     const token = localStorage.removeItem("@foodExplorer:token")
 
     setData({ user, token })
+
+    setTimeout(() => {
+      setAlertMessage("Volte sempre !")
+      setColor(false)
+    }, 200)
+  }
+
+  async function updateProfile(formUser) {
+    try {
+      const response = await api.put("/users", formUser)
+      const user = response.data
+
+      localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
+      setData({ user, token: data.token })
+
+      return response.data
+    } catch (error) {
+      if (error.response) {
+        return error.response.data.message
+      } else {
+        return "Não foi possível atualizar o perfil"
+      }
+    }
   }
 
   useLayoutEffect(() => {
@@ -75,8 +77,9 @@ function AuthProvider({ children }) {
 
       setData({
         token,
-        user: JSON.parse(user),
+        user: JSON.parse(user)
       })
+
     }
   }, [])
 
@@ -84,13 +87,12 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         signIn,
-        searchCep,
         signOut,
-        address,
-        user: data.user,
-        alertMessage,
+        updateProfile,
         setAlertMessage,
+        alertMessage,
         color,
+        user: data.user,
       }}
     >
       {children}

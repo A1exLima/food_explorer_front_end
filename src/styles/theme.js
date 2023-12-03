@@ -26,6 +26,7 @@ export default {
     Gradients200: "linear-gradient(180deg, #091E26 0%, #00131C 100%)",
     Gradients245: "linear-gradient(245deg, #091E26 0%, #00131C 100%)",
 
+
     TintsTomato100: "#750310",
     TintsTomato200: "#92000E",
     TintsTomato300: "#AB222E",

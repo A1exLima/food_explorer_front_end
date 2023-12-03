@@ -45,7 +45,7 @@ export function SignUp() {
   const navigate = useNavigate()
 
   async function handleSignUp() {
-    if (validName && validEmail && validPassword && validConfirmPassword) {
+    if (validName === true && validEmail === true && validPassword && validConfirmPassword) {
       await api
         .post("/users", {
           name,
@@ -78,7 +78,7 @@ export function SignUp() {
     setTimeout(() => {
       setWaiting(true)
       setAlertMessage("")
-    }, messageDisplayTime + 150)
+    }, messageDisplayTime + 250)
   }
 
   function handleClick() {
@@ -136,9 +136,9 @@ export function SignUp() {
             id="name"
             type="text"
             placeholder="Exemplo: Maria da Silva"
-            $margin={validName}
+            $margin={!validName}
           />
-          {!validName && <p>O nome deve conter no mínimo 3 caracteres.</p>}
+          {validName && <p>{validName}</p>}
 
           <Input
             onChange={handleValidateEmail}
@@ -148,9 +148,9 @@ export function SignUp() {
             type="email"
             autoComplete="username"
             placeholder="Exemplo: exemplo@exemplo.com.br"
-            $margin={validEmail}
+            $margin={!validEmail}
           />
-          {!validEmail && <p>Por favor, insira um email válido.</p>}
+          {validEmail && <p>{validEmail}</p>}
 
           <Input
             onChange={handleValidatePassword}
