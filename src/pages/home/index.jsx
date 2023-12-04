@@ -11,10 +11,11 @@ import { Splide, SplideSlide } from "@splidejs/react-splide"
 import "@splidejs/react-splide/css/skyblue"
 
 import { useState } from "react"
+import { useAuth } from "../../hooks/auth"
 
 export function Home() {
-
-  const [admin, setAdmin] = useState(false)
+  const { user } = useAuth()
+  const [admin, setAdmin] = useState(user.isAdmin === "true")
   
   return (
     <Container>

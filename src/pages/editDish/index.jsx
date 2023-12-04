@@ -12,9 +12,12 @@ import DeleteButton from "../../components/deleteButton"
 import { IoIosArrowDown } from "react-icons/io"
 
 import { useState } from "react"
+import { useAuth } from "../../hooks/auth"
+
 
 export function EditDish() {
-  const [admin, setAdmin] = useState(false)
+  const { user } = useAuth()
+  const [admin, setAdmin] = useState(user.isAdmin === "true")
 
   return (
     <Container>

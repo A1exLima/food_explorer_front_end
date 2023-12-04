@@ -138,19 +138,40 @@ export const Avatar = styled.label`
     }
   }
 
+  > div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    > img {
+      width: clamp(20rem, 23vw, 25rem);
+      height: clamp(20rem, 23vw, 25rem);
+      border-radius: 50%;
+      object-fit: cover;
+      
+      animation: my-blink 2s ease 0s 1 normal forwards;
+    }
+  }
+
   > svg {
     height: 100%;
     font-size: 25rem;
 
+    animation: my-blink 2s ease 0s 1 normal forwards;
+
     transition: transform 0.4s ease-in-out;
     &:hover {
-      transform: scale(1.02);
+      transform: scale(1.01);
     }
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     > label {
       margin-bottom: 1rem;
+    }
+
+    > div {
+      margin-bottom: 2rem;
     }
 
     > svg {
@@ -162,6 +183,20 @@ export const Avatar = styled.label`
   @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
     > svg {
       font-size: 20rem;
+    }
+  }
+
+  @keyframes my-blink {
+    0% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.4;
+    }
+
+    100% {
+      opacity: 1;
     }
   }
 `

@@ -50,11 +50,19 @@ function AuthProvider({ children }) {
     }, 200)
   }
 
-  async function updateProfile(formUser) {
+  async function updateProfile(formUser, avatarFile) {
+    if (avatarFile) {
+      const fileUploadForm = new FormData()
+      fileUploadForm.append("avatar", avatarFile)
+
+      const response = await api.patch("/users/avatar", fileUploadForm)
+      formUser.avatar = response.data.avatar
+    }
+
     try {
+
       const response = await api.put("/users", formUser)
       const user = response.data
-
       localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
       setData({ user, token: data.token })
 
@@ -77,9 +85,8 @@ function AuthProvider({ children }) {
 
       setData({
         token,
-        user: JSON.parse(user)
+        user: JSON.parse(user),
       })
-
     }
   }, [])
 

@@ -7,15 +7,23 @@ import image1 from "../../assets/images/dish/img1.png"
 import heart from "../../assets/icons/Heart.svg"
 import pencil from "../../assets/icons/pencil.svg"
 
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function Card({ admin = false }) {
+  const navigate = useNavigate()
+
+  function handleClickContainer() {
+    return navigate("/dish")
+  }
+
+  function handleClickLink(e) {
+    e.stopPropagation()
+    navigate("/edit_dish")
+  }
   return (
-    <Container to="/dish">
+    <Container onClick={handleClickContainer}>
       {admin ? (
-        <Link to="/edit_dish">
-          <img src={pencil} alt="Editar Prato" />
-        </Link>
+        <img onClick={handleClickLink} src={pencil} alt="Editar Prato" />
       ) : (
         <img src={heart} alt="Favoritar Prato" />
       )}

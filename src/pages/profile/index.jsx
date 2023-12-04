@@ -29,6 +29,10 @@ export function Profile() {
   const { user, updateProfile } = useAuth()
   const [admin, setAdmin] = useState(user.isAdmin === "true")
 
+  const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : ""
+  const [avatar, setAvatar] = useState(avatarURL)
+  const [avatarFile, setAvatarFile] = useState(null)
+
   const [name, setName] = useState(user.name)
   const [validName, setValidName] = useState(true)
 
@@ -58,7 +62,9 @@ export function Profile() {
 
   const [color, setColor] = useState(false)
   const [alertMessage, setAlertMessage] = useState("")
-  const [messageDisplayTime, setMessageDisplayTime] = useState(configDisplayTimerMessageAlert.timer)
+  const [messageDisplayTime, setMessageDisplayTime] = useState(
+    configDisplayTimerMessageAlert.timer
+  )
 
   const [waiting, setWaiting] = useState(true)
 
@@ -169,6 +175,14 @@ export function Profile() {
     }
   }
 
+  function handleChangeAvatar(e){
+    const file = e.target.files[0]
+    setAvatarFile(file)
+
+    const imagePreview = URL.createObjectURL(file)
+    setAvatar(imagePreview)
+  }
+
   async function showAddress() {
     try {
       const response = await api.get("/address")
@@ -216,14 +230,16 @@ export function Profile() {
       validNewPassword &&
       validCep == true
     ) {
+
       const formUser = {
-        admin: admin.toString(),
+        isAdmin: admin.toString(),
         name,
         email,
         oldPassword,
         newPassword,
       }
-      const user = await updateProfile(formUser)
+      
+      const user = await updateProfile(formUser, avatarFile)
 
       if (typeof user === "object") {
         if (validCep && address) {
@@ -297,12 +313,18 @@ export function Profile() {
 
           <div>
             <Avatar htmlFor="file">
-              <RxAvatar />
+              {avatar ? (
+                <div>
+                  <img src={avatar} alt="Imagem de Perfil" />
+                </div>
+              ) : (
+                <RxAvatar />
+              )}
 
               <label htmlFor="file">
                 <PiFileImageFill />
                 <p>Selecione uma imagem</p>
-                <input type="file" id="file" />
+                <input type="file" id="file" onChange={handleChangeAvatar} />
               </label>
             </Avatar>
 

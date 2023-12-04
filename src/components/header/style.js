@@ -79,6 +79,19 @@ export const Brand = styled(Link)`
 export const Logout = styled.div`
   position: relative;
 
+  > img {
+    cursor: pointer;
+    width: 4.2rem;
+    height: 4.2rem;
+    border-radius: 50%;
+    object-fit: cover;
+
+    transition: opacity 0.4s ease-in-out;
+    &:hover {
+      opacity: 70%;
+    }
+  }
+
   > svg {
     font-size: 4.2rem;
     margin-top: 0.6rem;

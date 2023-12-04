@@ -8,14 +8,14 @@ import Button from "../../components/button"
 import Tag from "../../components/tag"
 
 import { TbPointFilled } from "react-icons/tb"
-import { IoIosArrowBack } from "react-icons/io"
 
 import img2 from "../../assets/images/dish/Mask group.png"
 
 import receipt from "../../assets/icons/receipt.svg"
 
-import { Link } from "react-router-dom"
 import { useState } from "react"
+
+import { useAuth } from "../../hooks/auth"
 
 const tags = [
   { id: "1", name: "alface" },
@@ -31,7 +31,8 @@ const tags = [
 ]
 
 export function Dish() {
-  const [admin, setAdmin] = useState(false)
+  const { user } = useAuth()
+  const [admin, setAdmin] = useState(user.isAdmin === "true")
 
   return (
     <Container>

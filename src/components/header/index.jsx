@@ -14,11 +14,16 @@ import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
 
+import { api } from "../../services"
+
 export default function Header({ admin }) {
-  const { signOut } = useAuth()
+  const { signOut, user } = useAuth()
+  
   const navigate = useNavigate()
+
   const [hideAvatarMenu, setHideAvatarMenu] = useState(true)
   const menuAvatarRef = useRef(null)
+  const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : ""
 
   function handleClickLogOut() {
     signOut()
@@ -83,7 +88,15 @@ export default function Header({ admin }) {
         )}
 
         <Logout $hideAvatarMenu={hideAvatarMenu}>
-          <RxAvatar onClick={handleAvatar} />
+          {avatarURL ? (
+            <img
+              onClick={handleAvatar}
+              src={avatarURL}
+              alt="Imagem de Perfil"
+            />
+          ) : (
+            <RxAvatar onClick={handleAvatar} />
+          )}
 
           <div ref={menuAvatarRef}>
             <ul>

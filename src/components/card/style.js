@@ -1,8 +1,7 @@
 import { styled } from "styled-components"
-import { Link } from "react-router-dom"
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
-export const Container = styled(Link)`
+export const Container = styled.div`
   position: relative;
   z-index: 0;
   width: 100%;
@@ -19,22 +18,7 @@ export const Container = styled(Link)`
   gap: 1.5rem;
   cursor: pointer;
 
-  > a > img:nth-child(1) {
-    width: 2.4rem;
-    height: 2.4rem;
-    position: absolute;
-    z-index: 1;
-    right: 1.8rem;
-    top: 1.6rem;
-
-    transition: transform 0.4s ease-in-out;
-
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
-
-  img:nth-child(1) {
+  > img:nth-child(1) {
     width: 2.4rem;
     height: 2.4rem;
     position: absolute;

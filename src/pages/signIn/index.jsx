@@ -18,7 +18,7 @@ import {
 } from "../../hooks/validatingFormInputs"
 
 export function SignIn() {
-  const { signIn, user, alertMessage, setAlertMessage, color } = useAuth()
+  const { signIn, alertMessage, setAlertMessage, color } = useAuth()
 
   const [email, setEmail] = useState("")
   const [validEmail, setValidEmail] = useState(true)
