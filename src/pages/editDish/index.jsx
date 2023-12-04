@@ -19,6 +19,19 @@ export function EditDish() {
   const { user } = useAuth()
   const [admin, setAdmin] = useState(user.isAdmin === "true")
 
+  const [tags, setTags] = useState([]) 
+  const [newTags, setNewTags] = useState("")
+
+  const handleAddTags = () => {
+    if (newTags) {
+      setTags((prevState) => [...prevState, newTags])
+      setNewTags("")
+    }
+  }
+  const handleRemoveTags = (deleted) => {
+    setTags((prevState) => prevState.filter((tag) => tag !== deleted))
+  }
+
   return (
     <Container>
       <Header admin={admin} />
@@ -58,10 +71,22 @@ export function EditDish() {
               <div>
                 <h2>Ingredientes</h2>
                 <div>
-                  <NewTag $isNew={false} value="Lentilha" />
-                  <NewTag $isNew={false} value="Cebola" />
-                  <NewTag $isNew={false} value="Alho" />
-                  <NewTag $isNew={true} placeholder="Adicionar" />
+                  {tags &&
+                    tags.map((tag, index) => (
+                      <NewTag
+                        key={String(index)}
+                        value={tag}
+                        onClick={() => handleRemoveTags(tag)}
+                      />
+                    ))}
+
+                  <NewTag
+                    $isNew={true}
+                    placeholder="Adicionar"
+                    value={newTags}
+                    onChange={(e) => setNewTags(e.target.value)}
+                    onClick={handleAddTags}
+                  />
                 </div>
               </div>
 
