@@ -102,42 +102,6 @@ export const Avatar = styled.label`
   justify-content: space-between;
   cursor: pointer;
 
-  > label {
-    width: 100%;
-    height: 4.8rem;
-    border-radius: 0.8rem;
-    border: 0.1rem solid ${({ theme }) => theme.COLORS.Dark900};
-    background: ${({ theme }) => theme.COLORS.Dark900};
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-
-    color: ${({ theme }) => theme.COLORS.Light500};
-
-    transition: border 0.5s ease, color 0.5s ease;
-    &:hover {
-      border: 0.1rem solid ${({ theme }) => theme.COLORS.Light400};
-      color: ${({ theme }) => theme.COLORS.Light100};
-    }
-
-    > svg {
-      font-size: 2.3rem;
-    }
-
-    > p {
-      font-size: 1.6rem;
-      font-family: var(--roboto-font-family);
-      font-weight: 400;
-    }
-
-    > input {
-      display: none;
-    }
-  }
-
   > div {
     height: 100%;
     display: flex;
@@ -148,7 +112,7 @@ export const Avatar = styled.label`
       height: clamp(20rem, 23vw, 25rem);
       border-radius: 50%;
       object-fit: cover;
-      
+
       animation: my-blink 2s ease 0s 1 normal forwards;
     }
   }

@@ -6,6 +6,7 @@ import ToGoBack from "../../components/toGoBack"
 import Input from "../../components/input"
 import Button from "../../components/button"
 import MessageAlert from "../../components/messageAlert"
+import InputFile from "../../components/inputFile"
 
 import { RxAvatar } from "react-icons/rx"
 import { PiFileImageFill } from "react-icons/pi"
@@ -29,7 +30,9 @@ export function Profile() {
   const { user, updateProfile } = useAuth()
   const [admin, setAdmin] = useState(user.isAdmin === "true")
 
-  const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : ""
+  const avatarURL = user.avatar
+    ? `${api.defaults.baseURL}/files/${user.avatar}`
+    : ""
   const [avatar, setAvatar] = useState(avatarURL)
   const [avatarFile, setAvatarFile] = useState(null)
 
@@ -175,7 +178,7 @@ export function Profile() {
     }
   }
 
-  function handleChangeAvatar(e){
+  function handleChangeAvatar(e) {
     const file = e.target.files[0]
     setAvatarFile(file)
 
@@ -230,7 +233,6 @@ export function Profile() {
       validNewPassword &&
       validCep == true
     ) {
-
       const formUser = {
         isAdmin: admin.toString(),
         name,
@@ -238,7 +240,7 @@ export function Profile() {
         oldPassword,
         newPassword,
       }
-      
+
       const user = await updateProfile(formUser, avatarFile)
 
       if (typeof user === "object") {
@@ -312,7 +314,7 @@ export function Profile() {
           <ToGoBack link="/" />
 
           <div>
-            <Avatar htmlFor="file">
+            <Avatar htmlFor="upload-image">
               {avatar ? (
                 <div>
                   <img src={avatar} alt="Imagem de Perfil" />
@@ -321,11 +323,10 @@ export function Profile() {
                 <RxAvatar />
               )}
 
-              <label htmlFor="file">
-                <PiFileImageFill />
-                <p>Selecione uma imagem</p>
-                <input type="file" id="file" onChange={handleChangeAvatar} />
-              </label>
+              <InputFile
+                title="Selecione uma imagem"
+                onChange={handleChangeAvatar}
+              />
             </Avatar>
 
             <Form>
@@ -480,7 +481,7 @@ export function Profile() {
 
               <Button
                 $loading={!waiting}
-                onClick={waiting ? handleFormSaving : ""}
+                onClick={waiting ? handleFormSaving : null}
                 title="Salvar alterações"
               />
             </Form>

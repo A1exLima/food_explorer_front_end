@@ -12,14 +12,19 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
 
-  border: ${({ theme, $isNew }) =>
-    $isNew ? `.1rem dashed ${theme.COLORS.Light500}` : "none"};
+  border: ${({ $isNew }) => ($isNew ? `.15rem dashed` : "none")};
+
+  border-color: ${({ theme, $alert }) =>
+    $alert ? `${theme.COLORS.TintsTomato400}` : `${theme.COLORS.Light500}`};
 
   transition: all 0.5s ease;
 
   &:hover {
     border: ${({ theme, $isNew }) =>
-      $isNew ? `.1rem dashed ${theme.COLORS.Light100}` : "none"};
+      $isNew ? `.15rem dashed` : "none"};
+
+    border-color: ${({ theme, $alert }) =>
+      $alert ? `${theme.COLORS.TintsTomato300}` : `${theme.COLORS.Light100}`};
   }
 
   > input {
@@ -28,7 +33,8 @@ export const Container = styled.div`
     outline: none;
     width: 100%;
 
-    color: ${({ theme }) => theme.COLORS.Light100};
+    color: ${({ theme, $alert }) =>
+      $alert ? `${theme.COLORS.TintsTomato400}` : `${theme.COLORS.Light100}`};
     font-family: var(--roboto-font-family);
     font-size: 1.6rem;
     font-weight: 400;
@@ -47,7 +53,8 @@ export const Container = styled.div`
 
     > svg {
       font-size: 1.6rem;
-      color: ${({ theme }) => theme.COLORS.Light100};
+      color: ${({ theme, $alert }) =>
+        $alert ? `${theme.COLORS.TintsTomato400}` : `${theme.COLORS.Light100}`};
       display: flex;
       align-items: center;
 

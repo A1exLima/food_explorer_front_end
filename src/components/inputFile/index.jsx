@@ -1,14 +1,14 @@
 import { Container } from "./style"
-import Upload from "../../assets/icons/upload.svg"
+import { PiFileImageFill } from "react-icons/pi"
 
-export default function InputFile() {
+export default function InputFile({label, title, ...rest}) {
   return (
     <Container htmlFor="upload-image">
-      Imagem do Prato
+      <span>{label}</span>
       <div>
-        <img src={Upload} alt="" />
-        <p>Selecione a imagem</p>
-        <input type="file" id="upload-image" />
+        <PiFileImageFill />
+        <p>{title}</p>
+        <input {...rest} type="file" id="upload-image" />
       </div>
     </Container>
   )
