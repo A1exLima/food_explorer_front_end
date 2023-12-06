@@ -16,10 +16,20 @@ import { useAuth } from "../../hooks/auth"
 export function Home() {
   const { user } = useAuth()
   const [admin, setAdmin] = useState(user.isAdmin === "true")
-  
+  const [searchValue, setSearchValue] = useState("")
+
+  const handleSearchInputChange = (value) => {
+    setSearchValue(value)
+    console.log(searchValue)
+  }
+
   return (
     <Container>
-      <Header admin={admin} />
+      <Header
+        admin={admin}
+        search={handleSearchInputChange}
+        valueSearch={searchValue}
+      />
       <Main>
         <Presentation>
           <div>
@@ -42,22 +52,6 @@ export function Home() {
             <SplideSlide>
               <Card admin={admin} />
             </SplideSlide>
-
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
-
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
-
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
-
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
           </Splide>
         </Section>
 
@@ -74,22 +68,6 @@ export function Home() {
             <SplideSlide>
               <Card admin={admin} />
             </SplideSlide>
-
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
-
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
-
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
-
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
           </Splide>
         </Section>
 
@@ -103,22 +81,6 @@ export function Home() {
             }}
             aria-label="dish carousel"
           >
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
-
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
-
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
-
-            <SplideSlide>
-              <Card admin={admin} />
-            </SplideSlide>
-
             <SplideSlide>
               <Card admin={admin} />
             </SplideSlide>

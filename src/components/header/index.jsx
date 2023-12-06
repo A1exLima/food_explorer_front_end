@@ -16,14 +16,26 @@ import { useState, useEffect, useRef } from "react"
 
 import { api } from "../../services"
 
-export default function Header({ admin }) {
+export default function Header({ admin, search, valueSearch }) {
   const { signOut, user } = useAuth()
-  
+
   const navigate = useNavigate()
 
   const [hideAvatarMenu, setHideAvatarMenu] = useState(true)
   const menuAvatarRef = useRef(null)
-  const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : ""
+  const avatarURL = user.avatar
+    ? `${api.defaults.baseURL}/files/${user.avatar}`
+    : null
+
+  function handleSearch(e) {
+    if(search){
+      search(e.target.value)
+    }
+  }
+
+  function clearSearch() {
+    search("")
+  }
 
   function handleClickLogOut() {
     signOut()
@@ -66,9 +78,13 @@ export default function Header({ admin }) {
         </Brand>
 
         <Search
-          type="search"
+          type="text"
           autoComplete="on"
           placeholder="Busque por pratos ou ingredientes"
+          onChange={handleSearch}
+          onClick={clearSearch}
+          value={valueSearch}
+          $toAppearCloseButton={valueSearch}
         />
 
         {admin ? (

@@ -120,13 +120,7 @@ export const Avatar = styled.label`
   > svg {
     height: 100%;
     font-size: 25rem;
-
     animation: my-blink 2s ease 0s 1 normal forwards;
-
-    transition: transform 0.4s ease-in-out;
-    &:hover {
-      transform: scale(1.01);
-    }
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
