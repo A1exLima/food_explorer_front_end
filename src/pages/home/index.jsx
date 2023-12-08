@@ -10,18 +10,49 @@ import cookieFruit from "../../assets/images/cookieFruit.png"
 import { Splide, SplideSlide } from "@splidejs/react-splide"
 import "@splidejs/react-splide/css/skyblue"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAuth } from "../../hooks/auth"
+
+import { api } from "../../services"
 
 export function Home() {
   const { user } = useAuth()
   const [admin, setAdmin] = useState(user.isAdmin === "true")
+
   const [searchValue, setSearchValue] = useState("")
+  const [category, setCategory] = useState([])
+
+  const [dishes, setDishes] = useState([])
 
   const handleSearchInputChange = (value) => {
     setSearchValue(value)
-    console.log(searchValue)
   }
+
+  function handleCategorysValues({ snack, dessert, drink }) {
+    const categorySet = new Set([snack, dessert, drink])
+    const category = Array.from(categorySet).filter(
+      (category) => category !== ""
+    )
+
+    setCategory(category)
+  }
+
+  
+  useEffect(() => {
+    console.log(dishes)
+  }, [dishes])
+  
+
+  useEffect(() => {
+    const fetchDish = async () => {
+      const response = await api(
+        `/dish?name=${searchValue}&category=${category}`
+      )
+      setDishes(response.data)
+    }
+
+    fetchDish()
+  }, [searchValue, category])
 
   return (
     <Container>
@@ -29,6 +60,7 @@ export function Home() {
         admin={admin}
         search={handleSearchInputChange}
         valueSearch={searchValue}
+        passingCategorysValuesToHome={handleCategorysValues}
       />
       <Main>
         <Presentation>

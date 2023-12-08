@@ -16,7 +16,12 @@ import { useState, useEffect, useRef } from "react"
 
 import { api } from "../../services"
 
-export default function Header({ admin, search, valueSearch }) {
+export default function Header({
+  admin,
+  search,
+  valueSearch,
+  passingCategorysValuesToHome,
+}) {
   const { signOut, user } = useAuth()
 
   const navigate = useNavigate()
@@ -27,8 +32,14 @@ export default function Header({ admin, search, valueSearch }) {
     ? `${api.defaults.baseURL}/files/${user.avatar}`
     : null
 
+  function handleCategorysValues({ snack, dessert, drink }) {
+    if (passingCategorysValuesToHome) {
+      passingCategorysValuesToHome({ snack, dessert, drink })
+    }
+  }
+
   function handleSearch(e) {
-    if(search){
+    if (search) {
       search(e.target.value)
     }
   }
@@ -85,6 +96,7 @@ export default function Header({ admin, search, valueSearch }) {
           onClick={clearSearch}
           value={valueSearch}
           $toAppearCloseButton={valueSearch}
+          changingCategoryValues={handleCategorysValues}
         />
 
         {admin ? (
