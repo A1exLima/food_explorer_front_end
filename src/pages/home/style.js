@@ -3,7 +3,14 @@ import { styled } from "styled-components"
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
 
+export const Content = styled.div`
+  width: 100%;
+  flex-grow: 1;
 `
 
 export const Main = styled.main`
@@ -11,6 +18,30 @@ export const Main = styled.main`
   margin: 0 auto;
   padding: 0 2rem;
 
+  .notFound {
+    width: 100%;
+    height: 100%;
+    margin: 4rem 0 4rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    > img {
+      width: 11.8rem;
+    }
+
+    > p {
+      margin-top: 2rem;
+      color: ${({ theme }) => theme.COLORS.Light700};
+      font-family: var(--poppins-font-family);
+      font-size: clamp(1.2rem, 3.5vw, 4rem);
+      font-weight: 600;
+      font-size: 1.8rem;
+      white-space: nowrap;
+    }
+  }
 `
 
 export const Presentation = styled.figure`
@@ -57,7 +88,7 @@ export const Presentation = styled.figure`
       width: clamp(55%, 37vw, 100%);
       color: ${({ theme }) => theme.COLORS.Light300};
       font-family: var(--roboto-font-family);
-      font-size: clamp(.88rem, 1.4vw, 1.6rem);
+      font-size: clamp(0.88rem, 1.4vw, 1.6rem);
       font-weight: 400;
       line-height: 100%;
     }
