@@ -1,5 +1,13 @@
 import { Container, Main, Content, Presentation } from "./style"
-import { useEffect, useState } from "react"
+
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+
+import { Splide, SplideSlide } from "@splidejs/react-splide"
+import "@splidejs/react-splide/css/skyblue"
+
+import { useAuth } from "../../hooks/auth"
+import { api } from "../../services"
 
 import Header from "../../components/header"
 import Footer from "../../components/footer"
@@ -7,18 +15,12 @@ import Section from "../../components/section"
 import Card from "../../components/card"
 
 import notFound from "../../assets/icons/notFound.svg"
-
 import cookieFruit from "../../assets/images/cookieFruit.png"
-
-import { Splide, SplideSlide } from "@splidejs/react-splide"
-import "@splidejs/react-splide/css/skyblue"
-
-import { useAuth } from "../../hooks/auth"
-
-import { api } from "../../services"
 
 export function Home() {
   const { user } = useAuth()
+  const navigate = useNavigate()
+
   const [admin, setAdmin] = useState(user.isAdmin === "true")
 
   const [searchValue, setSearchValue] = useState("")
@@ -32,7 +34,7 @@ export function Home() {
     setSearchValue(value)
   }
 
-  function handleCategorysValues({ snack, dessert, drink }) {
+  const handleCategorysValues = ({ snack, dessert, drink }) => {
     const categorySet = new Set([snack, dessert, drink])
     const category = Array.from(categorySet).filter(
       (category) => category !== ""
@@ -41,31 +43,25 @@ export function Home() {
     setCategory(category)
   }
 
+  const handleCard = (dishId) => {
+    navigate(`/dish/${dishId}`)
+  }
+
   useEffect(() => {
     const fetchDish = async () => {
-      try {
-        const response = await api.get(
-          `/dish?name=${searchValue}&category=${category}`
-        )
+      const response = await api.get(
+        `/dish?name=${searchValue}&category=${category}`
+      )
 
-        const snack = response.data.filter(
-          (dish) => dish.category === "Refeição"
-        )
-        const dessert = response.data.filter(
-          (dish) => dish.category === "Sobremesa"
-        )
-        const drink = response.data.filter((dish) => dish.category === "Bebida")
+      const snack = response.data.filter((dish) => dish.category === "Refeição")
+      const dessert = response.data.filter(
+        (dish) => dish.category === "Sobremesa"
+      )
+      const drink = response.data.filter((dish) => dish.category === "Bebida")
 
-        setDishesSnack(snack)
-        setDishesDessert(dessert)
-        setDishesDrink(drink)
-      } catch (error) {
-        if (error.response.data.message) {
-          console.log(error.response.data.message)
-        } else {
-          alert("Não foi possível localizar os pratos")
-        }
-      }
+      setDishesSnack(snack)
+      setDishesDessert(dessert)
+      setDishesDrink(drink)
     }
 
     fetchDish()
@@ -112,15 +108,19 @@ export function Home() {
                     >
                       {dishesSnack.map((dish) => (
                         <SplideSlide key={String(dish.id)}>
-                          <Card admin={admin} data={dish} />
+                          <Card
+                            admin={admin}
+                            data={dish}
+                            onClickCard={() => {
+                              handleCard(dish.id)
+                            }}
+                          />
                         </SplideSlide>
                       ))}
                     </Splide>
                   </Section>
                 </>
-              ) : (
-                ""
-              )}
+              ) : null}
 
               {dishesDessert.length ? (
                 <>
@@ -136,15 +136,19 @@ export function Home() {
                     >
                       {dishesDessert.map((dish) => (
                         <SplideSlide key={String(dish.id)}>
-                          <Card admin={admin} data={dish} />
+                          <Card
+                            admin={admin}
+                            data={dish}
+                            onClickCard={() => {
+                              handleCard(dish.id)
+                            }}
+                          />
                         </SplideSlide>
                       ))}
                     </Splide>
                   </Section>
                 </>
-              ) : (
-                ""
-              )}
+              ) : null}
 
               {dishesDrink.length ? (
                 <>
@@ -160,15 +164,19 @@ export function Home() {
                     >
                       {dishesDrink.map((dish) => (
                         <SplideSlide key={String(dish.id)}>
-                          <Card admin={admin} data={dish} />
+                          <Card
+                            admin={admin}
+                            data={dish}
+                            onClickCard={() => {
+                              handleCard(dish.id)
+                            }}
+                          />
                         </SplideSlide>
                       ))}
                     </Splide>
                   </Section>
                 </>
-              ) : (
-                ""
-              )}
+              ) : null}
             </>
           )}
         </Main>

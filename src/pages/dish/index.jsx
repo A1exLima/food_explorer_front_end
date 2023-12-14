@@ -9,77 +9,91 @@ import Tag from "../../components/tag"
 
 import { TbPointFilled } from "react-icons/tb"
 
-import img2 from "../../assets/images/dish/Mask group.png"
-
 import receipt from "../../assets/icons/receipt.svg"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 
 import { useAuth } from "../../hooks/auth"
 
-const tags = [
-  { id: "1", name: "alface" },
-  { id: "2", name: "cebola" },
-  { id: "3", name: "pão naan" },
-  { id: "4", name: "pepino" },
-  { id: "5", name: "rabanete" },
-  { id: "6", name: "tomate" },
-  { id: "7", name: "rabanete" },
-  { id: "8", name: "tomate" },
-  { id: "9", name: "rabanete" },
-  { id: "10", name: "tomate" },
-]
+import { api } from "../../services"
 
 export function Dish() {
   const { user } = useAuth()
+  const params = useParams()
+
   const [admin, setAdmin] = useState(user.isAdmin === "true")
+  const [data, setData] = useState(null)
+
+  const [image, setImage] = useState(null)
+  const [price, setPrice] = useState(null)
+
+  useEffect(() => {
+    const fetchDish = async () => {
+      const response = await api.get(`/dish/${params.id}`)
+      setData(response.data)
+
+      const imageURL = `${api.defaults.baseURL}/files_image/${response.data.image}`
+      setImage(imageURL)
+
+      const price = response.data.price.toFixed(2).replace(".", ",")
+      setPrice(price)
+    }
+
+    fetchDish()
+  }, [])
 
   return (
     <Container>
       <Header admin={admin} />
 
-      <Main>
-        <ToGoBack link="/" />
+      {data && (
+        <Main>
+          <ToGoBack link="/" />
 
-        <Content>
-          <figure>
-            <img src={img2} alt="Prato Salada Ravanello" />
-          </figure>
+          <Content>
+            <figure>
+              <img src={image} alt="Imagem do Prato" />
+            </figure>
 
-          <div>
             <div>
-              <h2>Salada Ravanello</h2>
-
-              <p>
-                Rabanetes, folhas verdes e molho agridoce salpicados com
-                gergelim. O pão naan dá um toque especial.
-              </p>
-
               <div>
-                {tags &&
-                  tags.map((tag) => <Tag key={tag.id} title={tag.name} />)}
+                <h2>{data.name}</h2>
+
+                <p>{data.description}</p>
+
+                <div>
+                  {data.ingredients &&
+                    data.ingredients.map((ingredient) => (
+                      <Tag title={ingredient.name} key={ingredient.id} />
+                    ))}
+                </div>
               </div>
+
+              {admin ? (
+                <div>
+                  <Button
+                    type="button"
+                    title="Editar prato"
+                    to={`/edit_dish/${data.id}`}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <Counter value="10" />
+                  <Button
+                    img={receipt}
+                    icon={TbPointFilled}
+                    type="button"
+                    title="pedir"
+                    value={price}
+                  />
+                </div>
+              )}
             </div>
-
-            {admin ? (
-              <div>
-                <Button to="/edit_dish" type="button" title="Editar prato" />
-              </div>
-            ) : (
-              <div>
-                <Counter value="10" />
-                <Button
-                  img={receipt}
-                  icon={TbPointFilled}
-                  type="button"
-                  title="pedir"
-                  value="R$25,00"
-                />
-              </div>
-            )}
-          </div>
-        </Content>
-      </Main>
+          </Content>
+        </Main>
+      )}
 
       <Footer />
     </Container>

@@ -125,7 +125,7 @@ export const Category = styled.div`
       font-size: 1.25rem;
       font-family: var(--roboto-font-family);
       font-weight: 500;
-      color: ${({ theme }) => theme.COLORS.Light600};
+      color: ${({ theme }) => theme.COLORS.Light500};
     }
 
     .checkmark {
@@ -135,7 +135,7 @@ export const Category = styled.div`
       height: 1.4rem;
       width: 1.4rem;
       background-color: transparent;
-      border: 0.2rem solid ${({ theme }) => theme.COLORS.Light600};
+      border: 0.2rem solid ${({ theme }) => theme.COLORS.Light500};
       border-radius: 0.2rem;
     }
 
@@ -154,7 +154,7 @@ export const Category = styled.div`
       top: 0.04rem;
       width: 2.4px;
       height: 6px;
-      border: solid ${({ theme }) => theme.COLORS.Light600};
+      border: solid ${({ theme }) => theme.COLORS.Light500};
       border-width: 0 0.2rem 0.2rem 0;
       transform: rotate(45deg);
     }
