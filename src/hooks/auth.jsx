@@ -18,8 +18,8 @@ function AuthProvider({ children }) {
       const { user, token } = response.data
 
       if (user && token) {
-        setAlertMessage("Login efetuado com sucesso")
-        setColor((prevState) => !prevState)
+        setAlertMessage(`Bem vindo ${user.name}`)
+        setColor(true)
       }
 
       localStorage.setItem("@foodExplorer:user", JSON.stringify(user))

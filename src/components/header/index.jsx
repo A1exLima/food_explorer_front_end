@@ -49,8 +49,8 @@ export default function Header({
   }
 
   function handleClickLogOut() {
-    signOut()
     navigate("/")
+    signOut()
   }
 
   function handleAvatar() {
