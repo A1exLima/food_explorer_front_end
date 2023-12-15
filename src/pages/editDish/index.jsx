@@ -135,6 +135,7 @@ export function EditDish() {
       setAlertMessage("")
     }, messageDisplayTime + 250)
   }
+
   const handleDeleteDish = async () => {
     setWaiting(false)
     const dishId = params.id
@@ -195,6 +196,7 @@ export function EditDish() {
 
     fetchDish()
   }, [])
+  
   return (
     <Container>
       <MessageAlert
