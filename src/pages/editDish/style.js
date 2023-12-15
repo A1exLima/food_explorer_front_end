@@ -5,8 +5,10 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
 `
 
 export const Main = styled.main`
@@ -20,7 +22,7 @@ export const Main = styled.main`
 `
 
 export const Content = styled.div`
-  max-width: 115rem;
+  max-width: 112rem;
   margin: 0 auto;
   padding: 0 2rem;
 
@@ -29,13 +31,73 @@ export const Content = styled.div`
     font-family: var(--poppins-font-family);
     font-size: clamp(2.2rem, 4vw, 3.2rem);
     font-weight: 500;
-    margin-top: 2.4rem;
+    margin-top: 2.2rem;
     margin-bottom: 3.2rem;
+  }
+
+  > div:last-child {
+    width: 100%;
+    margin: 3.2rem 0 3.2rem;
+    display: flex;
+    justify-content: flex-end;
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     > h2 {
       margin-bottom: 2.4rem;
+    }
+
+    > div:last-child {
+      margin-bottom: 5.308rem;
+    }
+  }
+`
+
+export const ContentForm = styled.div`
+  display: flex;
+  gap: 3.2rem;
+
+  > div:first-child {
+    > label {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+
+      > img {
+        cursor: pointer;
+        object-fit: cover;
+        border-radius: 9999rem;
+        width: clamp(20rem, 23vw, 25rem);
+        height: clamp(20rem, 23vw, 25rem);
+      }
+    }
+
+    > p {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      font-family: var(--poppins-font-family);
+      font-weight: 500;
+      color: ${({ theme }) => theme.COLORS.TintsTomato400};
+    }
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    display: block;
+
+    > div:first-child {
+      > label {
+        margin-bottom: 1rem;
+
+        > div {
+          width: 100%;
+        }
+      }
+
+      > p {
+        margin-bottom: 2rem;
+      }
     }
   }
 `
@@ -47,15 +109,17 @@ export const Form = styled.form`
 
   > div:nth-child(1) {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 3rem;
+    gap: 3.2rem;
+
+    > label:first-child {
+      width: 44%;
+    }
 
     > div {
       margin-bottom: 0;
 
       > Input {
-        background: ${({ theme }) => theme.COLORS.Dark800};
         border-color: ${({ theme }) => theme.COLORS.Dark800};
         margin-top: 1.6rem;
 
@@ -72,7 +136,7 @@ export const Form = styled.form`
       font-family: var(--roboto-font-family);
       font-size: 1.6rem;
       font-weight: 400;
-      min-width: 29.4rem;
+      min-width: 18rem;
 
       > div {
         position: relative;
@@ -95,7 +159,7 @@ export const Form = styled.form`
           padding: 1.2rem 1.4rem;
           margin-top: 1.6rem;
           border-radius: 0.8rem;
-          background: ${({ theme }) => theme.COLORS.Dark800};
+          background: ${({ theme }) => theme.COLORS.Dark900};
           border-color: ${({ theme }) => theme.COLORS.Dark800};
 
           color: ${({ theme }) => theme.COLORS.Light400};
@@ -116,6 +180,10 @@ export const Form = styled.form`
       flex-direction: column;
       gap: 2.4rem;
 
+      > label:first-child {
+        width: 100%;
+      }
+
       > label {
         width: 100%;
       }
@@ -124,7 +192,7 @@ export const Form = styled.form`
 
   > div:nth-child(2) {
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: 3.2rem;
 
     > div:nth-child(1) {
@@ -144,24 +212,27 @@ export const Form = styled.form`
         flex-wrap: wrap;
         justify-content: start;
         gap: 1.6rem;
-        width: 100%;
+        min-width: 60rem;
         min-height: 4.8rem;
         padding: 0.4rem 0.8rem;
         border-radius: 0.8rem;
-        background: ${({ theme }) => theme.COLORS.Dark800};
+        background: ${({ theme }) => theme.COLORS.Dark900};
+      }
 
-        @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-          justify-content: center;
+      @media (max-width: 656px) {
+        > div {
+          min-width: 0;
         }
       }
     }
 
     > div:nth-child(2) {
       max-width: 25.1rem;
+      height: 100%;
       margin-bottom: 0;
 
       > Input {
-        background: ${({ theme }) => theme.COLORS.Dark800};
+        background: ${({ theme }) => theme.COLORS.Dark900};
         border-color: ${({ theme }) => theme.COLORS.Dark800};
         margin-top: 1.6rem;
 
@@ -184,6 +255,8 @@ export const Form = styled.form`
   }
 
   > div:nth-child(3) {
+    display: flex;
+    flex-direction: column;
     > h2 {
       color: ${({ theme }) => theme.COLORS.Light400};
       font-family: var(--roboto-font-family);
@@ -194,11 +267,11 @@ export const Form = styled.form`
 
     > textarea {
       width: 100%;
-      height: 17.2rem;
+      height: ${({ $heightValid }) => ($heightValid ? "12.6rem" : "14.6rem")};
       padding: 1.4rem;
       border: 0.1rem solid ${({ theme }) => theme.COLORS.Dark800};
       border-radius: 0.8rem;
-      background: ${({ theme }) => theme.COLORS.Dark800};
+      background: ${({ theme }) => theme.COLORS.Dark900};
 
       color: ${({ theme }) => theme.COLORS.Light100};
       font-family: var(--roboto-font-family);
@@ -211,21 +284,12 @@ export const Form = styled.form`
         color: ${({ theme }) => theme.COLORS.Light500};
       }
 
-      transition: all 0.5s ease;
+      transition: border 0.5s ease;
 
       &:hover {
         border: 0.1rem solid ${({ theme }) => theme.COLORS.Light400};
       }
     }
-  }
-
-  > div:nth-child(4) {
-    width: 100%;
-    margin-bottom: 5.308rem;
-    
-    display: flex;
-    justify-content: flex-end;
-    gap: 3.2rem;
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {

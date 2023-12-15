@@ -22,7 +22,7 @@ export const Main = styled.main`
 `
 
 export const Content = styled.div`
-  max-width: 115rem;
+  max-width: 112rem;
   margin: 0 auto;
   padding: 0 2rem;
 

@@ -2,6 +2,7 @@ import { styled } from "styled-components"
 
 export const Container = styled.label`
   width: 100%;
+
   font-family: var(--roboto-font-family);
   font-size: 1.6rem;
   font-weight: 400;
@@ -18,7 +19,6 @@ export const Container = styled.label`
   }
 
   > div {
-    //width: 100%;
     height: 4.8rem;
     display: flex;
     gap: 0.8rem;

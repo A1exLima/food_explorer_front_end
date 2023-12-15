@@ -81,10 +81,10 @@ export function NewDish() {
       setAlertMessage("Verifique os campos em validação")
       setValidImgDishFile(true)
     } else {
-      if (newTags) {
+      if (tags.length == 0 || newTags) {
         setAlertTags(true)
         setColor(false)
-        setAlertMessage("Ingrediente pendente")
+        setAlertMessage("Ingredientes pendentes")
       } else {
         const formDish = {
           name,

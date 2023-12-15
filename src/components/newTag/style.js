@@ -20,8 +20,7 @@ export const Container = styled.div`
   transition: all 0.5s ease;
 
   &:hover {
-    border: ${({ theme, $isNew }) =>
-      $isNew ? `.15rem dashed` : "none"};
+    border: ${({ theme, $isNew }) => ($isNew ? `.15rem dashed` : "none")};
 
     border-color: ${({ theme, $alert }) =>
       $alert ? `${theme.COLORS.TintsTomato300}` : `${theme.COLORS.Light100}`};
@@ -42,7 +41,8 @@ export const Container = styled.div`
     text-align: center;
 
     &::placeholder {
-      color: ${({ theme }) => theme.COLORS.Light500};
+      color: ${({ theme, $alert }) =>
+        $alert ? `${theme.COLORS.TintsTomato400}` : `${theme.COLORS.Light500}`};
     }
   }
 
