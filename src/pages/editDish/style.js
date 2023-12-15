@@ -40,6 +40,7 @@ export const Content = styled.div`
     margin: 3.2rem 0 3.2rem;
     display: flex;
     justify-content: flex-end;
+    gap: 3.2rem;
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
@@ -49,6 +50,13 @@ export const Content = styled.div`
 
     > div:last-child {
       margin-bottom: 5.308rem;
+    }
+  }
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+    > div:last-child {
+      display: flex;
+      flex-direction: column-reverse;
     }
   }
 `

@@ -32,7 +32,7 @@ export default function Card({ admin = false, data, onClickCard }) {
         <img src={heart} alt="Favoritar Prato" />
       )}
 
-      <img src={imageDishURL} alt="Prato 1" />
+      <img src={imageDishURL} alt="imagem do prato"/>
 
       <h2>{`${dish.name} >`}</h2>
 

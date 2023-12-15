@@ -7,6 +7,7 @@ import InputFile from "../../components/inputFile"
 import Input from "../../components/input"
 import NewTag from "../../components/newTag"
 import SaveButton from "../../components/saveButton"
+import DeleteButton from "../../components/deleteButton"
 import MessageAlert from "../../components/messageAlert"
 
 import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
@@ -31,7 +32,8 @@ export function EditDish() {
   const [messageDisplayTime, setMessageDisplayTime] = useState(
     configDisplayTimerMessageAlert.timer
   )
-
+  
+  const [redirectToHome, setRedirectToHome] = useState("")
   const [redirectToDish, setRedirectToDish] = useState("")
   const navigate = useNavigate()
 
@@ -86,7 +88,6 @@ export function EditDish() {
       setAlertMessage("Verifique os campos em validação")
       setValidImgDishFile(true)
     } else {
- 
       if (tags.length == 0 || newTags) {
         setAlertTags(true)
         setColor(false)
@@ -134,8 +135,43 @@ export function EditDish() {
       setAlertMessage("")
     }, messageDisplayTime + 250)
   }
+  const handleDeleteDish = async () => {
+    setWaiting(false)
+    const dishId = params.id
+
+    try {
+      setRedirectToHome(true)
+
+      const response = await api.delete(`/dish/${dishId}`)
+      setColor(true)
+      setAlertMessage(response.data.message)
+      
+    } catch (error) {
+      setRedirectToHome(false)
+
+      if (error.response) {
+        setColor(false)
+        setAlertMessage(error.response.data.message)
+      } else {
+        setColor(false)
+        setAlertMessage("Não foi possível excluir o prato")
+      }
+    }
+
+    setTimeout(() => {
+      setWaiting(true)
+      setAlertMessage("")
+    }, messageDisplayTime + 250)
+  }
 
   useEffect(() => {
+    if (redirectToHome) {
+      setTimeout(() => {
+        navigate("/")
+      }, messageDisplayTime + 250)
+    }
+    setRedirectToHome("")
+
     if (redirectToDish) {
       setTimeout(() => {
         navigate(`/dish/${params.id}`)
@@ -171,7 +207,7 @@ export function EditDish() {
 
       <Main>
         <Content>
-          <ToGoBack link="/" />
+          <ToGoBack link={`/dish/${params.id}`} />
 
           <h2>Editar Prato</h2>
 
@@ -269,6 +305,12 @@ export function EditDish() {
           </ContentForm>
 
           <div>
+            <DeleteButton
+              title="Excluir prato"
+              $loading={!waiting}
+              onClick={waiting ? handleDeleteDish : null}
+            />
+
             <SaveButton
               title="Salvar alterações"
               $loading={!waiting}

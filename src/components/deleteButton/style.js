@@ -20,10 +20,10 @@ export const Container = styled(Link)`
   font-weight: 500;
   white-space: nowrap;
 
-  transition: transform 0.4s ease-in-out;
+  transition: filter 0.4s ease-in-out;
 
   &:hover {
-    transform: scale(0.985);
+    filter: brightness(85%);
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {

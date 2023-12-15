@@ -2,6 +2,7 @@ import { styled } from "styled-components"
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
+  overflow: hidden;
   position: relative;
   z-index: 0;
   width: 100%;
@@ -36,14 +37,31 @@ export const Container = styled.div`
   > img:nth-child(2) {
     width: clamp(8.8rem, 16vw, 17.6rem);
     height: clamp(8.8rem, 16vw, 17.6rem);
+    object-fit: cover;
+    border-radius: 9999rem;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  &:hover {
+    > img:nth-child(2) {
+      transform: scale(1.03);
+    }
   }
 
   > h2 {
+    max-width: clamp(13.5rem, 23.5vw, 25.5rem);
+    overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
     color: ${({ theme }) => theme.COLORS.Light300};
     font-family: var(--poppins-font-family);
     font-size: clamp(1.4rem, 2.2vw, 2.4rem);
     font-weight: 700;
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+      white-space: wrap;
+      text-align: center;
+    }
   }
 
   > p:nth-child(4) {
@@ -55,6 +73,11 @@ export const Container = styled.div`
     font-size: 1.4rem;
     font-weight: 400;
     line-height: 160%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   > p:nth-child(5) {
@@ -82,5 +105,3 @@ export const Container = styled.div`
     }
   }
 `
-
-
