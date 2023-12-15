@@ -311,7 +311,7 @@ export function Profile() {
 
       <Main>
         <Content>
-          <ToGoBack link="/" />
+          <ToGoBack />
 
           <div>
             <Avatar htmlFor="upload-image">

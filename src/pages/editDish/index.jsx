@@ -209,7 +209,7 @@ export function EditDish() {
 
       <Main>
         <Content>
-          <ToGoBack link={`/dish/${params.id}`} />
+          <ToGoBack />
 
           <h2>Editar Prato</h2>
 

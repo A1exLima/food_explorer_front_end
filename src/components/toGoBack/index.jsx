@@ -1,14 +1,19 @@
-import {Container} from "./style"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { Container } from "./style"
 import { IoIosArrowBack } from "react-icons/io"
 
-export default function toGoBack({link}){
+export default function toGoBack() {
+  const navigate = useNavigate()
+
+  const handleBack = () => {
+    navigate(-1)
+  }
   return (
     <Container>
-      <Link to={link}>
+      <Container onClick={handleBack}>
         <IoIosArrowBack />
         voltar
-      </Link>
+      </Container>
     </Container>
   )
 }

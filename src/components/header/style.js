@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.header`
+  position: fixed;
+  z-index: 2;
   width: 100%;
   height: 11.4rem;
   display: flex;

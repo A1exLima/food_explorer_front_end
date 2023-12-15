@@ -12,13 +12,14 @@ export const Container = styled.div`
 `
 
 export const Main = styled.main`
+  margin-top: 13.8rem;
   width: 100%;
-  margin: 2.4rem 0;
   flex-grow: 1;
 `
 
 export const Content = styled.div`
-  max-width: 115rem;
+  
+  max-width: 112rem;
   margin: 0 auto;
   padding: 0 2rem;
 
@@ -29,6 +30,8 @@ export const Content = styled.div`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    margin-bottom: 3.2rem;
+
     > div:last-child {
       display: block;
       align-items: center;

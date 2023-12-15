@@ -6,15 +6,17 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
 `
 
 export const Content = styled.div`
+  margin-top: 11.4rem;
   width: 100%;
   flex-grow: 1;
 `
 
 export const Main = styled.main`
-  max-width: 115rem;
+  max-width: 112rem;
   margin: 0 auto;
   padding: 0 2rem;
 

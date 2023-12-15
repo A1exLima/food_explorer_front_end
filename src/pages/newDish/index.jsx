@@ -150,7 +150,7 @@ export function NewDish() {
 
       <Main>
         <Content>
-          <ToGoBack link="/" />
+          <ToGoBack />
 
           <h2>Adicionar Prato</h2>
 

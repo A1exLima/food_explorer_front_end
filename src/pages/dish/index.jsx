@@ -49,7 +49,7 @@ export function Dish() {
 
       {data && (
         <Main>
-          <ToGoBack link="/" />
+          <ToGoBack />
 
           <Content>
             <figure>

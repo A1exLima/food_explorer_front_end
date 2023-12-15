@@ -13,11 +13,11 @@ export const Container = styled.div`
 
 export const Main = styled.main`
   width: 100%;
-  margin-top: 2.4rem;
+  margin-top: 13.8rem;
   flex-grow: 1;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    margin-top: 1.092rem;
+    margin-top: 13.092rem;
   }
 `
 
