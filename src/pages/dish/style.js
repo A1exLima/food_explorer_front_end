@@ -4,29 +4,52 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `
 
-export const Main = styled.main`
-  height: 100%;
-  margin: 13.8rem auto 3.357rem;
-  padding: 0 2rem;
-  flex-grow: 1;
-`
-
 export const Content = styled.div`
+  margin-top: 11.4rem;
+  width: 100%;
+  flex-grow: 1;
+  overflow-x: hidden;
   display: flex;
   align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+
+  > div {
+    width: 100%;
+    padding-top: 2.4rem;
+
+    > div {
+      width: 112rem;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+  }
+`
+
+export const Main = styled.main`
+  flex-grow: 1;
+  padding: 0 2rem 2rem 2rem;
+  display: flex;
+  align-items: start;
   gap: 4.783rem;
   margin-top: 4.2rem;
 
   > figure {
+    height: 100%;
+    margin-top: 6.4rem;
+
     > img {
       max-width: clamp(26.4rem, 31vw, 39.0105rem);
       max-height: clamp(26.4rem, 31vw, 38.9rem);
+    }
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+      margin-top: 0;
     }
   }
 
@@ -46,6 +69,10 @@ export const Content = styled.div`
         font-family: var(--poppins-font-family);
         font-size: clamp(2.7041rem, 3.2vw, 4rem);
         font-weight: 500;
+
+        @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+          text-align: center;
+        }
       }
 
       > p {

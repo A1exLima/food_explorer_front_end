@@ -180,8 +180,8 @@ export function Home() {
             </>
           )}
         </Main>
-      </Content>
       <Footer />
+      </Content>
     </Container>
   )
 }

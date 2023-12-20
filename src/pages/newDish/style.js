@@ -4,27 +4,24 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
   position: relative;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
 
 export const Main = styled.main`
-  margin-top: 13.8rem;
   width: 100%;
+  margin-top: 11.4rem;
   flex-grow: 1;
+  overflow-x: hidden;
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    margin-top: 13.092rem;
-  }
 `
 
 export const Content = styled.div`
   max-width: 112rem;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 2.4rem 2rem 0 2rem;
 
   > h2 {
     color: ${({ theme }) => theme.COLORS.Light300};
@@ -217,7 +214,7 @@ export const Form = styled.form`
 
     > textarea {
       width: 100%;
-      height: ${({ $heightValid }) => ($heightValid ? "15.2rem" : "17.2rem")};
+      height: ${({ $heightValid }) => ($heightValid ? "15.2rem" : "18.2rem")};
       padding: 1.4rem;
       border: 0.1rem solid ${({ theme }) => theme.COLORS.Dark800};
       border-radius: 0.8rem;

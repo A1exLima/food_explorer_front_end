@@ -13,18 +13,15 @@ export const Container = styled.div`
 
 export const Main = styled.main`
   width: 100%;
-  margin-top: 13.8rem;
+  margin-top: 11.4rem;
   flex-grow: 1;
-
-  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    margin-top: 13.092rem;
-  }
+  overflow-x: hidden;
 `
 
 export const Content = styled.div`
   max-width: 112rem;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 2.4rem 2rem 0 2rem;
 
   > h2 {
     color: ${({ theme }) => theme.COLORS.Light300};
@@ -72,6 +69,7 @@ export const ContentForm = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
+      //border: 1px solid red;
 
       > img {
         cursor: pointer;
@@ -79,6 +77,13 @@ export const ContentForm = styled.div`
         border-radius: 9999rem;
         width: clamp(20rem, 23vw, 25rem);
         height: clamp(20rem, 23vw, 25rem);
+      }
+
+      @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+        padding-bottom: 2.4rem;
+        > img {
+          margin-bottom: 1.8rem;
+        }
       }
     }
 

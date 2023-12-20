@@ -47,11 +47,12 @@ export function Dish() {
     <Container>
       <Header admin={admin} />
 
-      {data && (
-        <Main>
+      <Content>
+        <div>
           <ToGoBack />
-
-          <Content>
+        </div>
+        {data && (
+          <Main>
             <figure>
               <img src={image} alt="Imagem do Prato" />
             </figure>
@@ -91,11 +92,10 @@ export function Dish() {
                 </div>
               )}
             </div>
-          </Content>
-        </Main>
-      )}
-
-      <Footer />
+          </Main>
+        )}
+        <Footer />
+      </Content>
     </Container>
   )
 }

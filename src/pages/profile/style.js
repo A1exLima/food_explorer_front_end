@@ -12,16 +12,23 @@ export const Container = styled.div`
 `
 
 export const Main = styled.main`
-  margin-top: 13.8rem;
+  margin-top: 11.4rem;
   width: 100%;
   flex-grow: 1;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+    display: block;
+  }
 `
 
 export const Content = styled.div`
-  
   max-width: 112rem;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 2.4rem 2rem 3.4rem 2rem;
 
   > div:last-child {
     margin-top: 3.2rem;
@@ -30,7 +37,6 @@ export const Content = styled.div`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    margin-bottom: 3.2rem;
 
     > div:last-child {
       display: block;

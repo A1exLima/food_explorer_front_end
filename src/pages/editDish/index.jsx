@@ -320,9 +320,9 @@ export function EditDish() {
             />
           </div>
         </Content>
+      <Footer />
       </Main>
 
-      <Footer />
     </Container>
   )
 }

@@ -487,9 +487,9 @@ export function Profile() {
             </Form>
           </div>
         </Content>
+      <Footer />
       </Main>
 
-      <Footer />
     </Container>
   )
 }

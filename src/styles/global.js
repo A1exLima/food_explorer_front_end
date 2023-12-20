@@ -50,4 +50,16 @@ export default createGlobalStyle`
     margin: 0;
 }
 
+::-webkit-scrollbar {
+    width: 0.8rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: ${({ theme }) => theme.COLORS.Dark400};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.COLORS.TintsCake100};
+    border-radius: 0.8rem;
+  }
 `

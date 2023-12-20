@@ -88,30 +88,24 @@ export const Category = styled.div`
     &:hover {
       scale: 1.05;
     }
-
-    animation: my-blink 1s ease 0s 1 normal;
-    @keyframes my-blink {
-      0% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0.4;
-      }
-
-      100% {
-        opacity: 1;
-      }
-    }
   }
 
   > div {
     position: absolute;
     bottom: -2.7rem;
     left: 0;
-    display: ${({ $hideCategoryMenu }) =>
-      $hideCategoryMenu ? "none" : "flex"};
+    display: ${({ $hideCategoryMenu }) => $hideCategoryMenu ? "none" : "flex"};
     gap: 1rem;
+
+    animation: my-blink 1s ease-in-out;
+    @keyframes my-blink {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
 
     .checkbox-container input {
       display: none;

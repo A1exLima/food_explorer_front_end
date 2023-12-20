@@ -253,9 +253,9 @@ export function NewDish() {
             />
           </div>
         </Content>
+      <Footer />
       </Main>
 
-      <Footer />
     </Container>
   )
 }

@@ -13,6 +13,7 @@ export const Content = styled.div`
   margin-top: 11.4rem;
   width: 100%;
   flex-grow: 1;
+  overflow-x: hidden;
 `
 
 export const Main = styled.main`
