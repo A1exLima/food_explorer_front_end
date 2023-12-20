@@ -24,7 +24,7 @@ export const Content = styled.div`
     text-align: center;
     color: ${({ theme }) => theme.COLORS.Light200};
     font-family: var(--roboto-font-family);
-    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    font-size: clamp(1.1rem, 2.6vw, 1.4rem);
     font-weight: 400;
   }
 
@@ -37,20 +37,18 @@ export const Brand = styled.div`
   width: fit-content;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: clamp(.5rem, .5vw, 1rem);
 
   > img {
-    width: clamp(2.2rem, 3vw, 3rem);
-    height: clamp(2.2rem, 3vw, 3rem);
+    width: clamp(2rem, 3vw, 3rem);
+    height: clamp(2rem, 3vw, 3rem);
   }
 
   > h1 {
     color: ${({ theme }) => theme.COLORS.Light700};
     font-family: var(--roboto-font-family);
-    font-size: clamp(1.5262rem, 2.5vw, 2.4rem);
+    font-size: clamp(1.4262rem, 2.5vw, 2.4rem);
     font-weight: 700;
     white-space: nowrap;
   }
-
-  
 `

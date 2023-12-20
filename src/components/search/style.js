@@ -72,7 +72,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    display: none;
+    display:  ${({ $openSearch }) => $openSearch ? "flex" : "none"};
   }
 `
 

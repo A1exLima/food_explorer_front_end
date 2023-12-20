@@ -8,6 +8,7 @@ import { useEffect, useState } from "react"
 
 export default function Search({
   $toAppearCloseButton,
+  $openSearch,
   onClick,
   changingCategoryValues,
   ...rest
@@ -51,7 +52,10 @@ export default function Search({
   }, [snack, dessert, drink])
 
   return (
-    <Container $toAppearCloseButton={$toAppearCloseButton}>
+    <Container
+      $toAppearCloseButton={$toAppearCloseButton}
+      $openSearch={$openSearch}
+    >
       <div>
         <FaMagnifyingGlass />
       </div>

@@ -12,6 +12,94 @@ export const Container = styled.header`
   background: ${({ theme }) => theme.COLORS.Dark600};
 `
 
+export const SideMenu = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 1;
+  background: ${({ theme }) => theme.COLORS.Dark400};
+
+  transform: translateX(-100%);
+  transition: transform 0.6s ease-in-out;
+
+  &[data-toggle-menu="true"] {
+    transform: translateX(0%);
+  }
+
+  &[data-menu-is-open="hidden"] {
+    transition: none;
+  }
+
+  > header {
+    height: 14.8rem;
+    background: ${({ theme }) => theme.COLORS.Dark600};
+    padding: 2.4rem 2.8rem 2.4rem 2rem;
+    display: flex;
+    align-items: center;
+
+    > svg {
+      font-size: 2.8rem;
+      cursor: pointer;
+    }
+
+    > img {
+      width: 4.2rem;
+      height: 4.2rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    > svg:last-child {
+      font-size: 4.2rem;
+      margin-top: 0.6rem;
+      cursor: pointer;
+    }
+  }
+
+  > div {
+    margin: 3.6rem 2.8rem 4.6rem 2.8rem;
+
+    > div {
+      > input {
+        &::placeholder {
+          font-size: clamp(1rem, 3.5vw, 1.6rem);
+        }
+      }
+    }
+  }
+
+  > nav {
+    height: 100%;
+    margin: 0 2.8rem;
+
+    > ul > li {
+      padding: 1rem;
+      font-family: var(--poppins-font-family);
+      font-size: 2.4rem;
+      font-weight: 300;
+      border-bottom: 0.1rem solid ${({ theme }) => theme.COLORS.Dark1000};
+
+      > a {
+        width: fit-content;
+        cursor: pointer;
+        color: ${({ theme }) => theme.COLORS.Light300};
+        transition: color 0.6s ease-in-out;
+
+        &:hover {
+          color: ${({ theme }) => theme.COLORS.TintsCake200};
+        }
+      }
+    }
+  }
+
+  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+    display: none;
+  }
+`
+
 export const Content = styled.div`
   width: 117rem;
   height: 11.4rem;
@@ -30,6 +118,7 @@ export const Content = styled.div`
 
 export const SideBar = styled.div`
   display: none;
+  cursor: pointer;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
     display: block;
@@ -72,7 +161,7 @@ export const Brand = styled(Link)`
     > p {
       color: ${({ theme }) => theme.COLORS.TintsCake200};
       font-family: var(--roboto-font-family);
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 3vw, 1.2rem);
       font-weight: 400;
     }
   }
