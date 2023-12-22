@@ -103,7 +103,7 @@ function AuthProvider({ children }) {
         setAlertMessage,
         alertMessage,
         color,
-        user: data.user,
+        user: data.user ?? false,
       }}
     >
       {children}
