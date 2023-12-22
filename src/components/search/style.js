@@ -55,8 +55,8 @@ export const Container = styled.div`
       scale: 1.1;
     }
 
-    animation: my-blink 1s ease 0s 1 normal;
-    @keyframes my-blink {
+    animation: blink 2s ease 0s 1 normal;
+    @keyframes blink {
       0% {
         opacity: 1;
       }
@@ -97,8 +97,8 @@ export const Category = styled.div`
     display: ${({ $hideCategoryMenu }) => $hideCategoryMenu ? "none" : "flex"};
     gap: 1rem;
 
-    animation: my-blink 1s ease-in-out;
-    @keyframes my-blink {
+    animation: blink 1s ease-in-out;
+    @keyframes blink {
       0% {
         opacity: 0;
       }

@@ -51,6 +51,7 @@ function AuthProvider({ children }) {
   }
 
   async function updateProfile(formUser, avatarFile) {
+  
     if (avatarFile) {
       const fileUploadForm = new FormData()
       fileUploadForm.append("avatar", avatarFile)
@@ -64,8 +65,11 @@ function AuthProvider({ children }) {
       const response = await api.put("/users", formUser)
       const user = response.data
       localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
-      setData({ user, token: data.token })
-
+      
+      setTimeout(() => {
+        setData({ user, token: data.token })
+      }, configDisplayTimerMessageAlert.timer + 250)
+      
       return response.data
     } catch (error) {
       if (error.response) {

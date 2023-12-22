@@ -9,15 +9,16 @@ import MessageAlert from "../../components/messageAlert"
 import InputFile from "../../components/inputFile"
 
 import { RxAvatar } from "react-icons/rx"
-import { PiFileImageFill } from "react-icons/pi"
 
-import { useEffect, useState } from "react"
+import { useLayoutEffect, useState } from "react"
 
 import { useAuth } from "../../hooks/auth"
 
 import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
 
 import { api } from "../../services"
+
+import { useNavigate } from "react-router-dom"
 
 import {
   useValidatePassword,
@@ -28,7 +29,6 @@ import {
 
 export function Profile() {
   const { user, updateProfile } = useAuth()
-  const [admin, setAdmin] = useState(user.isAdmin === "true")
 
   const avatarURL = user.avatar
     ? `${api.defaults.baseURL}/files/${user.avatar}`
@@ -70,6 +70,8 @@ export function Profile() {
   )
 
   const [waiting, setWaiting] = useState(true)
+
+  const navigate = useNavigate()
 
   function handleCep(e) {
     setAlertMessage("")
@@ -234,7 +236,6 @@ export function Profile() {
       validCep == true
     ) {
       const formUser = {
-        isAdmin: admin.toString(),
         name,
         email,
         oldPassword,
@@ -242,8 +243,8 @@ export function Profile() {
       }
 
       const user = await updateProfile(formUser, avatarFile)
-
       if (typeof user === "object") {
+        
         if (validCep && address) {
           const formAddress = {
             street,
@@ -260,7 +261,6 @@ export function Profile() {
           } else if (cep) {
             createAddress(formAddress)
           }
-
           setAlertMessage("Perfil atualizado com sucesso")
           setColor(true)
         } else if (!address) {
@@ -279,10 +279,11 @@ export function Profile() {
     setTimeout(() => {
       setWaiting(true)
       setAlertMessage("")
+      navigate("/")
     }, messageDisplayTime + 250)
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (validDataAddress) {
       showAddress()
       setValidCep(true)
@@ -307,7 +308,7 @@ export function Profile() {
         $messageDisplayTime={messageDisplayTime}
       />
 
-      <Header admin={admin} />
+      <Header />
 
       <Main>
         <Content>
@@ -487,9 +488,8 @@ export function Profile() {
             </Form>
           </div>
         </Content>
-      <Footer />
+        <Footer />
       </Main>
-
     </Container>
   )
 }

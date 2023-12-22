@@ -14,16 +14,12 @@ import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
 import { IoIosArrowDown } from "react-icons/io"
 
 import { useEffect, useState } from "react"
-import { useAuth } from "../../hooks/auth"
 
 import { api } from "../../services"
 
 import { useNavigate } from "react-router-dom"
 
 export function NewDish() {
-  const { user } = useAuth()
-  const [admin, setAdmin] = useState(user.isAdmin === "true")
-
   const [waiting, setWaiting] = useState(true)
   const [alertMessage, setAlertMessage] = useState("")
   const [color, setColor] = useState(false)
@@ -146,7 +142,7 @@ export function NewDish() {
         $messageDisplayTime={messageDisplayTime}
       />
 
-      <Header admin={admin} />
+      <Header />
 
       <Main>
         <Content>

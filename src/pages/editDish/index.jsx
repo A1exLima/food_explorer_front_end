@@ -23,7 +23,6 @@ import { useNavigate, useParams } from "react-router-dom"
 
 export function EditDish() {
   const { user } = useAuth()
-  const [admin, setAdmin] = useState(user.isAdmin === "true")
   const params = useParams()
 
   const [waiting, setWaiting] = useState(true)
@@ -205,7 +204,7 @@ export function EditDish() {
         $messageDisplayTime={messageDisplayTime}
       />
 
-      <Header admin={admin} />
+      <Header />
 
       <Main>
         <Content>

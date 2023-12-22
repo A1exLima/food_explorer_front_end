@@ -19,15 +19,14 @@ import { useState, useEffect, useRef } from "react"
 
 import { api } from "../../services"
 
+import { USER_ROLES } from "../../utils/roles"
+
 export default function Header({
-  admin,
   search,
   valueSearch,
   passingCategorysValuesToHome,
 }) {
   const { signOut, user } = useAuth()
-
-  const navigate = useNavigate()
 
   const [hideAvatarMenu, setHideAvatarMenu] = useState(true)
   const menuAvatarRef = useRef(null)
@@ -54,7 +53,6 @@ export default function Header({
   }
 
   function handleClickLogOut() {
-    //navigate("/")
     signOut()
   }
 
@@ -97,7 +95,11 @@ export default function Header({
               <h1>food explorer</h1>
             </div>
 
-            <div>{admin ? <p>Admin</p> : ""}</div>
+            <div>
+              {[USER_ROLES.ADMIN].includes(user.role) ? (
+                <p>Admin</p>
+              ) : null}
+            </div>
           </Brand>
 
           {avatarURL ? (
@@ -152,7 +154,9 @@ export default function Header({
             <h1>food explorer</h1>
           </div>
 
-          <div>{admin ? <p>Admin</p> : ""}</div>
+          <div>
+            {[USER_ROLES.ADMIN].includes(user.role) ? <p>Admin</p> : null}
+          </div>
         </Brand>
 
         <Search
@@ -165,8 +169,8 @@ export default function Header({
           $toAppearCloseButton={valueSearch}
           changingCategoryValues={handleCategorysValues}
         />
-
-        {admin ? (
+        
+        {[USER_ROLES.ADMIN].includes(user.role) ? (
           <OrderButton
             iconAndAmount={false}
             type="button"

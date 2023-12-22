@@ -17,12 +17,13 @@ import { useParams } from "react-router-dom"
 import { useAuth } from "../../hooks/auth"
 
 import { api } from "../../services"
+import { USER_ROLES } from "../../utils/roles"
 
 export function Dish() {
   const { user } = useAuth()
+  
   const params = useParams()
 
-  const [admin, setAdmin] = useState(user.isAdmin === "true")
   const [data, setData] = useState(null)
 
   const [image, setImage] = useState(null)
@@ -45,7 +46,7 @@ export function Dish() {
 
   return (
     <Container>
-      <Header admin={admin} />
+      <Header />
 
       <Content>
         <div>
@@ -71,7 +72,7 @@ export function Dish() {
                 </div>
               </div>
 
-              {admin ? (
+              {[USER_ROLES.ADMIN].includes(user.role) ? (
                 <div>
                   <Button
                     type="button"

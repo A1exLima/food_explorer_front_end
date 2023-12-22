@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom"
 import { Splide, SplideSlide } from "@splidejs/react-splide"
 import "@splidejs/react-splide/css/skyblue"
 
-import { useAuth } from "../../hooks/auth"
 import { api } from "../../services"
 
 import Header from "../../components/header"
@@ -18,10 +17,7 @@ import notFound from "../../assets/icons/notFound.svg"
 import cookieFruit from "../../assets/images/cookieFruit.png"
 
 export function Home() {
-  const { user } = useAuth()
   const navigate = useNavigate()
-
-  const [admin, setAdmin] = useState(user.isAdmin === "true")
 
   const [searchValue, setSearchValue] = useState("")
   const [category, setCategory] = useState([])
@@ -70,7 +66,6 @@ export function Home() {
   return (
     <Container>
       <Header
-        admin={admin}
         search={handleSearchInputChange}
         valueSearch={searchValue}
         passingCategorysValuesToHome={handleCategorysValues}
@@ -109,7 +104,6 @@ export function Home() {
                       {dishesSnack.map((dish) => (
                         <SplideSlide key={String(dish.id)}>
                           <Card
-                            admin={admin}
                             data={dish}
                             onClickCard={() => {
                               handleCard(dish.id)
@@ -137,7 +131,6 @@ export function Home() {
                       {dishesDessert.map((dish) => (
                         <SplideSlide key={String(dish.id)}>
                           <Card
-                            admin={admin}
                             data={dish}
                             onClickCard={() => {
                               handleCard(dish.id)
@@ -165,7 +158,6 @@ export function Home() {
                       {dishesDrink.map((dish) => (
                         <SplideSlide key={String(dish.id)}>
                           <Card
-                            admin={admin}
                             data={dish}
                             onClickCard={() => {
                               handleCard(dish.id)
