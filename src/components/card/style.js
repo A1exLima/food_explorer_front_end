@@ -5,8 +5,8 @@ export const Container = styled.div`
   overflow: hidden;
   position: relative;
   z-index: 0;
-  width: 100%;
-  height: clamp(29.2rem, 48vw, 46.2rem);
+  width: clamp(21rem, 28vw, 30.4rem);
+  height: clamp(29.2rem, 42vw, 46.2rem);
   padding: 2.4rem;
   border-radius: 0.8rem;
   border: 1px solid ${({ theme }) => theme.COLORS.Dark300};
