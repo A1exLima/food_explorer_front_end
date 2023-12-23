@@ -172,7 +172,7 @@ export function Home() {
             </>
           )}
         </Main>
-      <Footer />
+        <Footer />
       </Content>
     </Container>
   )

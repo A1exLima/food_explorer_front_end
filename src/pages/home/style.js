@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100%;
@@ -6,7 +7,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
 `
 
 export const Content = styled.div`
@@ -18,18 +18,23 @@ export const Content = styled.div`
 
 export const Main = styled.main`
   max-width: 112rem;
+
   margin: 0 auto;
   padding: 0 2rem;
 
   .notFound {
     width: 100%;
-    height: 100%;
+    height: 23.7vh;
     margin: 4rem 0 4rem;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+      height: 55vh;
+    }
 
     > img {
       width: 11.8rem;
