@@ -24,17 +24,12 @@ export const Main = styled.main`
 
   .notFound {
     width: 100%;
-    height: 23.7vh;
     margin: 4rem 0 4rem;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-      height: 55vh;
-    }
 
     > img {
       width: 11.8rem;

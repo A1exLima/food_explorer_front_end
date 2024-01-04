@@ -10,6 +10,7 @@ import menu from "../../assets/icons/menu.svg"
 import { MdOutlineLogout } from "react-icons/md"
 import { RxAvatar } from "react-icons/rx"
 import { IoMdClose } from "react-icons/io"
+import { SlLogin } from "react-icons/sl"
 
 import { useAuth } from "../../hooks/auth"
 
@@ -27,14 +28,14 @@ export default function Header({
   passingCategorysValuesToHome,
 }) {
   const { signOut, user } = useAuth()
-
   const [hideAvatarMenu, setHideAvatarMenu] = useState(true)
   const menuAvatarRef = useRef(null)
   const avatarURL = user.avatar
     ? `${api.defaults.baseURL}/files/${user.avatar}`
     : null
-  
-  const [ toggleMenu, setToggleMenu] = useState("hidden")
+
+  const [toggleMenu, setToggleMenu] = useState("hidden")
+  const navigate = useNavigate()
 
   function handleCategorysValues({ snack, dessert, drink }) {
     if (passingCategorysValuesToHome) {
@@ -57,10 +58,14 @@ export default function Header({
   }
 
   function handleAvatar() {
-    setHideAvatarMenu((prevState) => !prevState)
+    if (user === false){
+      navigate("/login")
+    }else{
+      setHideAvatarMenu((prevState) => !prevState)
+    }
   }
 
-  function openMenuSideBar(){
+  function openMenuSideBar() {
     setToggleMenu(true)
   }
 
@@ -96,16 +101,14 @@ export default function Header({
             </div>
 
             <div>
-              {[USER_ROLES.ADMIN].includes(user.role) ? (
-                <p>Admin</p>
-              ) : null}
+              {[USER_ROLES.ADMIN].includes(user.role) ? <p>Admin</p> : null}
             </div>
           </Brand>
 
           {avatarURL ? (
             <img src={avatarURL} alt="Imagem de Perfil" />
           ) : (
-            <RxAvatar />
+            <RxAvatar/>
           )}
         </header>
 
@@ -144,7 +147,7 @@ export default function Header({
       </SideMenu>
 
       <Content>
-        <SideBar onClick={openMenuSideBar}>
+        <SideBar onClick={openMenuSideBar} $user={user}>
           <img src={menu} alt="Menu de opções" />
         </SideBar>
 
@@ -169,7 +172,7 @@ export default function Header({
           $toAppearCloseButton={valueSearch}
           changingCategoryValues={handleCategorysValues}
         />
-        
+
         {[USER_ROLES.ADMIN].includes(user.role) ? (
           <OrderButton
             iconAndAmount={false}
@@ -177,42 +180,46 @@ export default function Header({
             title="Novo Prato"
             link="/new_dish"
           />
-        ) : (
+        ) : user === false ? null : (
           <OrderButton
             iconAndAmount={true}
             type="button"
             title="Pedidos"
-            value="10"
+            value="20"
           />
         )}
 
-        <Logout $hideAvatarMenu={hideAvatarMenu}>
+        <Logout $hideAvatarMenu={hideAvatarMenu} $user={user}>
           {avatarURL ? (
             <img
               onClick={handleAvatar}
               src={avatarURL}
               alt="Imagem de Perfil"
             />
+          ) : user === false ? (
+            <SlLogin onClick={handleAvatar} />
           ) : (
             <RxAvatar onClick={handleAvatar} />
           )}
 
-          <div ref={menuAvatarRef}>
-            <ul>
-              <li>
-                <Link to="/profile">Perfil</Link>
-              </li>
-              <li>
-                <Link to="">Favoritos</Link>
-              </li>
-              <li>
-                <Link to="">Histórico</Link>
-              </li>
-              <li onClick={handleClickLogOut}>
-                <MdOutlineLogout />
-              </li>
-            </ul>
-          </div>
+          {user !== false ? (
+            <div ref={menuAvatarRef}>
+              <ul>
+                <li>
+                  <Link to="/profile">Perfil</Link>
+                </li>
+                <li>
+                  <Link to="">Favoritos</Link>
+                </li>
+                <li>
+                  <Link to="">Histórico</Link>
+                </li>
+                <li onClick={handleClickLogOut}>
+                  <MdOutlineLogout />
+                </li>
+              </ul>
+            </div>
+          ) : null}
         </Logout>
       </Content>
     </Container>

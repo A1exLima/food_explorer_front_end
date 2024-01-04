@@ -40,9 +40,15 @@ export const SideMenu = styled.div`
     display: flex;
     align-items: center;
 
-    > svg {
+    > svg:first-child {
       font-size: 2.8rem;
       cursor: pointer;
+
+      transition: transform .3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05);
+      }
     }
 
     > img {
@@ -55,7 +61,6 @@ export const SideMenu = styled.div`
     > svg:last-child {
       font-size: 4.2rem;
       margin-top: 0.6rem;
-      cursor: pointer;
     }
   }
 
@@ -121,7 +126,7 @@ export const SideBar = styled.div`
   cursor: pointer;
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    display: block;
+    display: ${({ $user }) => ($user === false ? "none" : "block")};
   }
 `
 
@@ -184,9 +189,16 @@ export const Logout = styled.div`
   }
 
   > svg {
-    font-size: 4.2rem;
+    color: ${({ theme }) => theme.COLORS.Light100};
+    font-size: ${({ $user }) => ($user === false ? "2.8rem" : "4.2rem")};
     margin-top: 0.6rem;
     cursor: pointer;
+    transition: all 0.4s ease-in-out;
+
+    &:hover {
+      transform: ${({ $user }) => ($user === false ? "scale(0.95)" : "none")};
+      color: ${({ theme }) => theme.COLORS.TintsCake200};
+    }
   }
 
   > div {
@@ -241,6 +253,6 @@ export const Logout = styled.div`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    display: none;
+    display: ${({ $user }) => ($user === false ? "block" : "none")};
   }
 `
