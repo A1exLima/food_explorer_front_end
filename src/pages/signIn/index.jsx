@@ -74,7 +74,7 @@ export function SignIn() {
         $messageDisplayTime={messageDisplayTime}
       />
 
-      <Brand>
+      <Brand to="/">
         <img src={polygon} alt="logo food explorer" />
         <h1>food explorer</h1>
       </Brand>

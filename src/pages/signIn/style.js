@@ -1,5 +1,6 @@
 import { styled } from "styled-components"
 import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
+import { Link } from "react-router-dom"
 
 export const Container = styled.div`
   width: 100vw;
@@ -22,12 +23,13 @@ export const Container = styled.div`
   }
 `
 
-export const Brand = styled.div`
+export const Brand = styled(Link)`
   display: flex;
   align-items: center;
   gap: 1.901rem;
   padding-right: 2rem;
   margin-bottom: 7rem;
+  cursor: pointer;
 
   > h1 {
     font-family: var(--roboto-font-family);

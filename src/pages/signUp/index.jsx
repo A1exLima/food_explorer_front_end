@@ -120,7 +120,7 @@ export function SignUp() {
         $messageDisplayTime={messageDisplayTime}
       />
 
-      <Brand>
+      <Brand to="/">
         <img src={polygon} alt="logo food explorer" />
         <h1>food explorer</h1>
       </Brand>
@@ -182,7 +182,7 @@ export function SignUp() {
             title="Criar Conta"
           />
         </form>
-        <ButtonText to="/" title="Já tenho uma conta" />
+        <ButtonText to="/login" title="Já tenho uma conta" />
       </Content>
     </Container>
   )
