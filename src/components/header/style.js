@@ -118,6 +118,7 @@ export const Content = styled.div`
     width: 100%;
     justify-content: space-between;
     padding: 2.4rem 2rem;
+    gap: ${({ $user }) => ($user === false ? "0rem" : "3.2rem")};
   }
 `
 
@@ -141,7 +142,7 @@ export const Brand = styled(Link)`
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    gap: 0.8rem;
+    gap: ${({ $user }) => ($user === false ? "none" : ".8rem")};
   }
 
   > div:first-child {

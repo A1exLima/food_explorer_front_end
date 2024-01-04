@@ -94,7 +94,7 @@ export default function Header({
         <header>
           <IoMdClose onClick={closeMenuSideBar} />
 
-          <Brand to="/">
+          <Brand to="/" $user={user}>
             <div>
               <img src={polygon} alt="logo food explorer" />
               <h1>food explorer</h1>
@@ -108,7 +108,7 @@ export default function Header({
           {avatarURL ? (
             <img src={avatarURL} alt="Imagem de Perfil" />
           ) : (
-            <RxAvatar/>
+            <RxAvatar />
           )}
         </header>
 
@@ -146,7 +146,7 @@ export default function Header({
         <Footer />
       </SideMenu>
 
-      <Content>
+      <Content $user={user}>
         <SideBar onClick={openMenuSideBar} $user={user}>
           <img src={menu} alt="Menu de opções" />
         </SideBar>
