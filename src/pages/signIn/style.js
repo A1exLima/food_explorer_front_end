@@ -32,6 +32,11 @@ export const Brand = styled(Link)`
   margin-bottom: 7rem;
   cursor: pointer;
 
+  > img {
+    width: 4.94rem;
+    height: 4.75rem;
+  }
+
   > h1 {
     font-family: var(--roboto-font-family);
     font-size: 4.2rem;

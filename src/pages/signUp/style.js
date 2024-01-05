@@ -28,7 +28,7 @@ export const Brand = styled(Link)`
   display: flex;
   align-items: center;
   gap: 1.901rem;
-  padding-right: 3rem;
+  padding-right: 2rem;
   margin-bottom: 7rem;
   cursor: pointer;
 

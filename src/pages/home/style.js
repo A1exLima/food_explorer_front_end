@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow-x: auto;
+  overflow-x: visible;
 `
 
 export const Content = styled.div`
