@@ -163,6 +163,7 @@ export default function Header({
         </Brand>
 
         <Search
+          $user={user}
           type="text"
           autoComplete="on"
           placeholder="Busque por pratos ou ingredientes"
@@ -185,7 +186,7 @@ export default function Header({
             iconAndAmount={true}
             type="button"
             title="Pedidos"
-            value="20"
+            value="01"
           />
         )}
 

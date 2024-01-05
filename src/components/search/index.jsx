@@ -7,6 +7,7 @@ import { IoClose } from "react-icons/io5"
 import { useEffect, useState } from "react"
 
 export default function Search({
+  $user,
   $toAppearCloseButton,
   $openSearch,
   onClick,
@@ -53,6 +54,7 @@ export default function Search({
 
   return (
     <Container
+      $user={$user}
       $toAppearCloseButton={$toAppearCloseButton}
       $openSearch={$openSearch}
     >

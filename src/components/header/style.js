@@ -44,7 +44,7 @@ export const SideMenu = styled.div`
       font-size: 2.8rem;
       cursor: pointer;
 
-      transition: transform .3s ease-in-out;
+      transition: transform 0.3s ease-in-out;
 
       &:hover {
         transform: scale(1.05);
@@ -100,7 +100,7 @@ export const SideMenu = styled.div`
     }
   }
 
-  @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
     display: none;
   }
 `
@@ -111,10 +111,10 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3.2rem;
+  gap: clamp(1.55rem, 2.1vw, 3.2rem);
   padding: 2.4rem 4rem;
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     width: 100%;
     justify-content: space-between;
     padding: 2.4rem 2rem;
@@ -126,7 +126,7 @@ export const SideBar = styled.div`
   display: none;
   cursor: pointer;
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     display: ${({ $user }) => ($user === false ? "none" : "block")};
   }
 `
@@ -137,7 +137,7 @@ export const Brand = styled(Link)`
   flex-direction: column;
   align-items: end;
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -209,6 +209,7 @@ export const Logout = styled.div`
     padding: 1rem;
 
     position: absolute;
+    top: 5.5rem;
     left: -1.9rem;
 
     background: ${({ theme }) => theme.COLORS.Gradients245};
@@ -253,7 +254,7 @@ export const Logout = styled.div`
     }
   }
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     display: ${({ $user }) => ($user === false ? "block" : "none")};
   }
 `

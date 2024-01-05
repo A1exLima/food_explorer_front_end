@@ -40,6 +40,8 @@ export const Container = styled.div`
 
     &::placeholder {
       color: ${({ theme }) => theme.COLORS.Light500};
+      font-size: ${({ $user }) =>
+        $user === false ? null : "clamp(1.25rem, 1.6vw, 1.6rem)"};
     }
   }
 
@@ -71,8 +73,8 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-    display:  ${({ $openSearch }) => $openSearch ? "flex" : "none"};
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    display: ${({ $openSearch }) => ($openSearch ? "flex" : "none")};
   }
 `
 
