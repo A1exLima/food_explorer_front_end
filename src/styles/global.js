@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../styles/deviceBreakPoints"
 
 export default createGlobalStyle`
   *{
@@ -51,15 +52,20 @@ export default createGlobalStyle`
 }
 
 ::-webkit-scrollbar {
-    width: 0.8rem;
+    width: 0.5rem;
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+      width: 0rem;
+    }
   }
 
   ::-webkit-scrollbar-track {
-    background-color: ${({ theme }) => theme.COLORS.Dark400};
+    background-color: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: ${({ theme }) => theme.COLORS.TintsCake100};
-    border-radius: 0.8rem;
+    border-radius: 0.2rem;
   }
+
 `

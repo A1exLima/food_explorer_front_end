@@ -172,8 +172,8 @@ export function Home() {
             </>
           )}
         </Main>
-        <Footer />
       </Content>
+      <Footer />
     </Container>
   )
 }

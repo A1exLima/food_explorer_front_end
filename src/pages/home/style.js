@@ -1,5 +1,5 @@
 import { styled } from "styled-components"
-import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
+
 
 export const Container = styled.div`
   width: 100%;
@@ -7,23 +7,26 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-x: auto;
 `
 
 export const Content = styled.div`
   margin-top: 11.4rem;
   width: 100%;
   flex-grow: 1;
-  overflow-x: hidden;
 `
 
 export const Main = styled.main`
   max-width: 112rem;
-
+  height: 100%;
   margin: 0 auto;
   padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
 
   .notFound {
     width: 100%;
+    flex-grow: 1;
     margin: 4rem 0 4rem;
     padding: 2rem;
     display: flex;
