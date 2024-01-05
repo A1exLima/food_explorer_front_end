@@ -16,7 +16,7 @@ export const Container = styled.div`
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     flex-direction: column;
     justify-content: center;
-    margin-top: -5rem;
+    margin-top: -3rem;
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
@@ -42,10 +42,10 @@ export const Brand = styled(Link)`
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     padding-right: 0;
+    margin-bottom: 5rem;
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
-
     > img {
       width: 4.33rem;
       height: 4.33rem;
