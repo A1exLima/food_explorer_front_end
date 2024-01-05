@@ -16,6 +16,7 @@ export const Container = styled.div`
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     flex-direction: column;
     justify-content: center;
+    margin-top: -5rem;
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
