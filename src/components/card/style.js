@@ -5,8 +5,12 @@ export const Container = styled.div`
   overflow: hidden;
   position: relative;
   z-index: 0;
-  width: clamp(21rem, 28vw, 30.4rem);
-  height: clamp(29.2rem, 42vw, 46.2rem);
+  width: ${({ $user }) =>
+    $user === false
+      ? "clamp(21rem, 30vw, 30.4rem)"
+      : "clamp(21rem, 38vw, 30.4rem)"};
+  height: clamp(30.2rem, 50vw, 46.2rem);
+
   padding: 2.4rem;
   border-radius: 0.8rem;
   border: 1px solid ${({ theme }) => theme.COLORS.Dark300};
@@ -20,6 +24,7 @@ export const Container = styled.div`
   cursor: pointer;
 
   > img:nth-child(1) {
+    display: ${({ $user }) => ($user === false ? "none" : "block")};
     width: 2.4rem;
     height: 2.4rem;
     position: absolute;
@@ -65,7 +70,7 @@ export const Container = styled.div`
   }
 
   > p:nth-child(4) {
-    max-width: clamp(12.5rem, 23.5vw, 25.5rem);
+    max-width: clamp(12.5rem, 26.5vw, 25.5rem);
     height: auto;
     color: ${({ theme }) => theme.COLORS.Light400};
     text-align: center;
@@ -76,7 +81,7 @@ export const Container = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: ${({ $user }) => ($user === false ? "3" : "2")};
     -webkit-box-orient: vertical;
   }
 
@@ -96,12 +101,20 @@ export const Container = styled.div`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    width: clamp(21rem, 28vw, 30.4rem);
+    height: clamp(30.2rem, 46vw, 46.2rem);
+
     > p:nth-child(4) {
-      display: none;
+      display: ${({ $user }) => ($user === false ? "" : "none")};
     }
 
     > div {
       flex-direction: column;
+    }
+
+    > img:nth-child(2) {
+      width: clamp(8.8rem, 13vw, 17.6rem);
+      height: clamp(8.8rem, 13vw, 17.6rem);
     }
   }
 `

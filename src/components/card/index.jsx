@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom"
 
 import { useAuth } from "../../hooks/auth"
 
-export default function Card({data, onClickCard }) {
+export default function Card({ data, onClickCard }) {
   const { user } = useAuth()
   const [dish, setDish] = useState(data)
   const imageDishURL = data.image
@@ -31,7 +31,7 @@ export default function Card({data, onClickCard }) {
   }
 
   return (
-    <Container onClick={onClickCard}>
+    <Container onClick={onClickCard} $user={user}>
       {[USER_ROLES.ADMIN].includes(user.role) ? (
         <img src={pencil} alt="Editar Prato" onClick={handleClickEditDish} />
       ) : (
@@ -45,11 +45,9 @@ export default function Card({data, onClickCard }) {
       <p>{dish.description}</p>
       <p>R${priceFormatted}</p>
 
-      {[USER_ROLES.ADMIN].includes(user.role) ? (
-        null
-      ) : (
+      {[USER_ROLES.ADMIN].includes(user.role) ? null : user === false ? null : (
         <div>
-          <Counter value="01" />
+          <Counter value="10" />
           <IncludeButton title="Incluir" type="button" />
         </div>
       )}

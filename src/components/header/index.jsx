@@ -197,7 +197,7 @@ export default function Header({
               alt="Imagem de Perfil"
             />
           ) : user === false ? (
-            <SlLogin onClick={handleAvatar} />
+            <SlLogin onClick={handleAvatar} title="login" />
           ) : (
             <RxAvatar onClick={handleAvatar} />
           )}
