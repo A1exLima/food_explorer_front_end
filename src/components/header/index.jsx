@@ -186,7 +186,7 @@ export default function Header({
             iconAndAmount={true}
             type="button"
             title="Pedidos"
-            value="01"
+            value="999"
           />
         )}
 

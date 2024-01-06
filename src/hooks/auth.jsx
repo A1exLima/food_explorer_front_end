@@ -10,6 +10,14 @@ function AuthProvider({ children }) {
   const [alertMessage, setAlertMessage] = useState("")
   const [color, setColor] = useState(false)
 
+  const [dishRedirection, setDishRedirection] = useState("")
+  const [back, setBack] = useState(false)
+
+  function redirectionDish(dish) {
+    setBack(true)
+    setDishRedirection(dish)
+  }
+
   async function signIn({ email, password }) {
     setAlertMessage("")
 
@@ -51,7 +59,6 @@ function AuthProvider({ children }) {
   }
 
   async function updateProfile(formUser, avatarFile) {
-  
     if (avatarFile) {
       const fileUploadForm = new FormData()
       fileUploadForm.append("avatar", avatarFile)
@@ -61,15 +68,14 @@ function AuthProvider({ children }) {
     }
 
     try {
-
       const response = await api.put("/users", formUser)
       const user = response.data
       localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
-      
+
       setTimeout(() => {
         setData({ user, token: data.token })
       }, configDisplayTimerMessageAlert.timer + 250)
-      
+
       return response.data
     } catch (error) {
       if (error.response) {
@@ -100,6 +106,10 @@ function AuthProvider({ children }) {
         signIn,
         signOut,
         updateProfile,
+        redirectionDish,
+        dishRedirection,
+        back,
+        setBack,
         setAlertMessage,
         alertMessage,
         color,

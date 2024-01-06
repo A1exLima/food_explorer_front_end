@@ -20,14 +20,24 @@ import { api } from "../../services"
 import { USER_ROLES } from "../../utils/roles"
 
 export function Dish() {
-  const { user } = useAuth()
-  
+  const { user, redirectionDish, dishRedirection } = useAuth()
+
   const params = useParams()
 
   const [data, setData] = useState(null)
 
   const [image, setImage] = useState(null)
   const [price, setPrice] = useState(null)
+
+  const [redirect, setRedirect] = useState("/login")
+
+  const handleButtonOrder = () => {
+    if (user === false) {
+      redirectionDish(data.id)
+    } else {
+      //Lógica para pedidos
+    }
+  }
 
   useEffect(() => {
     const fetchDish = async () => {
@@ -84,6 +94,8 @@ export function Dish() {
                 <div>
                   <Counter value="10" />
                   <Button
+                    onClick={handleButtonOrder}
+                    to={redirect}
                     img={receipt}
                     icon={TbPointFilled}
                     type="button"
