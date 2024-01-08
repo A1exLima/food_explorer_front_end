@@ -30,15 +30,61 @@ export function Dish() {
   const [price, setPrice] = useState(null)
 
   const [redirectLink, setRedirectLink] = useState("")
-  
+
   const [dataPrice, setDataPrice] = useState(0)
   const [multiplicationValue, setMultiplicationValue] = useState(1)
-  
+
+  const [quantityOfItemsInTheCart, setQuantityOfItemsInTheCart] = useState(false)
+
   const handleButtonOrder = () => {
+    setQuantityOfItemsInTheCart(true)
+
     if (user === false) {
       redirectionDish(data.id)
     } else {
-      //Lógica para pedidos
+      const dishOrder = {
+        id: params.id,
+        count: multiplicationValue,
+        price: dataPrice,
+        name: data.name,
+        image: image,
+      }
+
+      const cartItems = JSON.parse(
+        localStorage.getItem("@foodExplorer:cartItems")
+      )
+
+      if (!cartItems) {
+        localStorage.setItem(
+          "@foodExplorer:cartItems",
+          JSON.stringify([dishOrder])
+        )
+      } else {
+        const checkDishId = cartItems.findIndex(
+          (object) => object.id === params.id
+        )
+
+        if (checkDishId !== -1) {
+          cartItems[checkDishId].count =
+            multiplicationValue + cartItems[checkDishId].count
+          localStorage.setItem(
+            "@foodExplorer:cartItems",
+            JSON.stringify(cartItems)
+          )
+        } else {
+          cartItems.push(dishOrder)
+          localStorage.setItem(
+            "@foodExplorer:cartItems",
+            JSON.stringify(cartItems)
+          )
+        }
+
+        const sumCount = cartItems.reduce((accumulator, object) => {
+          return accumulator + object.count
+        }, 0)
+
+        setQuantityOfItemsInTheCart(sumCount)
+      }
     }
   }
 
@@ -46,17 +92,16 @@ export function Dish() {
     setMultiplicationValue(newValue)
   }
 
-  useEffect(()=>{
-    const multipliedPrice = (multiplicationValue * dataPrice).toFixed(2).replace(".", ",")
+  useEffect(() => {
+    const multipliedPrice = (multiplicationValue * dataPrice)
+      .toFixed(2)
+      .replace(".", ",")
     setPrice(multipliedPrice)
-
-  },[multiplicationValue])
+  }, [multiplicationValue])
 
   useEffect(() => {
     if (user === false) {
       setRedirectLink("/login")
-    } else {
-      setRedirectLink("/orders")
     }
   }, [])
 
@@ -78,7 +123,7 @@ export function Dish() {
 
   return (
     <Container>
-      <Header />
+      <Header qtdOrders={quantityOfItemsInTheCart} />
 
       <Content>
         <div>

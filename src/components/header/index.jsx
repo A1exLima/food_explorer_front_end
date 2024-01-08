@@ -16,7 +16,7 @@ import { useAuth } from "../../hooks/auth"
 
 import { useNavigate, Link } from "react-router-dom"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useLayoutEffect, useRef } from "react"
 
 import { api } from "../../services"
 
@@ -26,6 +26,7 @@ export default function Header({
   search,
   valueSearch,
   passingCategorysValuesToHome,
+  qtdOrders,
 }) {
   const { signOut, user } = useAuth()
   const [hideAvatarMenu, setHideAvatarMenu] = useState(true)
@@ -36,6 +37,8 @@ export default function Header({
 
   const [toggleMenu, setToggleMenu] = useState("hidden")
   const navigate = useNavigate()
+
+  const [quantityOfItemsInTheCart, setQuantityOfItemsInTheCart] = useState("")
 
   function handleCategorysValues({ snack, dessert, drink }) {
     if (passingCategorysValuesToHome) {
@@ -58,9 +61,9 @@ export default function Header({
   }
 
   function handleAvatar() {
-    if (user === false){
+    if (user === false) {
       navigate("/login")
-    }else{
+    } else {
       setHideAvatarMenu((prevState) => !prevState)
     }
   }
@@ -72,6 +75,22 @@ export default function Header({
   function closeMenuSideBar() {
     setToggleMenu(false)
   }
+
+  useLayoutEffect(() => {
+    const cartItems = JSON.parse(
+      localStorage.getItem("@foodExplorer:cartItems")
+    )
+
+    if (!cartItems) {
+      setQuantityOfItemsInTheCart(0)
+    } else {
+      const sumCount = cartItems.reduce((accumulator, object) => {
+        return accumulator + object.count
+      }, 0)
+
+      setQuantityOfItemsInTheCart(sumCount)
+    }
+  }, [qtdOrders])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -186,7 +205,7 @@ export default function Header({
             iconAndAmount={true}
             type="button"
             title="Pedidos"
-            value="999"
+            value={quantityOfItemsInTheCart}
           />
         )}
 
