@@ -20,7 +20,7 @@ import { api } from "../../services"
 import { USER_ROLES } from "../../utils/roles"
 
 export function Dish() {
-  const { user, redirectionDish, dishRedirection } = useAuth()
+  const { user, redirectionDish } = useAuth()
 
   const params = useParams()
 
@@ -29,8 +29,11 @@ export function Dish() {
   const [image, setImage] = useState(null)
   const [price, setPrice] = useState(null)
 
-  const [redirect, setRedirect] = useState("/login")
-
+  const [redirectLink, setRedirectLink] = useState("")
+  
+  const [dataPrice, setDataPrice] = useState(0)
+  const [multiplicationValue, setMultiplicationValue] = useState(1)
+  
   const handleButtonOrder = () => {
     if (user === false) {
       redirectionDish(data.id)
@@ -38,6 +41,24 @@ export function Dish() {
       //Lógica para pedidos
     }
   }
+
+  const handleCounterChange = (newValue) => {
+    setMultiplicationValue(newValue)
+  }
+
+  useEffect(()=>{
+    const multipliedPrice = (multiplicationValue * dataPrice).toFixed(2).replace(".", ",")
+    setPrice(multipliedPrice)
+
+  },[multiplicationValue])
+
+  useEffect(() => {
+    if (user === false) {
+      setRedirectLink("/login")
+    } else {
+      setRedirectLink("/orders")
+    }
+  }, [])
 
   useEffect(() => {
     const fetchDish = async () => {
@@ -47,6 +68,7 @@ export function Dish() {
       const imageURL = `${api.defaults.baseURL}/files_image/${response.data.image}`
       setImage(imageURL)
 
+      setDataPrice(response.data.price)
       const price = response.data.price.toFixed(2).replace(".", ",")
       setPrice(price)
     }
@@ -92,10 +114,10 @@ export function Dish() {
                 </div>
               ) : (
                 <div>
-                  <Counter value="10" />
+                  <Counter onValueChange={handleCounterChange} />
                   <Button
                     onClick={handleButtonOrder}
-                    to={redirect}
+                    to={redirectLink}
                     img={receipt}
                     icon={TbPointFilled}
                     type="button"

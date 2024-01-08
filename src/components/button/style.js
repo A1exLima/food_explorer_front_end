@@ -2,6 +2,7 @@ import { styled } from "styled-components"
 import { Link } from "react-router-dom"
 
 export const Container = styled(Link)`
+  user-select: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +27,7 @@ export const Container = styled(Link)`
 
   > svg {
     font-size: ${({ $loading }) => ($loading ? "1.9rem" : ".8rem")};
-    animation: rotate .7s linear infinite;
+    animation: rotate 0.7s linear infinite;
   }
 
   @keyframes rotate {

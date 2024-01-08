@@ -1,9 +1,9 @@
 import { styled } from "styled-components"
 
 export const Container = styled.span`
+  user-select: none;
   width: 10rem;
   height: 3.2rem;
-  padding: .4rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,6 +15,7 @@ export const Container = styled.span`
   font-weight: 700;
 
   > svg {
+    height: 100%;
     font-size: 2.5rem;
     color: ${({ theme }) => theme.COLORS.Light100};
     cursor: pointer;
