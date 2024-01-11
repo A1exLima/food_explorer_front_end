@@ -34,7 +34,8 @@ export function Dish() {
   const [dataPrice, setDataPrice] = useState(0)
   const [multiplicationValue, setMultiplicationValue] = useState(1)
 
-  const [quantityOfItemsInTheCart, setQuantityOfItemsInTheCart] = useState(false)
+  const [quantityOfItemsInTheCart, setQuantityOfItemsInTheCart] =
+    useState(false)
 
   const handleButtonOrder = () => {
     setQuantityOfItemsInTheCart(true)
@@ -48,6 +49,7 @@ export function Dish() {
         price: dataPrice,
         name: data.name,
         image: image,
+        category: data.category
       }
 
       const cartItems = JSON.parse(

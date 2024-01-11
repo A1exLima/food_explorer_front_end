@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { Home } from "../pages/home"
 import { Dish } from "../pages/dish"
 import { Profile } from "../pages/profile"
+import  { Orders } from "../pages/orders"
 
 import { useAuth } from "../hooks/auth"
 
@@ -26,6 +27,7 @@ export function CustomerRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/dish/:id" element={<Dish />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/orders" element={<Orders />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )

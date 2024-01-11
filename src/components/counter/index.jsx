@@ -1,8 +1,8 @@
 import { Container } from "./style"
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
-export default function Counter({onValueChange}) {
+export default function Counter({ onValueChange, countValue }) {
   const [value, setValue] = useState(1)
 
   function addValue() {
@@ -19,6 +19,12 @@ export default function Counter({onValueChange}) {
       onValueChange(value - 1)
     }
   }
+
+  useEffect(() => {
+    if (countValue) {
+      setValue(countValue)
+    }
+  }, [])
 
   return (
     <Container>

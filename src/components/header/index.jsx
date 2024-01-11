@@ -206,6 +206,7 @@ export default function Header({
             type="button"
             title="Pedidos"
             value={quantityOfItemsInTheCart}
+            link="/orders"
           />
         )}
 
