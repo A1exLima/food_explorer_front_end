@@ -60,8 +60,6 @@ export const EmptyCart = styled.div`
 `
 
 export const FullCart = styled.div`
-  //border: 1px solid blue;
-
   > h1 {
     font-family: var(--poppins-font-family);
     font-size: 2.8rem;

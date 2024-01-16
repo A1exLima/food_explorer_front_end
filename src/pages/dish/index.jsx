@@ -104,6 +104,8 @@ export function Dish() {
   useEffect(() => {
     if (user === false) {
       setRedirectLink("/login")
+    }else{
+      setRedirectLink("/orders")
     }
   }, [])
 

@@ -95,16 +95,12 @@ export function Orders() {
         setWaiting(true)
         setAlertMessage("")
       }, messageDisplayTime + 250)
-
     } else {
-
-      //Lógica para salvar dados do carrinho
-
       setTimeout(() => {
         setWaiting(true)
         setAlertMessage("")
         navigate("/checkout")
-      }, messageDisplayTime + 250)
+      }, 250)
     }
   }
 
