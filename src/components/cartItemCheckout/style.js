@@ -47,6 +47,7 @@ export const Container = styled.div`
 
       > h2 {
         font-size: 1.5rem;
+        font-weight: 500;
         color: ${({ theme }) => theme.COLORS.Light300};
       }
 

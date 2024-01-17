@@ -29,8 +29,7 @@ export function Orders() {
   const [subtotal, setSubtotal] = useState(0)
   const [flagSubtotal, setFlagSubtotal] = useState(false)
   const [flagDeleteItem, setFlagDeleteItem] = useState(false)
-  const [quantityOfItemsInTheCart, setQuantityOfItemsInTheCart] =
-    useState(false)
+  const [quantityOfItemsInTheCart, setQuantityOfItemsInTheCart] = useState(false)
   const [economicShippingOption, setEconomicShippingOption] = useState(true)
   const [freeShippingOption, setFreeShippingOption] = useState(false)
   const [shippingValue, setShippingValue] = useState(9.9)
@@ -99,10 +98,26 @@ export function Orders() {
       setTimeout(() => {
         setWaiting(true)
         setAlertMessage("")
-        navigate("/checkout")
+
+        localStorage.setItem("@foodExplorer:shippingValue", JSON.stringify(shippingValue))
+        navigate(`/checkout`)
       }, 250)
     }
   }
+
+  useLayoutEffect(()=> {
+    const shippingValue = localStorage.getItem("@foodExplorer:shippingValue")
+
+    if(shippingValue == null || shippingValue > 0 ){
+      setEconomicShippingOption(true)
+      setFreeShippingOption(false)
+    }else{
+      setFreeShippingOption(true)
+      setEconomicShippingOption(false)
+      setShippingValue(0)
+    }
+
+  }, [])
 
   useEffect(() => {
     const fetchAddress = async () => {

@@ -531,6 +531,21 @@ export const PixCardDetails = styled.span`
     background-color: ${({ theme }) => theme.COLORS.Light300};
     margin-bottom: 2rem;
 
+    > svg {
+      font-size: 3rem;
+      animation: rotate 0.7s linear infinite;
+      color: ${({ theme }) => theme.COLORS.Dark300};
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
     > img {
       width: 20rem;
       height: 20rem;

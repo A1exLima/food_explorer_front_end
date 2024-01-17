@@ -279,7 +279,6 @@ export function Profile() {
     setTimeout(() => {
       setWaiting(true)
       setAlertMessage("")
-      navigate("/")
     }, messageDisplayTime + 250)
   }
 

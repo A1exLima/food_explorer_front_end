@@ -22,28 +22,149 @@ import CartItemCheckout from "../../components/cartItemCheckout"
 import { MdOutlineCreditCard } from "react-icons/md"
 import { FaPix } from "react-icons/fa6"
 import { IoIosArrowDown } from "react-icons/io"
+import { AiOutlineLoading3Quarters } from "react-icons/ai"
 
 import imgPix from "../../assets/images/pix.png"
 
-import { useState } from "react"
+import { useLayoutEffect, useState } from "react"
+
+import { api } from "../../services"
 
 export function Checkout() {
   const [containerView, setContainerView] = useState(false)
-  const [containerViewPix, setContainerViewPix] = useState(true)
+  const [containerViewPix, setContainerViewPix] = useState(false)
+
+  const [cartItems, setCartItems] = useState([])
+
+  const [priceMultipliedByQuantity, setPriceMultipliedByQuantity] = useState(0)
+  const [shippingPrice, setShippingPrice] = useState(0)
+
+  const [economicShippingOption, setEconomicShippingOption] = useState(false)
+  const [freeShippingOption, setFreeShippingOption] = useState(false)
+
+  const [cashPaymentDiscount, setCashPaymentDiscount] = useState(0)
+  const [discountPercentage, setDiscountPercentage] = useState(0.02)
+
+  const [totalOrder, setTotalOrder] = useState(0)
+
+  const [address, setAddress] = useState({})
+
+  const [userData, setUserData] = useState({})
+
+  const [loadingPix, setLoadingPix] = useState(false)
 
   function toggleContainerView() {
     setContainerView((prevState) => !prevState)
+
     if (containerViewPix) {
       setContainerViewPix((prevState) => !prevState)
     }
+
+    setCashPaymentDiscount(0)
   }
 
   function toggleContainerViewPix() {
+    setLoadingPix(true)
+
     setContainerViewPix((prevState) => !prevState)
+
     if (containerView) {
       setContainerView((prevState) => !prevState)
     }
+
+    const discount =
+      (priceMultipliedByQuantity + shippingPrice) * discountPercentage
+    setCashPaymentDiscount(discount)
+
+    if (cashPaymentDiscount > 0) {
+      setCashPaymentDiscount(0)
+    }
+
+    setTimeout(() => {
+      setLoadingPix(false)
+    }, 2000);
   }
+
+  function handleCheckBoxEconomicalShipping() {
+    setEconomicShippingOption(true)
+    const shippingValue = 9.9
+    setShippingPrice(shippingValue)
+
+    if (freeShippingOption) {
+      setFreeShippingOption(false)
+    }
+
+    localStorage.setItem(
+      "@foodExplorer:shippingValue",
+      JSON.stringify(shippingValue)
+    )
+  }
+
+  function handleCheckBoxFreeShipping() {
+    setFreeShippingOption(true)
+    const shippingValue = 0
+    setShippingPrice(shippingValue)
+
+    if (economicShippingOption) {
+      setEconomicShippingOption(false)
+    }
+
+    localStorage.setItem(
+      "@foodExplorer:shippingValue",
+      JSON.stringify(shippingValue)
+    )
+  }
+
+  useLayoutEffect(() => {
+    const totalOrder =
+      priceMultipliedByQuantity + shippingPrice - cashPaymentDiscount
+    setTotalOrder(totalOrder)
+  }, [priceMultipliedByQuantity, shippingPrice, cashPaymentDiscount])
+
+  useLayoutEffect(() => {
+    const cartItems = JSON.parse(
+      localStorage.getItem("@foodExplorer:cartItems")
+    )
+    setPriceMultipliedByQuantity(
+      cartItems.reduce(
+        (accumulator, item) => accumulator + item.price * item.count,
+        0
+      )
+    )
+    setCartItems(cartItems)
+  }, [])
+
+  useLayoutEffect(() => {
+    const shippingValue = localStorage.getItem("@foodExplorer:shippingValue")
+
+    if (shippingValue == 0) {
+      setFreeShippingOption(true)
+    } else {
+      setEconomicShippingOption(true)
+    }
+
+    setShippingPrice(parseFloat(shippingValue))
+  }, [])
+
+  useLayoutEffect(() => {
+    const fetchAddress = async () => {
+      try {
+        const response = await api.get("/address")
+        setAddress(response.data)
+
+      } catch (error) {
+        setAddress(false)
+      }
+    }
+
+    fetchAddress()
+  }, [])
+
+  useLayoutEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("@foodExplorer:user"))
+    setUserData(userData)
+  }, [])
+
   return (
     <Container>
       <Header />
@@ -58,8 +179,8 @@ export function Checkout() {
                 </h2>
 
                 <div>
-                  <p>Alex da Silva Lima</p>
-                  <p>alex@email.com</p>
+                  <p>{userData.name}</p>
+                  <p>{userData.email}</p>
                 </div>
 
                 <ButtonText title="Editar" to="/profile" />
@@ -70,24 +191,34 @@ export function Checkout() {
                   <p>2</p> Endereço de entrega
                 </h2>
 
-                <div>
-                  <p>São Paulo - SP</p>
-                  <p>Rua Raça Humana, 28</p>
-                  <p>08223590</p>
-                  <p>portão azul</p>
-                  <p>Conjunto Habitacional Águia de Haia</p>
-                </div>
+                {address ? (
+                  <div>
+                    <p>{`${address.city} - ${address.country}`}</p>
+                    <p>{`${address.street}, ${address.number}`}</p>
+                    <p>{address.cep}</p>
+                    <p>{address.complement}</p>
+                    <p>{address.district}</p>
+                  </div>
+                ) : null}
 
                 <ButtonText title="Editar" to="/profile" />
               </ContentForm>
+
               <ContentForm>
                 <h2>
                   <p>3</p> Formas de envio
                 </h2>
 
-                <div className="economical-shipping">
+                <div
+                  className="economical-shipping"
+                  onClick={handleCheckBoxEconomicalShipping}
+                >
                   <label className="checkbox-container">
-                    <input type="checkbox" checked="" disabled />
+                    <input
+                      type="checkbox"
+                      checked={economicShippingOption}
+                      disabled
+                    />
                     <span className="checkmark"></span>
                   </label>
 
@@ -100,9 +231,16 @@ export function Checkout() {
                   </div>
                 </div>
 
-                <div className="free-shipping">
+                <div
+                  className="free-shipping"
+                  onClick={handleCheckBoxFreeShipping}
+                >
                   <label className="checkbox-container">
-                    <input type="checkbox" checked="on" disabled />
+                    <input
+                      type="checkbox"
+                      checked={freeShippingOption}
+                      disabled
+                    />
                     <span className="checkmark"></span>
                   </label>
 
@@ -135,6 +273,7 @@ export function Checkout() {
                   <span>até 6x sem juros</span>
                 </div>
               </CreditCardPayment>
+
               <CreditCardDetails $containerView={containerView}>
                 <InputPayment
                   identifier="numberCard"
@@ -207,11 +346,15 @@ export function Checkout() {
                   <span>à vista</span>
                 </div>
               </PixCardPayment>
+
               <PixCardDetails $containerView={containerViewPix}>
                 <div>
-                  <img src={imgPix} alt="QR Code" />
+                  {loadingPix ?  <AiOutlineLoading3Quarters /> : <img src={imgPix} alt="QR Code" />}
                 </div>
-                <p>R$229,90 com desconto</p>
+
+                <p>{`R$${totalOrder
+                  .toFixed(2)
+                  .replace(".", ",")} com desconto`}</p>
                 <Button title="Finalizar pedido" />
               </PixCardDetails>
             </PaymentContainer>
@@ -219,11 +362,9 @@ export function Checkout() {
             <ContentForm>
               <h2>Resumo do pedido</h2>
 
-              <div>
-                <CartItemCheckout />
-                <CartItemCheckout />
-                <CartItemCheckout />
-              </div>
+              {cartItems.map((item) => (
+                <CartItemCheckout key={item.id} data={item} />
+              ))}
 
               <ButtonText title="voltar ao carrinho" to="/orders" />
 
@@ -233,19 +374,41 @@ export function Checkout() {
               <div className="orderSummary">
                 <div>
                   <p>Subtotal</p>
-                  <p>R$219,90</p>
+                  <p>
+                    {`R$${priceMultipliedByQuantity
+                      .toFixed(2)
+                      .replace(".", ",")}`}
+                  </p>
+                </div>
+
+                <div>
+                  {economicShippingOption ? (
+                    <>
+                      <p>Frete (econômico)</p>
+                      <p>{`R$${shippingPrice.toFixed(2).replace(".", ",")}`}</p>
+                    </>
+                  ) : (
+                    <>
+                      <p>Frete (grátis)</p>
+                      <p>{`R$${shippingPrice.toFixed(2).replace(".", ",")}`}</p>
+                    </>
+                  )}
                 </div>
                 <div>
-                  <p>Frete (Econômico)</p> 
-                  <p>R$9,90</p>
+                  <p>Desconto pagamento à vista</p>
+                  {containerViewPix ? (
+                    <p>{`- R$${cashPaymentDiscount
+                      .toFixed(2)
+                      .replace(".", ",")}`}</p>
+                  ) : (
+                    <p>{`R$${cashPaymentDiscount
+                      .toFixed(2)
+                      .replace(".", ",")}`}</p>
+                  )}
                 </div>
                 <div>
-                  <p>Desconto pagamento à vista</p> 
-                  <p>- R$2,90</p>
-                </div>
-                <div>
-                  <p>Total do pedido</p> 
-                  <p>R$229,90</p>
+                  <p>Total do pedido</p>
+                  <p>{`R$${totalOrder.toFixed(2).replace(".", ",")}`}</p>
                 </div>
               </div>
             </ContentForm>
