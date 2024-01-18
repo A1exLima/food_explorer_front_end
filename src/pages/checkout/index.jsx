@@ -27,7 +27,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import imgPix from "../../assets/images/pix.png"
 import imgLogoPix from "../../assets/images/logoPix.png"
 
-import { useLayoutEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 
 import { api } from "../../services"
 
@@ -36,7 +36,17 @@ import {
   useValidateCardExpiringDate,
 } from "../../hooks/validatingFormInputs"
 
+import MessageAlert from "../../components/messageAlert"
+import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
+
 export function Checkout() {
+  const [waiting, setWaiting] = useState(true)
+  const [alertMessage, setAlertMessage] = useState("")
+  const [color, setColor] = useState(false)
+  const [messageDisplayTime, setMessageDisplayTime] = useState(
+    configDisplayTimerMessageAlert.timer
+  )
+
   const [containerView, setContainerView] = useState(false)
   const [containerViewPix, setContainerViewPix] = useState(false)
 
@@ -77,6 +87,8 @@ export function Checkout() {
   const [numberOfInstallments, setNumberOfInstallments] = useState(6)
   const [valueOfTheChosenInstallment, setValueOfTheChosenInstallment] =
     useState("")
+
+  const [commentsRequest, setCommentsRequest] = useState("")
 
   function toggleContainerView() {
     setContainerView((prevState) => !prevState)
@@ -185,7 +197,12 @@ export function Checkout() {
     const part1 = cardExpiringDate.substring(0, 2)
     const part2 = cardExpiringDate.substring(2, 4)
     const result = part1 + "/" + part2
-    setCardExpiringDate(result)
+    
+    if(!cardExpiringDate){
+      setCardExpiringDate("")
+    }else {
+      setCardExpiringDate(result)
+    }
   }
 
   function handleValidateNameCard(e) {
@@ -221,6 +238,82 @@ export function Checkout() {
         setCodCvcCardValidation(false)
       }
     }
+  }
+
+  async function handleFinalizedOrder() {
+    setWaiting(false)
+
+    if (
+      cardNumberValidation ||
+      cardExpiringDateValidation ||
+      nameCardValidation ||
+      codCvcCardValidation ||
+      containsStringOrNot ||
+      !numberCard ||
+      !cardExpiringDate ||
+      !nameCard ||
+      !nameCard ||
+      !codCvcCard
+    ) {
+      setColor(false)
+      setAlertMessage("Verifique todos os campos")
+    } else {
+      const finalizedOrderForm = {
+        paymentType: "creditCard",
+        payment: totalOrder.toFixed(2),
+        deliveryType: freeShippingOption ? "free" : "economic",
+        cartItems: cartItems,
+        orderCompleted: false,
+        numberInstallments: valueOfTheChosenInstallment,
+      }
+
+      try {
+        const response = await api.post("/checkout", finalizedOrderForm)
+        setColor(true)
+        setAlertMessage("Pedido finalizado com sucesso")
+      } catch (error) {
+        if (error.response) {
+          setColor(false)
+          setAlertMessage(error.response.data.message)
+        }
+      }
+    }
+
+    setTimeout(() => {
+      setWaiting(true)
+      setColor(false)
+      setAlertMessage("")
+    }, messageDisplayTime + 250)
+  }
+
+  async function handleFinalizedOrderPix() {
+    setWaiting(false)
+
+    const finalizedOrderForm = {
+      paymentType: "pix",
+      payment: totalOrder.toFixed(2),
+      deliveryType: freeShippingOption ? "free" : "economic",
+      cartItems: cartItems,
+      orderCompleted: false,
+    }
+
+    try {
+      const response = await api.post("/checkout", finalizedOrderForm)
+      setColor(true)
+      setAlertMessage("Pedido finalizado com sucesso")
+    } catch (error) {
+      if (error.response) {
+        setColor(false)
+        setAlertMessage(error.response.data.message)
+      }
+    }
+
+    setTimeout(() => {
+      setWaiting(true)
+      setColor(false)
+      setAlertMessage("")
+      
+    }, messageDisplayTime + 250)
   }
 
   useLayoutEffect(() => {
@@ -287,6 +380,12 @@ export function Checkout() {
 
   return (
     <Container>
+      <MessageAlert
+        message={alertMessage}
+        $color={color}
+        $messageDisplayTime={messageDisplayTime}
+      />
+
       <Header />
 
       <Content>
@@ -468,7 +567,7 @@ export function Checkout() {
                       }
                     >
                       {valueOfEachInstallment.map((valueInstallment, index) => (
-                        <option key={index} value={valueInstallment}>
+                        <option key={index} value={index + 1}>
                           {`${index + 1}x de R$ ${valueInstallment
                             .toFixed(2)
                             .replace(".", ",")} sem juros`}
@@ -478,7 +577,11 @@ export function Checkout() {
                   </div>
                 </Installment>
 
-                <Button title="Finalizar pedido" />
+                <Button
+                  title="Finalizar pedido"
+                  $loading={!waiting}
+                  onClick={handleFinalizedOrder}
+                />
               </CreditCardDetails>
 
               <PixCardPayment
@@ -513,7 +616,11 @@ export function Checkout() {
                 <p>{`R$${totalOrder
                   .toFixed(2)
                   .replace(".", ",")} com desconto`}</p>
-                <Button title="Finalizar pedido" />
+                <Button
+                  title="Finalizar pedido"
+                  $loading={!waiting}
+                  onClick={handleFinalizedOrderPix}
+                />
               </PixCardDetails>
             </PaymentContainer>
 
@@ -527,7 +634,12 @@ export function Checkout() {
               <ButtonText title="voltar ao carrinho" to="/orders" />
 
               <h3>Observações:</h3>
-              <textarea placeholder="Adicione informações relacionadas ao seu pedido"></textarea>
+
+              <textarea
+                placeholder="Adicione informações relacionadas ao seu pedido"
+                value={commentsRequest}
+                onChange={(e) => setCommentsRequest(e.target.value)}
+              ></textarea>
 
               <div className="orderSummary">
                 <div>
