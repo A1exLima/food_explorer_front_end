@@ -1,10 +1,10 @@
 import { Container } from "./style"
 
-export default function InputPayment({identifier, label, ...rest }) {
+export default function InputPayment({identifier, label, alert, margin, ...rest }) {
   return (
-    <Container>
+    <Container $margin = {margin}>
       <label htmlFor={identifier}>{label}</label>
-      <input  {...rest} />
+      <input {...rest} />
     </Container>
   )
 }

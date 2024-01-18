@@ -25,10 +25,16 @@ import { IoIosArrowDown } from "react-icons/io"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 
 import imgPix from "../../assets/images/pix.png"
+import imgLogoPix from "../../assets/images/logoPix.png"
 
 import { useLayoutEffect, useState } from "react"
 
 import { api } from "../../services"
+
+import {
+  useValidateNumberCard,
+  useValidateCardExpiringDate,
+} from "../../hooks/validatingFormInputs"
 
 export function Checkout() {
   const [containerView, setContainerView] = useState(false)
@@ -52,6 +58,25 @@ export function Checkout() {
   const [userData, setUserData] = useState({})
 
   const [loadingPix, setLoadingPix] = useState(false)
+
+  const [numberCard, setNumberCard] = useState("")
+  const [cardNumberValidation, setCardNumberValidation] = useState(false)
+
+  const [cardExpiringDate, setCardExpiringDate] = useState("")
+  const [cardExpiringDateValidation, setCardExpiringDateValidation] =
+    useState(false)
+  const [containsStringOrNot, setContainsStringOrNot] = useState(false)
+
+  const [nameCard, setNameCard] = useState("")
+  const [nameCardValidation, setNameCardValidation] = useState(false)
+
+  const [codCvcCard, setCodCvcCard] = useState("")
+  const [codCvcCardValidation, setCodCvcCardValidation] = useState(false)
+
+  const [valueOfEachInstallment, setValueOfEachInstallment] = useState([])
+  const [numberOfInstallments, setNumberOfInstallments] = useState(6)
+  const [valueOfTheChosenInstallment, setValueOfTheChosenInstallment] =
+    useState("")
 
   function toggleContainerView() {
     setContainerView((prevState) => !prevState)
@@ -82,7 +107,7 @@ export function Checkout() {
 
     setTimeout(() => {
       setLoadingPix(false)
-    }, 2000);
+    }, 2000)
   }
 
   function handleCheckBoxEconomicalShipping() {
@@ -115,11 +140,107 @@ export function Checkout() {
     )
   }
 
+  function handleCardNumberValidation(e) {
+    const numberCard = e.target.value
+    const validationResult = useValidateNumberCard(numberCard)
+
+    if (validationResult) {
+      setCardNumberValidation(false)
+    } else {
+      setNumberCard(numberCard)
+      setCardNumberValidation(true)
+
+      if (!numberCard || numberCard.length === 16) {
+        setCardNumberValidation(false)
+      }
+    }
+  }
+
+  function handleCardExpiringDateValidation(e) {
+    setContainsStringOrNot(false)
+
+    const cardExpiringDate = e.target.value
+    const validationResult = useValidateCardExpiringDate(cardExpiringDate)
+
+    if (validationResult) {
+      setCardExpiringDateValidation(false)
+    } else {
+      setCardExpiringDate(cardExpiringDate)
+      setCardExpiringDateValidation(true)
+
+      if (!cardExpiringDate || cardExpiringDate.length === 4) {
+        setCardExpiringDateValidation(false)
+      }
+    }
+  }
+
+  function handleCardExpirationDateValidationWhenLostFocus(e) {
+    const cardExpiringDate = e.target.value
+    const regex = /[a-zA-Z]/
+
+    if (regex.test(cardExpiringDate)) {
+      setContainsStringOrNot(true)
+    }
+
+    const part1 = cardExpiringDate.substring(0, 2)
+    const part2 = cardExpiringDate.substring(2, 4)
+    const result = part1 + "/" + part2
+    setCardExpiringDate(result)
+  }
+
+  function handleValidateNameCard(e) {
+    const nameCard = e.target.value
+    setNameCard(nameCard)
+
+    if (nameCard.length <= 3) {
+      setNameCardValidation(true)
+    } else {
+      setNameCardValidation(false)
+    }
+
+    if (nameCard === "") {
+      setNameCardValidation(false)
+    }
+  }
+
+  function handleValidateCvc(e) {
+    const codCvcCard = e.target.value
+
+    if (codCvcCard.length > 3) {
+      setCodCvcCard((prevState) => prevState)
+    } else {
+      setCodCvcCard(codCvcCard)
+
+      if (codCvcCard.length <= 2) {
+        setCodCvcCardValidation(true)
+      } else {
+        setCodCvcCardValidation(false)
+      }
+
+      if (codCvcCard === "") {
+        setCodCvcCardValidation(false)
+      }
+    }
+  }
+
   useLayoutEffect(() => {
     const totalOrder =
       priceMultipliedByQuantity + shippingPrice - cashPaymentDiscount
     setTotalOrder(totalOrder)
-  }, [priceMultipliedByQuantity, shippingPrice, cashPaymentDiscount])
+
+    const myArray = Array(numberOfInstallments).fill(undefined)
+
+    const valueOfEachInstallment = myArray.map((_, index) => {
+      return totalOrder / (index + 1)
+    })
+
+    setValueOfEachInstallment(valueOfEachInstallment)
+  }, [
+    priceMultipliedByQuantity,
+    shippingPrice,
+    cashPaymentDiscount,
+    containerView,
+  ])
 
   useLayoutEffect(() => {
     const cartItems = JSON.parse(
@@ -151,7 +272,6 @@ export function Checkout() {
       try {
         const response = await api.get("/address")
         setAddress(response.data)
-
       } catch (error) {
         setAddress(false)
       }
@@ -270,7 +390,7 @@ export function Checkout() {
                     <MdOutlineCreditCard />
                     <p>Cartão de Crédito</p>
                   </div>
-                  <span>até 6x sem juros</span>
+                  <span>{`até ${numberOfInstallments}x sem juros`}</span>
                 </div>
               </CreditCardPayment>
 
@@ -282,7 +402,11 @@ export function Checkout() {
                   type="number"
                   placeholder="Informe o número do cartão"
                   autoComplete="off"
+                  onChange={handleCardNumberValidation}
+                  value={numberCard}
+                  margin={cardNumberValidation}
                 />
+                {cardNumberValidation && <p>No mínimo 16 caracteres</p>}
 
                 <InputPayment
                   identifier="cardExpiringDate"
@@ -291,7 +415,19 @@ export function Checkout() {
                   type="text"
                   placeholder="Informe a validade do cartão"
                   autoComplete="off"
+                  onChange={handleCardExpiringDateValidation}
+                  onBlur={handleCardExpirationDateValidationWhenLostFocus}
+                  value={cardExpiringDate}
+                  margin={
+                    cardExpiringDateValidation
+                      ? cardExpiringDateValidation
+                      : containsStringOrNot
+                  }
                 />
+                {cardExpiringDateValidation && (
+                  <p>Informe o mês e Ano com 2 dígitos</p>
+                )}
+                {containsStringOrNot && <p>Informe somente números</p>}
 
                 <InputPayment
                   identifier="name"
@@ -300,7 +436,11 @@ export function Checkout() {
                   type="text"
                   placeholder="Informe o nome e sobrenome no cartão"
                   autoComplete="off"
+                  value={nameCard}
+                  onChange={handleValidateNameCard}
+                  margin={nameCardValidation}
                 />
+                {nameCardValidation && <p>No mínimo 3 caracteres</p>}
 
                 <InputPayment
                   identifier="securityCode"
@@ -309,7 +449,11 @@ export function Checkout() {
                   type="number"
                   placeholder="Informe o código de segurança"
                   autoComplete="off"
+                  onChange={handleValidateCvc}
+                  value={codCvcCard}
+                  margin={codCvcCardValidation}
                 />
+                {codCvcCardValidation && <p>No mínimo 3 caracteres</p>}
 
                 <Installment htmlFor="installment">
                   Escolha uma opção de parcelamento
@@ -318,15 +462,18 @@ export function Checkout() {
                     <select
                       name="installment"
                       id="installment"
-                      /*value={category}
-                        onChange={(e) => setCategory(e.target.value)}*/
+                      value={valueOfTheChosenInstallment}
+                      onChange={(e) =>
+                        setValueOfTheChosenInstallment(e.target.value)
+                      }
                     >
-                      <option value="25.90">1x de R$25,90 sem juros</option>
-                      <option value="25.90">2x de R$25,90 sem juros</option>
-                      <option value="25.90">3x de R$25,90 sem juros</option>
-                      <option value="25.90">4x de R$25,90 sem juros</option>
-                      <option value="25.90">5x de R$25,90 sem juros</option>
-                      <option value="25.90">6x de R$25,90 sem juros</option>
+                      {valueOfEachInstallment.map((valueInstallment, index) => (
+                        <option key={index} value={valueInstallment}>
+                          {`${index + 1}x de R$ ${valueInstallment
+                            .toFixed(2)
+                            .replace(".", ",")} sem juros`}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </Installment>
@@ -349,7 +496,18 @@ export function Checkout() {
 
               <PixCardDetails $containerView={containerViewPix}>
                 <div>
-                  {loadingPix ?  <AiOutlineLoading3Quarters /> : <img src={imgPix} alt="QR Code" />}
+                  {loadingPix ? (
+                    <AiOutlineLoading3Quarters />
+                  ) : (
+                    <div>
+                      <div>
+                        <img src={imgLogoPix} alt="Logo Pix" />
+                      </div>
+                      <div>
+                        <img src={imgPix} alt="QR Code" />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <p>{`R$${totalOrder

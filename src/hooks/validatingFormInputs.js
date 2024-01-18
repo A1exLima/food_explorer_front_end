@@ -84,10 +84,22 @@ function useValidateConfirmPassword(
   setValidConfirmPassword(checkConfirmPassword(newConfirmPassword))
 }
 
+function useValidateNumberCard(numberCard) {
+  const validation = numberCard.length > 16
+  return validation
+}
+
+function useValidateCardExpiringDate(cardExpiringDate) {
+  const validation = cardExpiringDate.length > 4
+  return validation
+}
+
 export {
   useValidateName,
   useValidateEmail,
   useValidatePassword,
   useValidateConfirmPassword,
   useValidateOldPassword,
+  useValidateNumberCard,
+  useValidateCardExpiringDate,
 }

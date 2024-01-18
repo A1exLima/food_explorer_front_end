@@ -295,7 +295,7 @@ export const ContentForm = styled.form`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: .9rem;
+      margin-bottom: 0.9rem;
 
       > p {
         color: ${({ theme }) => theme.COLORS.Light300};
@@ -417,6 +417,14 @@ export const CreditCardDetails = styled.span`
   border: 1px solid ${({ theme }) => theme.COLORS.Dark1000};
   padding: 1rem;
   border-radius: 0 0 0.5rem 0.5rem;
+
+  > p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: var(--poppins-font-family);
+    color: ${({ theme }) => theme.COLORS.TintsTomato400};
+    margin-bottom: 1.5rem;
+  }
 `
 
 export const Installment = styled.label`
@@ -528,7 +536,7 @@ export const PixCardDetails = styled.span`
     justify-content: center;
     height: 25rem;
     border-radius: 0.5rem;
-    background-color: ${({ theme }) => theme.COLORS.Light300};
+    background-color: ${({ theme }) => theme.COLORS.Light100};
     margin-bottom: 2rem;
 
     > svg {
@@ -546,9 +554,33 @@ export const PixCardDetails = styled.span`
       }
     }
 
-    > img {
-      width: 20rem;
-      height: 20rem;
+    > div {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+
+      > div:first-child {
+        width: 100%;
+        > img {
+          width: 8rem;
+        }
+      }
+
+      > div:last-child {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        margin-top: -1rem;
+        > img {
+          width: 13rem;
+        }
+      }
     }
   }
 
@@ -560,4 +592,3 @@ export const PixCardDetails = styled.span`
     margin-bottom: 1rem;
   }
 `
-
