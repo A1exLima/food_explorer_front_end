@@ -27,7 +27,8 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import imgPix from "../../assets/images/pix.png"
 import imgLogoPix from "../../assets/images/logoPix.png"
 
-import { useEffect, useLayoutEffect, useState } from "react"
+import {useLayoutEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import { api } from "../../services"
 
@@ -38,6 +39,7 @@ import {
 
 import MessageAlert from "../../components/messageAlert"
 import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
+
 
 export function Checkout() {
   const [waiting, setWaiting] = useState(true)
@@ -90,6 +92,8 @@ export function Checkout() {
 
   const [commentsRequest, setCommentsRequest] = useState("")
 
+  const navigate = useNavigate()
+
   function toggleContainerView() {
     setContainerView((prevState) => !prevState)
 
@@ -119,7 +123,7 @@ export function Checkout() {
 
     setTimeout(() => {
       setLoadingPix(false)
-    }, 2000)
+    }, 500)
   }
 
   function handleCheckBoxEconomicalShipping() {
@@ -197,10 +201,10 @@ export function Checkout() {
     const part1 = cardExpiringDate.substring(0, 2)
     const part2 = cardExpiringDate.substring(2, 4)
     const result = part1 + "/" + part2
-    
-    if(!cardExpiringDate){
+
+    if (!cardExpiringDate) {
       setCardExpiringDate("")
-    }else {
+    } else {
       setCardExpiringDate(result)
     }
   }
@@ -271,6 +275,8 @@ export function Checkout() {
         const response = await api.post("/checkout", finalizedOrderForm)
         setColor(true)
         setAlertMessage("Pedido finalizado com sucesso")
+        localStorage.removeItem("@foodExplorer:cartItems")
+        localStorage.removeItem("@foodExplorer:shippingValue")
       } catch (error) {
         if (error.response) {
           setColor(false)
@@ -283,6 +289,7 @@ export function Checkout() {
       setWaiting(true)
       setColor(false)
       setAlertMessage("")
+      navigate("/order_completed")
     }, messageDisplayTime + 250)
   }
 
@@ -301,6 +308,9 @@ export function Checkout() {
       const response = await api.post("/checkout", finalizedOrderForm)
       setColor(true)
       setAlertMessage("Pedido finalizado com sucesso")
+      localStorage.removeItem("@foodExplorer:cartItems")
+      localStorage.removeItem("@foodExplorer:shippingValue")
+
     } catch (error) {
       if (error.response) {
         setColor(false)
@@ -312,7 +322,7 @@ export function Checkout() {
       setWaiting(true)
       setColor(false)
       setAlertMessage("")
-      
+      navigate("/order_completed")
     }, messageDisplayTime + 250)
   }
 
