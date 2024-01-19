@@ -49,11 +49,13 @@ export default function CartItem({ data, onValueChangeSubtotal, flagDeleteItem }
         </div>
       </div>
 
-      <Counter onValueChange={handleValueCounter} countValue={counter} />
-
-      <p>{`R$${priceMultiplied}`}</p>
       <div>
-        <MdDeleteForever onClick={deleteCart} />
+        <Counter onValueChange={handleValueCounter} countValue={counter} />
+
+        <p>{`R$${priceMultiplied}`}</p>
+        <div>
+          <MdDeleteForever onClick={deleteCart} />
+        </div>
       </div>
     </Container>
   )

@@ -1,16 +1,21 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 4fr 2.3fr 2fr 0.5fr;
+  grid-template-columns: 2.5fr 3fr;
   align-items: center;
-
-  padding-bottom: 1rem;
-  margin-bottom: 3rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
   border-bottom: 1px solid ${({ theme }) => theme.COLORS.Dark1000};
 
-  > div {
+  @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  > div:first-child {
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -23,12 +28,22 @@ export const Container = styled.div`
     }
 
     > div {
+      width: 100%;
       font-family: var(--poppins-font-family);
       font-weight: 300;
 
       > h2 {
-        font-size: 2.2rem;
+        font-size: clamp(1.7rem, 2vw, 2.2rem);
         color: ${({ theme }) => theme.COLORS.Light300};
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+
+        @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+          font-size: clamp(1.7rem, 4vw, 2.2rem);
+        }
       }
 
       > p {
@@ -43,28 +58,38 @@ export const Container = styled.div`
     }
   }
 
-  > p {
-    text-align: center;
-    font-size: 1.6rem;
-    font-family: var(--poppins-font-family);
-    font-weight: 500;
-    color: ${({ theme }) => theme.COLORS.Light300};
-  }
-
   > div:last-child {
-    height: 100%;
-    justify-content: center;
-    user-select: none;
+    padding-left: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    > svg {
-      font-size: 2.2rem;
-      color: ${({ theme }) => theme.COLORS.TintsTomato300};
-      cursor: pointer;
+    @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+      padding-left: 0rem;
+    }
 
-      transition: transform 0.4s ease-in-out;
+    > p {
+      text-align: center;
+      font-size: 1.6rem;
+      font-family: var(--poppins-font-family);
+      font-weight: 500;
+      color: ${({ theme }) => theme.COLORS.Light300};
+    }
 
-      &:hover {
-        transform: scale(1.1);
+    > div:last-child {
+      justify-content: center;
+      user-select: none;
+
+      > svg {
+        font-size: 2.2rem;
+        color: ${({ theme }) => theme.COLORS.TintsTomato300};
+        cursor: pointer;
+
+        transition: transform 0.4s ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
       }
     }
   }

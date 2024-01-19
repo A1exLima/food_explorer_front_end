@@ -154,7 +154,10 @@ export default function Header({
               <Link to="">Favoritos</Link>
             </li>
             <li>
-              <Link to="">Histórico</Link>
+              <Link to="/orders">Carrinho</Link>
+            </li>
+            <li>
+              <Link to="">Pedidos</Link>
             </li>
             <li onClick={handleClickLogOut}>
               <Link to="/">Sair</Link>
@@ -204,7 +207,7 @@ export default function Header({
           <OrderButton
             iconAndAmount={true}
             type="button"
-            title="Pedidos"
+            title="Carrinho"
             value={quantityOfItemsInTheCart}
             link="/orders"
           />
@@ -233,7 +236,7 @@ export default function Header({
                   <Link to="">Favoritos</Link>
                 </li>
                 <li>
-                  <Link to="">Histórico</Link>
+                  <Link to="">Pedidos</Link>
                 </li>
                 <li onClick={handleClickLogOut}>
                   <MdOutlineLogout />

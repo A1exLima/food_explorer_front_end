@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100%;
@@ -23,8 +24,6 @@ export const Main = styled.main`
   padding: 2.4rem 2rem;
   display: flex;
   flex-direction: column;
-
-  
 `
 
 export const EmptyCart = styled.div`
@@ -70,6 +69,7 @@ export const FullCart = styled.div`
     margin-bottom: 2rem;
   }
 `
+
 export const ContainerPricesAndShipping = styled.div`
   display: flex;
   flex-direction: column;
@@ -79,6 +79,10 @@ export const ContainerPricesAndShipping = styled.div`
     display: flex;
     gap: 2rem;
 
+    @media (max-width: ${DEVICE_BREAKPOINTS.MLG}) {
+      flex-direction: column;
+    }
+
     .shipping-method,
     .price-summary {
       padding: 1rem;
@@ -87,7 +91,7 @@ export const ContainerPricesAndShipping = styled.div`
 
       h2 {
         font-family: var(--poppins-font-family);
-        font-size: 2rem;
+        font-size: clamp(1.8rem, 5vw, 2rem);
         font-weight: 500;
         color: ${({ theme }) => theme.COLORS.Light300};
         border-bottom: 1px solid ${({ theme }) => theme.COLORS.Dark1000};
@@ -102,7 +106,8 @@ export const ContainerPricesAndShipping = styled.div`
 
       > div {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        align-items: start;
         gap: 1rem;
 
         > div {
@@ -140,6 +145,7 @@ export const ContainerPricesAndShipping = styled.div`
 
           > p:nth-child(2) {
             margin-bottom: 0.2rem;
+            font-size: 1.7rem;
           }
 
           > p:nth-child(3) {
@@ -155,8 +161,11 @@ export const ContainerPricesAndShipping = styled.div`
 
         > a {
           flex: 1;
-          font-size: 1.6rem;
+          font-size: clamp(1.35rem, 3vw, 1.6rem);
           color: ${({ theme }) => theme.COLORS.TintsCarrot200};
+          text-align: end;
+          padding-right: 1rem;
+
         }
       }
     }
@@ -171,7 +180,7 @@ export const ContainerPricesAndShipping = styled.div`
         > p {
           color: ${({ theme }) => theme.COLORS.Light300};
           font-family: var(--roboto-font-family);
-          font-size: 1.6rem;
+          font-size: clamp(1.4rem, 3vw, 1.6rem);
           font-weight: 400;
           padding-bottom: 1.6rem;
         }
@@ -181,7 +190,7 @@ export const ContainerPricesAndShipping = styled.div`
         > p {
           padding-bottom: 0rem;
           font-weight: 500;
-          font-size: 1.6rem;
+          font-size: clamp(1.4rem, 3vw, 1.6rem);
           color: ${({ theme }) => theme.COLORS.TintsCake200};
         }
       }
@@ -191,7 +200,6 @@ export const ContainerPricesAndShipping = styled.div`
   .shipping {
     display: flex;
     flex-direction: column;
-    margin-bottom: 2rem;
 
     padding: 1rem;
     border-radius: 0.5rem;
@@ -199,7 +207,7 @@ export const ContainerPricesAndShipping = styled.div`
 
     h2 {
       font-family: var(--poppins-font-family);
-      font-size: 2rem;
+      font-size: clamp(1.8rem, 5vw, 2rem);
       font-weight: 500;
       color: ${({ theme }) => theme.COLORS.Light300};
       border-bottom: 1px solid ${({ theme }) => theme.COLORS.Dark1000};
@@ -274,8 +282,14 @@ export const ContainerPricesAndShipping = styled.div`
         justify-content: space-between;
         gap: 1rem;
 
+        .shipping-instructions {
+          @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+            display: none;
+          }
+        }
+
         > div,
-        p {
+        > p {
           color: ${({ theme }) => theme.COLORS.Light300};
           font-family: var(--roboto-font-family);
           font-size: 1.25rem;
@@ -360,6 +374,12 @@ export const ContainerPricesAndShipping = styled.div`
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
+
+        .shipping-instructions {
+          @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+            display: none;
+          }
+        }
 
         > div,
         p {

@@ -267,8 +267,11 @@ export function Orders() {
                       <div>
                         <p>Econômico</p>
                         <p>
-                          3 dias úteis. Obs: Pedidos realizados após as 14h30, é
-                          adicionado + 1 dia útil.
+                          3 dias úteis.{" "}
+                          <span className="shipping-instructions">
+                            Obs: Pedidos realizados após as 14h30, é adicionado
+                            + 1 dia útil.
+                          </span>
                         </p>
                       </div>
                       <p>R$9,90</p>
@@ -292,8 +295,11 @@ export function Orders() {
                       <div>
                         <p>Frete Grátis</p>
                         <p>
-                          7 dias úteis. Obs: Pedidos realizados após as 14h30, é
-                          adicionado + 1 dia útil.
+                          7 dias úteis.{" "}
+                          <span className="shipping-instructions">
+                            Obs: Pedidos realizados após as 14h30, é adicionado
+                            + 1 dia útil.
+                          </span>
                         </p>
                       </div>
                       <p>Grátis</p>
