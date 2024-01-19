@@ -27,7 +27,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import imgPix from "../../assets/images/pix.png"
 import imgLogoPix from "../../assets/images/logoPix.png"
 
-import {useLayoutEffect, useState } from "react"
+import { useLayoutEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { api } from "../../services"
@@ -39,7 +39,6 @@ import {
 
 import MessageAlert from "../../components/messageAlert"
 import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
-
 
 export function Checkout() {
   const [waiting, setWaiting] = useState(true)
@@ -246,6 +245,7 @@ export function Checkout() {
 
   async function handleFinalizedOrder() {
     setWaiting(false)
+    let authorizeRedirection = false
 
     if (
       cardNumberValidation ||
@@ -275,12 +275,19 @@ export function Checkout() {
         const response = await api.post("/checkout", finalizedOrderForm)
         setColor(true)
         setAlertMessage("Pedido finalizado com sucesso")
+
         localStorage.removeItem("@foodExplorer:cartItems")
         localStorage.removeItem("@foodExplorer:shippingValue")
+
+        authorizeRedirection = true
       } catch (error) {
         if (error.response) {
           setColor(false)
           setAlertMessage(error.response.data.message)
+          authorizeRedirection = false
+        }else{
+          setColor(false)
+          setAlertMessage("Não foi possível finalizar o pedido")
         }
       }
     }
@@ -289,7 +296,10 @@ export function Checkout() {
       setWaiting(true)
       setColor(false)
       setAlertMessage("")
-      navigate("/order_completed")
+
+      if (authorizeRedirection) {
+        navigate("/order_completed")
+      }
     }, messageDisplayTime + 250)
   }
 
@@ -310,7 +320,6 @@ export function Checkout() {
       setAlertMessage("Pedido finalizado com sucesso")
       localStorage.removeItem("@foodExplorer:cartItems")
       localStorage.removeItem("@foodExplorer:shippingValue")
-
     } catch (error) {
       if (error.response) {
         setColor(false)
