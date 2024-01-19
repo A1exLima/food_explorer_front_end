@@ -41,17 +41,19 @@ export const ContentOrderCompleted = styled.section`
     margin-top: -10rem;
 
     > h1 {
+      text-align: center;
       margin-bottom: 0.5rem;
       color: ${({ theme }) => theme.COLORS.TintsCake200};
       font-family: var(--poppins-font-family);
-      font-size: clamp(2.7041rem, 3.2vw, 4rem);
+      font-size: clamp(2.64rem, 6.5vw, 4rem);
       font-weight: 500;
     }
 
     > p {
+      text-align: center;
       color: ${({ theme }) => theme.COLORS.Light300};
       font-family: var(--poppins-font-family);
-      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
       font-weight: 400;
       margin-bottom: 2.5rem;
 
