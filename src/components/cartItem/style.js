@@ -59,7 +59,7 @@ export const Container = styled.div`
   }
 
   > div:last-child {
-    padding-left: 6rem;
+    padding-left: 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

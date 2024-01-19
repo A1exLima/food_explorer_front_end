@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100%;
@@ -29,6 +30,10 @@ export const ContentCheckout = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MLG}) {
+    display: block;
+  }
 `
 
 export const ContentForm = styled.form`
@@ -369,6 +374,7 @@ export const CreditCardPayment = styled.div`
   cursor: pointer;
 
   > div {
+    gap: 1rem;
     height: 6rem;
     display: flex;
     align-items: center;
@@ -394,6 +400,7 @@ export const CreditCardPayment = styled.div`
 
       > p {
         font-size: 1.4rem;
+        white-space: nowrap;
       }
 
       > svg {
@@ -404,8 +411,14 @@ export const CreditCardPayment = styled.div`
 
     > span {
       padding-top: 0.2rem;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 300;
+      text-align: center;
+
+      @media (max-width: ${DEVICE_BREAKPOINTS.MLG}) {
+        padding-right: 0.3rem;
+        
+      }
     }
   }
 `

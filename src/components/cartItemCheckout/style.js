@@ -1,14 +1,20 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 3.2fr 0.95fr;
   align-items: center;
+  gap: 0.6rem;
 
   padding-bottom: 1rem;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.COLORS.Dark1000};
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.MLG}) {
+    gap: 0rem;
+  }
 
   > div {
     display: flex;
@@ -49,6 +55,11 @@ export const Container = styled.div`
         font-size: 1.5rem;
         font-weight: 500;
         color: ${({ theme }) => theme.COLORS.Light300};
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
       }
 
       > p {
@@ -63,11 +74,16 @@ export const Container = styled.div`
     }
   }
 
-  > p {
+  .price-total {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-family: var(--poppins-font-family);
     font-weight: 500;
     color: ${({ theme }) => theme.COLORS.Light300};
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.MLG}) {
+      text-align: end;
+      padding-right: .5rem;
+    }
   }
 `

@@ -16,7 +16,7 @@ export default function CartItem({data}) {
         </div>
       </div>
 
-      <p>{`R$${(data.price * data.count).toFixed(2).replace(".", ",")}`}</p>
+      <p className="price-total">{`R$${(data.price * data.count).toFixed(2).replace(".", ",")}`}</p>
     </Container>
   )
 }
