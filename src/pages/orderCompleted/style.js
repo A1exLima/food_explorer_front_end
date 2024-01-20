@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100%;
@@ -56,6 +57,14 @@ export const ContentOrderCompleted = styled.section`
       font-size: clamp(1.2rem, 2.5vw, 1.5rem);
       font-weight: 400;
       margin-bottom: 2.5rem;
+
+      @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
+        margin: 0 4rem 2.5rem 4rem;
+      }
+
+      @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+        margin: 0 1rem 2.5rem 1rem;
+      }
 
       > span {
         color: ${({ theme }) => theme.COLORS.TintsCake200};

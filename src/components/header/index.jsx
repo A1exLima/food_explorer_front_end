@@ -157,7 +157,7 @@ export default function Header({
               <Link to="/orders">Carrinho</Link>
             </li>
             <li>
-              <Link to="">Pedidos</Link>
+              <Link to="/order_status">Meus Pedidos</Link>
             </li>
             <li onClick={handleClickLogOut}>
               <Link to="/">Sair</Link>
@@ -236,7 +236,7 @@ export default function Header({
                   <Link to="">Favoritos</Link>
                 </li>
                 <li>
-                  <Link to="">Pedidos</Link>
+                  <Link to="/order_status">Pedidos</Link>
                 </li>
                 <li onClick={handleClickLogOut}>
                   <MdOutlineLogout />

@@ -7,6 +7,7 @@ import { Profile } from "../pages/profile"
 import  { Orders } from "../pages/orders"
 import { Checkout } from "../pages/checkout"
 import { OrderCompleted } from "../pages/orderCompleted"
+import { OrderStatus } from "../pages/orderStatus"
 
 import { useAuth } from "../hooks/auth"
 
@@ -32,6 +33,8 @@ export function CustomerRoutes() {
       <Route path="/orders" element={<Orders />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/order_completed" element={<OrderCompleted />} />
+      <Route path="/order_status" element={<OrderStatus />} />
+
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )
