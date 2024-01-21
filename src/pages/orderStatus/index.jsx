@@ -7,20 +7,18 @@ import OrderList from "../../components/orderList"
 
 import { api } from "../../services"
 
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 export function OrderStatus() {
   const [orderData, setOrderData] = useState([])
 
   useEffect(() => {
-    try {
-      const getOrders = async () => {
-        const response = await api.get("/checkout")
-        setOrderData(response.data)
-      }
+    const getOrders = async () => {
+      const response = await api.get("/checkout")
+      setOrderData((response.data).reverse())
+    }
 
-      getOrders()
-    } catch (error) {}
+    getOrders()
   }, [])
 
   return (

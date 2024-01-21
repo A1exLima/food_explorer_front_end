@@ -60,7 +60,7 @@ export default function OrderList({ data }) {
         </div>
 
         <div>
-          <Button title="Ver detalhes" />
+          <Button title="Ver detalhes" to={`/details_order/${data.id}`} />
         </div>
       </section>
     </Container>

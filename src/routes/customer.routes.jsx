@@ -4,10 +4,11 @@ import { useEffect } from "react"
 import { Home } from "../pages/home"
 import { Dish } from "../pages/dish"
 import { Profile } from "../pages/profile"
-import  { Orders } from "../pages/orders"
+import { Orders } from "../pages/orders"
 import { Checkout } from "../pages/checkout"
 import { OrderCompleted } from "../pages/orderCompleted"
 import { OrderStatus } from "../pages/orderStatus"
+import { DetailsOrder } from "../pages/detailsOrder"
 
 import { useAuth } from "../hooks/auth"
 
@@ -34,7 +35,7 @@ export function CustomerRoutes() {
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/order_completed" element={<OrderCompleted />} />
       <Route path="/order_status" element={<OrderStatus />} />
-
+      <Route path="/details_order/:id" element={<DetailsOrder />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )
