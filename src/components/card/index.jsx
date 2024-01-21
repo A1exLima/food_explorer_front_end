@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom"
 
 import { useAuth } from "../../hooks/auth"
 
-export default function Card({ data, onClickCard }) {
+export default function Card({ data, onClickCard, quantityOfItemsInTheCart, ...rest }) {
   const { user } = useAuth()
   const [dish, setDish] = useState(data)
   const imageDishURL = data.image
@@ -25,13 +25,70 @@ export default function Card({ data, onClickCard }) {
   const priceFormatted = data.price.toFixed(2).replace(".", ",")
   const navigate = useNavigate()
 
+  const [countValue, setCountValue] = useState(1)
+
   function handleClickEditDish(e) {
     e.stopPropagation()
     navigate(`/edit_dish/${dish.id}`)
   }
 
+  function handleClickButton(e) {
+    quantityOfItemsInTheCart(true)
+    e.stopPropagation()
+
+    const dishOrder = {
+      id: data.id,
+      count: countValue,
+      price: data.price,
+      name: data.name,
+      image: `${api.defaults.baseURL}/files_image/${data.image}`,
+      category: data.category,
+    }
+
+    const cartItems = JSON.parse(
+      localStorage.getItem("@foodExplorer:cartItems")
+    )
+
+    if (!cartItems) {
+      localStorage.setItem(
+        "@foodExplorer:cartItems",
+        JSON.stringify([dishOrder])
+      )
+    } else {
+      const checkDishId = cartItems.findIndex((object) => object.id === data.id)
+
+      if (checkDishId !== -1) {
+        cartItems[checkDishId].count = countValue + cartItems[checkDishId].count
+        localStorage.setItem(
+          "@foodExplorer:cartItems",
+          JSON.stringify(cartItems)
+        )
+      } else {
+        cartItems.push(dishOrder)
+        localStorage.setItem(
+          "@foodExplorer:cartItems",
+          JSON.stringify(cartItems)
+        )
+      }
+
+      const sumCount = cartItems.reduce((accumulator, object) => {
+        return accumulator + object.count
+      }, 0)
+
+      quantityOfItemsInTheCart(sumCount)
+    }
+  }
+
+  function handleClickCounter(e) {
+    e.stopPropagation()
+  }
+
+  const handleCounterChange = (newValue) => {
+    setCountValue(newValue)
+  }
+
   return (
-    <Container onClick={onClickCard} $user={user}>
+    <Container onClick={onClickCard} $user={user} {...rest}>
       {[USER_ROLES.ADMIN].includes(user.role) ? (
         <img src={pencil} alt="Editar Prato" onClick={handleClickEditDish} />
       ) : (
@@ -47,8 +104,15 @@ export default function Card({ data, onClickCard }) {
 
       {[USER_ROLES.ADMIN].includes(user.role) ? null : user === false ? null : (
         <div>
-          <Counter value="10" />
-          <IncludeButton title="Incluir" type="button" />
+          <Counter
+            onValueChange={handleCounterChange}
+            onClick={handleClickCounter}
+          />
+          <IncludeButton
+            title="Incluir"
+            type="button"
+            onClick={handleClickButton}
+          />
         </div>
       )}
     </Container>

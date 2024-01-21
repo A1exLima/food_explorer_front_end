@@ -2,7 +2,7 @@ import { Container } from "./style"
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"
 import { useState, useEffect } from "react"
 
-export default function Counter({ onValueChange, countValue }) {
+export default function Counter({ onValueChange, countValue, ...rest }) {
   const [value, setValue] = useState(1)
 
   function addValue() {
@@ -27,7 +27,7 @@ export default function Counter({ onValueChange, countValue }) {
   }, [])
 
   return (
-    <Container>
+    <Container {...rest}>
       <AiOutlineMinus onClick={subtractValue} />
       <span>{value}</span>
       <AiOutlinePlus onClick={addValue} />

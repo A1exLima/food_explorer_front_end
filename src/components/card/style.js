@@ -93,11 +93,23 @@ export const Container = styled.div`
   }
 
   > div {
+    //border: 1px solid red;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1.6rem;
+    z-index: 1;
+    //position: absolute;
+
+    > span {
+      //border: 1px solid violet;
+
+    }
+
+    > button {
+      //border: 1px solid violet;
+    }
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {

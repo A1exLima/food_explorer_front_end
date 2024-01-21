@@ -174,9 +174,9 @@ export function Orders() {
             <FullCart>
               <h1>Meu Carrinho</h1>
 
-              {cartItems.map((item) => (
+              {cartItems.map((item, index) => (
                 <CartItem
-                  key={item.id}
+                  key={index}
                   data={item}
                   onValueChangeSubtotal={handleValueChangeSubtotal}
                   flagDeleteItem={handleValueChangeDelete}

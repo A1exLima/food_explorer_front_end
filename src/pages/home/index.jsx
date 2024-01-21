@@ -26,6 +26,8 @@ export function Home() {
   const [dishesDessert, setDishesDessert] = useState([])
   const [dishesDrink, setDishesDrink] = useState([])
 
+  const [quantityOfItemsInTheCart, setQuantityOfItemsInTheCart] = useState(0)
+
   const handleSearchInputChange = (value) => {
     setSearchValue(value)
   }
@@ -41,6 +43,10 @@ export function Home() {
 
   const handleCard = (dishId) => {
     navigate(`/dish/${dishId}`)
+  }
+
+  const handleQuantityOfItemsInTheCart = (value) => {
+    setQuantityOfItemsInTheCart(value)
   }
 
   useEffect(() => {
@@ -66,6 +72,7 @@ export function Home() {
   return (
     <Container>
       <Header
+        qtdOrders={quantityOfItemsInTheCart}
         search={handleSearchInputChange}
         valueSearch={searchValue}
         passingCategorysValuesToHome={handleCategorysValues}
@@ -104,6 +111,9 @@ export function Home() {
                       {dishesSnack.map((dish) => (
                         <SplideSlide key={String(dish.id)}>
                           <Card
+                            quantityOfItemsInTheCart={
+                              handleQuantityOfItemsInTheCart
+                            }
                             data={dish}
                             onClickCard={() => {
                               handleCard(dish.id)

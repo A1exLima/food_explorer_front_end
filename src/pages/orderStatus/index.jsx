@@ -20,8 +20,7 @@ export function OrderStatus() {
         const response = await api.get("/checkout")
         setOrderData(response.data.reverse())
       } catch (error) {
-        console.error(error.response.data.message)
-
+        
         if (error) {
           setFlagOrder(false)
         }

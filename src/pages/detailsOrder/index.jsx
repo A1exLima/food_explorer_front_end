@@ -165,7 +165,7 @@ export function DetailsOrder() {
 
               <p>{`${address.city} - ${address.country}`}</p>
               <p>{address.cep}</p>
-              <p>{`${address.street} - ${address.number}`}</p>
+              <p>{`${address.street}, ${address.number}`}</p>
               <p>{address.complement}</p>
               <p>{address.district}</p>
             </DeliveryAddress>

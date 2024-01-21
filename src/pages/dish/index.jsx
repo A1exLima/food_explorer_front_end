@@ -44,12 +44,12 @@ export function Dish() {
       redirectionDish(data.id)
     } else {
       const dishOrder = {
-        id: params.id,
+        id: parseInt(params.id),
         count: multiplicationValue,
         price: dataPrice,
         name: data.name,
         image: image,
-        category: data.category
+        category: data.category,
       }
 
       const cartItems = JSON.parse(
@@ -63,7 +63,7 @@ export function Dish() {
         )
       } else {
         const checkDishId = cartItems.findIndex(
-          (object) => object.id === params.id
+          (object) => object.id === parseInt(params.id)
         )
 
         if (checkDishId !== -1) {
