@@ -39,7 +39,7 @@ export const EmptyCart = styled.div`
   > h2 {
     color: ${({ theme }) => theme.COLORS.TintsCake200};
     font-family: var(--poppins-font-family);
-    font-size: 3.6rem;
+    font-size: clamp(2.3rem, 5vw, 3.6rem);
     font-weight: 700;
     text-align: center;
   }
@@ -47,7 +47,7 @@ export const EmptyCart = styled.div`
   > p {
     color: ${({ theme }) => theme.COLORS.Light400};
     font-family: var(--roboto-font-family);
-    font-size: 2rem;
+    font-size: clamp(1.6rem, 3vw, 2rem);
     font-weight: 400;
     text-align: center;
     padding-bottom: 1.6rem;

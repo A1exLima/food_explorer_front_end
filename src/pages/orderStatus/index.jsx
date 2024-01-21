@@ -8,20 +8,27 @@ import Button from "../../components/button"
 
 import { api } from "../../services"
 
-import { useLayoutEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 export function OrderStatus() {
   const [orderData, setOrderData] = useState([])
+  const [flagOrder, setFlagOrder] = useState(true)
 
-  useLayoutEffect(() => {
-    const getOrders = async () => {
+  useEffect(() => {
+    const fetchData = async () => {
       try {
         const response = await api.get("/checkout")
         setOrderData(response.data.reverse())
-      } catch (error) {}
+      } catch (error) {
+        console.error(error.response.data.message)
+
+        if (error) {
+          setFlagOrder(false)
+        }
+      }
     }
 
-    getOrders()
+    fetchData()
   }, [])
 
   return (
@@ -30,11 +37,11 @@ export function OrderStatus() {
 
       <Content>
         <Main>
-          {orderData.length != 0 ? <ToGoBack /> : null}
-          {orderData.length != 0 ? <h1>Meus Pedidos</h1> : null}
+          {flagOrder ? <ToGoBack /> : null}
+          {flagOrder ? <h1>Meus Pedidos</h1> : null}
 
           <ContainerOrderList>
-            {orderData.length != 0 ? (
+            {flagOrder ? (
               orderData.map((order, index) => (
                 <OrderList key={index} data={order} />
               ))

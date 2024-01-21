@@ -49,7 +49,7 @@ export const ContainerOrderList = styled.section`
 
     > h1 {
       font-family: var(--poppins-font-family);
-      font-size: 3.6rem;
+      font-size: clamp(2.3rem, 5vw, 3.6rem);
       font-weight: 700;
       text-align: center;
       color: ${({ theme }) => theme.COLORS.TintsCake200};
@@ -58,7 +58,7 @@ export const ContainerOrderList = styled.section`
     > p {
       color: #c4c4cc;
       font-family: var(--roboto-font-family);
-      font-size: 2rem;
+      font-size: clamp(1.6rem, 3vw, 2rem);
       font-weight: 400;
       text-align: center;
       padding-bottom: 1.6rem;
