@@ -16,12 +16,12 @@ export function OrderCompleted() {
               <h1>Confirmação do pedido</h1>
 
               <p>
-                Obrigado, seu pedido foi <span>concluído com sucesso</span>.
-                Em breve você receberá uma mensagem no seu e-mail com os
-                detalhes da compra.
+                Obrigado, seu pedido foi <span>concluído com sucesso</span>. Em
+                breve você receberá uma mensagem no seu e-mail com os detalhes
+                da compra.
               </p>
 
-              <Button title="Ver detalhes da compra" />
+              <Button title="Ver detalhes da compra" to="/order_status" />
             </div>
           </ContentOrderCompleted>
         </Main>
