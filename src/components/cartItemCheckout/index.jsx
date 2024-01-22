@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { Container } from "./style"
 
+import { BiSolidLike } from "react-icons/bi"
+
 export default function CartItem({ data, ...rest }) {
   const [cursorValue, setCursorValue] = useState(false)
 
@@ -21,7 +23,7 @@ export default function CartItem({ data, ...rest }) {
         </div>
         <div>
           <h2>{data.name}</h2>
-          <p>{data.category}</p>
+          <span>{data.category}</span>
           {data.count ? (
             <p>{`R$ ${data.price.toFixed(2).replace(".", ",")}`}</p>
           ) : null}
@@ -31,6 +33,11 @@ export default function CartItem({ data, ...rest }) {
         <p className="price-total">{`R$${(data.price * data.count)
           .toFixed(2)
           .replace(".", ",")}`}</p>
+      ) : data.amount ? (
+        <div className="like">
+          <BiSolidLike />
+          <p className="price">{data.amount}</p>
+        </div>
       ) : (
         <p className="price">{`R$${data.price
           .toFixed(2)

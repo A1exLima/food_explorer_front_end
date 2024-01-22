@@ -16,11 +16,15 @@ import { FaHeart } from "react-icons/fa"
 
 import { api } from "../../services"
 
-import { useEffect, useState } from "react"
+import { useAuth } from "../../hooks/auth"
+import { USER_ROLES } from "../../utils/roles"
 
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export function Favorites() {
+  const { user } = useAuth()
+
   const [dishFavorites, setDishFavorites] = useState([])
   const [dataDishes, setDataDishes] = useState([])
   const [flagFavorites, setFlagFavorites] = useState(true)
@@ -35,9 +39,11 @@ export function Favorites() {
       try {
         const response = await api.get("/favorite")
         const usersFavoriteDishes = response.data
-
         const dish_favorites = usersFavoriteDishes.map((dish) => {
-          return dish.dish_id
+          return {
+            dish: dish.dish_id,
+            amount: dish.amount,
+          }
         })
 
         setDishFavorites(dish_favorites)
@@ -59,7 +65,7 @@ export function Favorites() {
     const getDataDish = async () => {
       try {
         const promises = dishFavorites.map(async (dishId) => {
-          const response = await api.get(`/dish/${dishId}`)
+          const response = await api.get(`/dish/${dishId.dish}`)
 
           return {
             id: response.data.id,
@@ -67,10 +73,12 @@ export function Favorites() {
             category: response.data.category,
             price: response.data.price,
             image: `${api.defaults.baseURL}/files_image/${response.data.image}`,
+            amount: dishId.amount ?? 0,
           }
         })
 
         const dataDishesArray = await Promise.all(promises)
+        dataDishesArray.sort((a, b) => b.amount - a.amount)
         setDataDishes(dataDishesArray)
       } catch (error) {
         console.error(error.message)
@@ -87,7 +95,13 @@ export function Favorites() {
       <Content>
         <Main>
           {flagFavorites ? <ToGoBack /> : null}
-          {flagFavorites ? <h1>Meus favoritos</h1> : null}
+          {flagFavorites ? (
+            <h1>
+              {[USER_ROLES.ADMIN].includes(user.role)
+                ? "Todos favoritos"
+                : "Meus favoritos"}
+            </h1>
+          ) : null}
 
           <ContainerFavorites>
             {flagFavorites ? (

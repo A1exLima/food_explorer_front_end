@@ -8,6 +8,7 @@ import { EditDish } from "../pages/editDish"
 import { Profile } from "../pages/profile"
 import { OrderStatus } from "../pages/orderStatus"
 import { DetailsOrder } from "../pages/detailsOrder"
+import { Favorites } from "../pages/favorites"
 
 import { useAuth } from "../hooks/auth"
 
@@ -34,6 +35,7 @@ export function AdminRoutes() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/order_status" element={<OrderStatus />} />
       <Route path="/details_order/:id" element={<DetailsOrder />} />
+      <Route path="/favorites" element={<Favorites />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )

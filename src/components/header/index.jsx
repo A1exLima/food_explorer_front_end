@@ -21,7 +21,6 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react"
 
 import { api } from "../../services"
 
-
 export default function Header({
   search,
   valueSearch,
@@ -153,12 +152,22 @@ export default function Header({
             <li>
               <Link to="/favorites">Favoritos</Link>
             </li>
-            <li>
-              <Link to="/orders">Carrinho</Link>
-            </li>
-            <li>
-              <Link to="/order_status">Meus Pedidos</Link>
-            </li>
+            {[USER_ROLES.ADMIN].includes(user.role) ? null : (
+              <li>
+                <Link to="/orders">Carrinho</Link>
+              </li>
+            )}
+
+            {[USER_ROLES.ADMIN].includes(user.role) ? (
+              <li>
+                <Link to="/order_status">Pedidos</Link>
+              </li>
+            ) : (
+              <li>
+                <Link to="/order_status">Meus Pedidos</Link>
+              </li>
+            )}
+
             <li onClick={handleClickLogOut}>
               <Link to="/">Sair</Link>
             </li>

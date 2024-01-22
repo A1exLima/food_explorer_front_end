@@ -17,6 +17,24 @@ export const Container = styled.div`
     gap: 0rem;
   }
 
+  .like {
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+
+    > svg {
+      font-size: 2.2rem;
+      color: ${({ theme }) => theme.COLORS.Light500};
+    }
+
+    > p {
+      padding-top: 0.2rem;
+      font-size: 1.8rem;
+      margin-right: 1rem;
+      color: ${({ theme }) => theme.COLORS.Light500};
+    }
+  }
+
   > div {
     display: flex;
     align-items: center;
@@ -64,7 +82,7 @@ export const Container = styled.div`
         -webkit-box-orient: vertical;
       }
 
-      > p {
+      > span {
         font-size: 1.3rem;
         color: ${({ theme }) => theme.COLORS.TintsCarrot200};
       }
