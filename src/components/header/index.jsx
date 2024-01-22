@@ -13,6 +13,7 @@ import { IoMdClose } from "react-icons/io"
 import { SlLogin } from "react-icons/sl"
 
 import { useAuth } from "../../hooks/auth"
+import { USER_ROLES } from "../../utils/roles"
 
 import { useNavigate, Link } from "react-router-dom"
 
@@ -20,7 +21,6 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react"
 
 import { api } from "../../services"
 
-import { USER_ROLES } from "../../utils/roles"
 
 export default function Header({
   search,
@@ -198,14 +198,17 @@ export default function Header({
 
         {[USER_ROLES.ADMIN].includes(user.role) ? (
           <OrderButton
+            $userRole={[USER_ROLES.ADMIN].includes(user.role)}
+            newDish={true}
             iconAndAmount={false}
             type="button"
-            title="Novo Prato"
+            title={"Novo Prato"}
             link="/new_dish"
           />
         ) : user === false ? null : (
           <OrderButton
             iconAndAmount={true}
+            newDish={false}
             type="button"
             title="Carrinho"
             value={quantityOfItemsInTheCart}

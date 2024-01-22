@@ -27,6 +27,15 @@ export const Container = styled.button`
     transform: scale(0.985);
   }
 
+  > svg:first-child {
+    color: ${({ theme }) => theme.COLORS.Light300};
+    font-size: 2.5rem;
+
+    @media (min-width: ${DEVICE_BREAKPOINTS.MD}) {
+      display: none;
+    }
+  }
+
   > p:nth-child(3) {
     &::before {
       content: "(";
@@ -47,7 +56,8 @@ export const Container = styled.button`
     background: transparent;
     justify-content: end;
     width: fit-content;
-    padding: 1.2rem 3.2rem .9rem 0;
+    padding: ${({ $userRole }) =>
+      $userRole ? "1.5rem .5rem 0.9rem 0;" : "1.5rem 1.1rem 0.9rem 0;"};
 
     &:hover {
       transform: scale(0.95);
@@ -59,7 +69,7 @@ export const Container = styled.button`
 
     > p:nth-child(3) {
       position: relative;
-      top: -.9rem;
+      top: -0.9rem;
       left: 1rem;
       background-color: ${({ theme }) => theme.COLORS.TintsTomato300};
       border-radius: 9999rem;
@@ -75,6 +85,10 @@ export const Container = styled.button`
       }
     }
 
+    > svg {
+      color: ${({ theme }) => theme.COLORS.Light300};
+      font-size: 2.6rem;
+    }
     > img {
       display: block;
       position: absolute;
