@@ -49,6 +49,7 @@ function AuthProvider({ children }) {
   function signOut() {
     const user = localStorage.removeItem("@foodExplorer:user")
     const token = localStorage.removeItem("@foodExplorer:token")
+    localStorage.removeItem("@foodExplorer:cartItems")
 
     setData({ user, token })
 

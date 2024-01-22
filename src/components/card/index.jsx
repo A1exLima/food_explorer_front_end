@@ -3,10 +3,9 @@ import { Container } from "./style"
 import Counter from "../../components/counter"
 import IncludeButton from "../../components/includeButton"
 
-import heart from "../../assets/icons/Heart.svg"
 import pencil from "../../assets/icons/pencil.svg"
 
-import { useState } from "react"
+import { useLayoutEffect, useState } from "react"
 
 import { USER_ROLES } from "../../utils/roles"
 
@@ -16,7 +15,15 @@ import { useNavigate } from "react-router-dom"
 
 import { useAuth } from "../../hooks/auth"
 
-export default function Card({ data, onClickCard, quantityOfItemsInTheCart, ...rest }) {
+import { FaHeart } from "react-icons/fa"
+import { FaRegHeart } from "react-icons/fa"
+
+export default function Card({
+  data,
+  onClickCard,
+  quantityOfItemsInTheCart,
+  ...rest
+}) {
   const { user } = useAuth()
   const [dish, setDish] = useState(data)
   const imageDishURL = data.image
@@ -26,10 +33,37 @@ export default function Card({ data, onClickCard, quantityOfItemsInTheCart, ...r
   const navigate = useNavigate()
 
   const [countValue, setCountValue] = useState(1)
+  const [favorites, setFavorites] = useState(false)
 
   function handleClickEditDish(e) {
     e.stopPropagation()
     navigate(`/edit_dish/${dish.id}`)
+  }
+
+  async function handleClickFavorites(e) {
+    e.stopPropagation()
+
+    try {
+      const response = await api.post(`/favorite/${data.id}`)
+      if (response.data) {
+        setFavorites(true)
+      }
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
+
+  async function handleClickNoFavorites(e) {
+    e.stopPropagation()
+
+    try {
+      const response = await api.delete(`/favorite/${data.id}`)
+      if (response.data) {
+        setFavorites(false)
+      }
+    } catch (error) {
+      console.error(error.message)
+    }
   }
 
   function handleClickButton(e) {
@@ -87,12 +121,42 @@ export default function Card({ data, onClickCard, quantityOfItemsInTheCart, ...r
     setCountValue(newValue)
   }
 
+  useLayoutEffect(() => {
+    const checkFavorite = async () => {
+      try {
+        const response = await api.get("/favorite")
+        const usersFavoriteDishes = response.data
+
+        let dishIdFavorites
+
+        for (let i = 0; i < usersFavoriteDishes.length; i++) {
+          if (usersFavoriteDishes[i].dish_id == data.id) {
+            dishIdFavorites = usersFavoriteDishes[i].id
+          }
+        }
+
+        if (dishIdFavorites) {
+          setFavorites(true)
+        } else {
+          setFavorites(false)
+        }
+      } catch (error) {
+        console.error(error.message)
+        setFavorites(false)
+      }
+    }
+
+    checkFavorite()
+  }, [])
+
   return (
     <Container onClick={onClickCard} $user={user} {...rest}>
       {[USER_ROLES.ADMIN].includes(user.role) ? (
         <img src={pencil} alt="Editar Prato" onClick={handleClickEditDish} />
+      ) : favorites ? (
+        <FaHeart className="favorite-red" onClick={handleClickNoFavorites} />
       ) : (
-        <img src={heart} alt="Favoritar Prato" />
+        <FaRegHeart onClick={handleClickFavorites} />
       )}
 
       <img src={imageDishURL} alt="imagem do prato" />

@@ -151,7 +151,7 @@ export default function Header({
               <Link to="/profile">Perfil</Link>
             </li>
             <li>
-              <Link to="">Favoritos</Link>
+              <Link to="/favorites">Favoritos</Link>
             </li>
             <li>
               <Link to="/orders">Carrinho</Link>
@@ -233,7 +233,7 @@ export default function Header({
                   <Link to="/profile">Perfil</Link>
                 </li>
                 <li>
-                  <Link to="">Favoritos</Link>
+                  <Link to="/favorites">Favoritos</Link>
                 </li>
                 <li>
                   <Link to="/order_status">Pedidos</Link>

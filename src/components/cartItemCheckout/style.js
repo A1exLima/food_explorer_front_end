@@ -7,6 +7,7 @@ export const Container = styled.div`
   grid-template-columns: 3.2fr 0.95fr;
   align-items: center;
   gap: 0.6rem;
+  cursor: ${({ $cursorValue }) => ($cursorValue ? "pointer" : "auto")};
 
   padding-bottom: 1rem;
   margin-bottom: 1.5rem;
@@ -52,7 +53,8 @@ export const Container = styled.div`
       font-weight: 300;
 
       > h2 {
-        font-size: 1.5rem;
+        font-size: ${({ $cursorValue }) =>
+          $cursorValue ? "1.8rem" : "1.5rem"};
         font-weight: 500;
         color: ${({ theme }) => theme.COLORS.Light300};
         overflow: hidden;
@@ -68,7 +70,8 @@ export const Container = styled.div`
       }
 
       > p:last-child {
-        font-size: 1.2rem;
+        font-size: ${({ $cursorValue }) =>
+          $cursorValue ? "1.3rem" : "1.2rem"};
         color: ${({ theme }) => theme.COLORS.Light300};
       }
     }
@@ -83,7 +86,20 @@ export const Container = styled.div`
 
     @media (max-width: ${DEVICE_BREAKPOINTS.MLG}) {
       text-align: end;
-      padding-right: .5rem;
+      padding-right: 0.5rem;
+    }
+  }
+
+  .price {
+    text-align: end;
+    font-size: ${({ $cursorValue }) => ($cursorValue ? "1.5rem" : "1.3rem")};
+    font-family: var(--poppins-font-family);
+    font-weight: 500;
+    color: ${({ theme }) => theme.COLORS.Light300};
+
+    @media (max-width: ${DEVICE_BREAKPOINTS.MLG}) {
+      text-align: end;
+      padding-right: 0.5rem;
     }
   }
 `

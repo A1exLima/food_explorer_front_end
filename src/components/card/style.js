@@ -23,6 +23,53 @@ export const Container = styled.div`
   gap: 1.5rem;
   cursor: pointer;
 
+  .favorite-red {
+    color: ${({ theme }) => theme.COLORS.TintsTomato300};
+
+    animation: zoomIn 3s infinite alternate;
+
+    @keyframes zoomIn {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.15);
+      }
+
+      100% {
+        transform: scale(1);
+
+      }
+    }
+  }
+
+  > svg {
+    display: ${({ $user }) => ($user === false ? "none" : "block")};
+    font-size: 2.4rem;
+    position: absolute;
+    z-index: 1;
+    right: 1.8rem;
+    top: 1.6rem;
+
+    animation: zoomIn2 1s;
+
+    @keyframes zoomIn2 {
+      0% {
+        transform: scale(1);
+        opacity: 5%;
+      }
+      50% {
+        transform: scale(1.15);
+        opacity: 50%;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 100%;
+      }
+    }
+  }
+
   > img:nth-child(1) {
     display: ${({ $user }) => ($user === false ? "none" : "block")};
     width: 2.4rem;
@@ -93,23 +140,11 @@ export const Container = styled.div`
   }
 
   > div {
-    //border: 1px solid red;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1.6rem;
-    z-index: 1;
-    //position: absolute;
-
-    > span {
-      //border: 1px solid violet;
-
-    }
-
-    > button {
-      //border: 1px solid violet;
-    }
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
