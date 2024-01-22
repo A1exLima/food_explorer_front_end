@@ -40,12 +40,13 @@ export const Main = styled.main`
   margin-top: 4.2rem;
 
   > figure {
-    height: 100%;
-    margin-top: 6.4rem;
+    margin-top: 3.4rem;
 
     > img {
-      max-width: clamp(26.4rem, 31vw, 39.0105rem);
-      max-height: clamp(26.4rem, 31vw, 38.9rem);
+      width: clamp(26.4rem, 31vw, 38.9rem);
+      height: clamp(26.4rem, 31vw, 38.9rem);
+      object-fit: cover;
+      border-radius: 9999rem;
     }
 
     @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
@@ -70,7 +71,7 @@ export const Main = styled.main`
         font-size: clamp(2.7041rem, 3.2vw, 4rem);
         font-weight: 500;
 
-        @media (max-width: ${DEVICE_BREAKPOINTS.SM}) {
+        @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
           text-align: center;
         }
       }

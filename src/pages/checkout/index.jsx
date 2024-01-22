@@ -49,7 +49,7 @@ export function Checkout() {
   )
 
   const [containerView, setContainerView] = useState(false)
-  const [containerViewPix, setContainerViewPix] = useState(false)
+  const [containerViewPix, setContainerViewPix] = useState(true)
 
   const [cartItems, setCartItems] = useState([])
 

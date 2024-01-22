@@ -132,7 +132,7 @@ export function DetailsOrder() {
 
           <h1>Detalhes do Pedido</h1>
 
-          <Status>
+          <Status $orderCompleted={order.orderCompleted}>
             <h2>Status do pedido</h2>
 
             <div>

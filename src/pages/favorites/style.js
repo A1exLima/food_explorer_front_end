@@ -51,3 +51,56 @@ export const ContainerFavorites = styled.section`
     }
   }
 `
+
+export const NoFavorites = styled.section`
+  height: 100%;
+  margin: -4rem 0 4rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  > h2 {
+    color: ${({ theme }) => theme.COLORS.TintsCake200};
+    font-family: var(--poppins-font-family);
+    font-size: clamp(2.3rem, 5vw, 3.6rem);
+    font-weight: 700;
+    text-align: center;
+  }
+
+  > p {
+    gap: 0.8rem;
+    color: ${({ theme }) => theme.COLORS.Light400};
+    font-family: var(--roboto-font-family);
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    font-weight: 400;
+    text-align: center;
+    padding-bottom: 1.6rem;
+
+    > strong {
+      color: ${({ theme }) => theme.COLORS.TintsCake200};
+    }
+
+    > svg {
+      padding-top: .8rem;
+      font-size: 2.2rem;
+      color: ${({ theme }) => theme.COLORS.TintsTomato300};
+
+      animation: zoomIn 3s infinite alternate;
+
+      @keyframes zoomIn {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.15);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+    }
+  }
+`

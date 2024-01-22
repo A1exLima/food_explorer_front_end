@@ -10,9 +10,18 @@ import { api } from "../../services"
 
 import { useEffect, useState } from "react"
 
+import { useAuth } from "../../hooks/auth"
+import { USER_ROLES } from "../../utils/roles"
+
 export function OrderStatus() {
+  const { user } = useAuth()
   const [orderData, setOrderData] = useState([])
   const [flagOrder, setFlagOrder] = useState(true)
+  const [flagUpdateOrder, setFlagUpdateOrder] = useState(false)
+
+  function handleUpdateOrder(value){
+    setFlagUpdateOrder(value)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +29,6 @@ export function OrderStatus() {
         const response = await api.get("/checkout")
         setOrderData(response.data.reverse())
       } catch (error) {
-        
         if (error) {
           setFlagOrder(false)
         }
@@ -28,7 +36,8 @@ export function OrderStatus() {
     }
 
     fetchData()
-  }, [])
+    setFlagUpdateOrder(false)
+  }, [flagUpdateOrder])
 
   return (
     <Container>
@@ -42,15 +51,26 @@ export function OrderStatus() {
           <ContainerOrderList>
             {flagOrder ? (
               orderData.map((order, index) => (
-                <OrderList key={index} data={order} />
+                <OrderList
+                  key={index}
+                  data={order}
+                  flagUpdateOrder={handleUpdateOrder}
+                />
               ))
             ) : (
               <div className="no-orders">
                 <h1>Você não possui pedidos</h1>
-                <p>
-                  Volte a página home, escolha um prato e{" "}
-                  <span>finalize a compra do seu pedido</span>.
-                </p>
+                {[USER_ROLES.ADMIN].includes(user.role) ? (
+                  <p>
+                    Nenhum cliente <span>finalizou</span> a compra de um pedido.
+                  </p>
+                ) : (
+                  <p>
+                    Volte a página home, escolha um prato e{" "}
+                    <span>finalize a compra do seu pedido</span>.
+                  </p>
+                )}
+
                 <Button title="Voltar a home" to="/" />
               </div>
             )}

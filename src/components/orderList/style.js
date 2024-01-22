@@ -1,9 +1,11 @@
 import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   border: 1px solid ${({ theme }) => theme.COLORS.Dark1000};
   border-radius: 0.8rem;
-  padding: 0 1.5rem 1.5rem;
+  padding: ${({ $user }) => ($user ? "2rem 1.5rem 1.5rem" : "0rem 1.5rem 1.5rem")};
+
   margin-bottom: 2rem;
   user-select: none;
 
@@ -25,7 +27,10 @@ export const Container = styled.div`
         font-family: var(--poppins-font-family);
         font-size: clamp(1.6rem, 4vw, 2.2rem);
         font-weight: 500;
-        color: ${({ theme }) => theme.COLORS.TintsCarrot200};
+        color: ${({ theme, $orderCompleted }) =>
+          $orderCompleted
+            ? theme.COLORS.TintsMint100
+            : theme.COLORS.TintsCarrot200};
         padding-bottom: 0.5rem;
       }
 
@@ -37,8 +42,52 @@ export const Container = styled.div`
       }
     }
 
+    .check-order {
+      .order-finalized {
+        color: ${({ theme }) => theme.COLORS.TintsMint100};
+        white-space: nowrap;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        user-select: none;
+      }
+
+      > div {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        cursor: pointer;
+
+        transition: filter 0.4s ease-in-out;
+
+        &:hover {
+          filter: brightness(70%);
+        }
+
+        > a {
+          color: ${({ theme }) => theme.COLORS.TintsCarrot200};
+          white-space: nowrap;
+          font-size: clamp(1.5rem, 4vw, 2rem);
+          text-align: start;
+        }
+
+        > svg {
+          color: ${({ theme }) => theme.COLORS.TintsCarrot200};
+          font-size: 2.2rem;
+        }
+      }
+
+      > p:last-child {
+        margin-top: 0.5rem;
+      }
+
+      > p:nth-child(2) {
+        font-size: clamp(1.1rem, 2vw, 1.6rem);
+        color: ${({ theme }) => theme.COLORS.TintsCake200};
+      }
+    }
+
     > div:last-child {
-      padding-top: 2.5rem;
+      padding-top: ${({ $user }) => ($user ? "0.7rem" : "2.5rem")};
+
       > p {
         max-width: 18rem;
         font-family: var(--poppins-font-family);

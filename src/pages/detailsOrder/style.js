@@ -64,6 +64,10 @@ export const Status = styled.section`
         font-weight: 500;
         color: ${({ theme }) => theme.COLORS.TintsCarrot200};
         padding-bottom: 0.5rem;
+        color: ${({ theme, $orderCompleted }) =>
+          $orderCompleted
+            ? theme.COLORS.TintsMint100
+            : theme.COLORS.TintsCarrot200};
       }
 
       > p {

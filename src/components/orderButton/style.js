@@ -27,6 +27,16 @@ export const Container = styled.button`
     transform: scale(0.985);
   }
 
+  > p:nth-child(3) {
+    &::before {
+      content: "(";
+    }
+
+    &::after {
+      content: ")";
+    }
+  }
+
   @media (max-width: ${DEVICE_BREAKPOINTS.MLG}) {
     > img {
       display: none;
@@ -34,6 +44,42 @@ export const Container = styled.button`
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
-    display: none;
+    background: transparent;
+    justify-content: end;
+    width: fit-content;
+    padding: 1.2rem 3.2rem .9rem 0;
+
+    &:hover {
+      transform: scale(0.95);
+    }
+
+    > p:nth-child(2) {
+      display: none;
+    }
+
+    > p:nth-child(3) {
+      position: relative;
+      top: -.9rem;
+      left: 1rem;
+      background-color: ${({ theme }) => theme.COLORS.TintsTomato300};
+      border-radius: 9999rem;
+      width: 2rem;
+      height: 2rem;
+
+      &::before {
+        content: none;
+      }
+
+      &::after {
+        content: none;
+      }
+    }
+
+    > img {
+      display: block;
+      position: absolute;
+      width: 2.3rem;
+      height: 2.3rem;
+    }
   }
 `

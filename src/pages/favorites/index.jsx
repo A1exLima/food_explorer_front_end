@@ -1,9 +1,18 @@
-import { Container, Main, Content, ContainerFavorites } from "./style"
+import {
+  Container,
+  Main,
+  Content,
+  ContainerFavorites,
+  NoFavorites,
+} from "./style"
 
 import Header from "../../components/header"
 import Footer from "../../components/footer"
 import ToGoBack from "../../components/toGoBack"
 import CartItem from "../../components/cartItemCheckout"
+import Button from "../../components/button"
+
+import { FaHeart } from "react-icons/fa"
 
 import { api } from "../../services"
 
@@ -14,9 +23,10 @@ import { useNavigate } from "react-router-dom"
 export function Favorites() {
   const [dishFavorites, setDishFavorites] = useState([])
   const [dataDishes, setDataDishes] = useState([])
+  const [flagFavorites, setFlagFavorites] = useState(true)
   const navigate = useNavigate()
 
-  function handleClickCartItem(id){
+  function handleClickCartItem(id) {
     navigate(`/dish/${id}`)
   }
 
@@ -31,8 +41,14 @@ export function Favorites() {
         })
 
         setDishFavorites(dish_favorites)
+
+        if (!usersFavoriteDishes.length) {
+          setFlagFavorites(false)
+        }
       } catch (error) {
-        console.error(error.message)
+        if (error) {
+          console.error(error.message)
+        }
       }
     }
 
@@ -70,17 +86,31 @@ export function Favorites() {
 
       <Content>
         <Main>
-          <ToGoBack />
-          <h1>Meus favoritos</h1>
+          {flagFavorites ? <ToGoBack /> : null}
+          {flagFavorites ? <h1>Meus favoritos</h1> : null}
+
           <ContainerFavorites>
-            {dataDishes &&
+            {flagFavorites ? (
               dataDishes.map((dish, index) => (
                 <CartItem
                   key={index}
                   data={dish}
                   onClick={() => handleClickCartItem(dish.id)}
                 />
-              ))}
+              ))
+            ) : (
+              <NoFavorites>
+                <h2>Nenhum prato favorito foi encontrado</h2>
+                <p>
+                  Clique no botão favoritos <FaHeart /> para{" "}
+                  <strong>Adicionar</strong> a essa página.
+                </p>
+
+                <div>
+                  <Button title="Voltar a home" to="/" />
+                </div>
+              </NoFavorites>
+            )}
           </ContainerFavorites>
         </Main>
       </Content>

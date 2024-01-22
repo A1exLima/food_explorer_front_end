@@ -146,7 +146,9 @@ export default function Card({
       }
     }
 
-    checkFavorite()
+    if(user){
+      checkFavorite()
+    }
   }, [])
 
   return (

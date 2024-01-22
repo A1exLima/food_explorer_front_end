@@ -320,8 +320,8 @@ export function Orders() {
             <EmptyCart>
               <h2>Seu Carrinho está vazio</h2>
               <p>
-                Adicione pratos clicando no botão <strong>Adicionar</strong> na
-                página de pratos.
+                Adicione pratos clicando no botão <strong>Pedir ou Incluir</strong> na
+                página de pratos ou na home.
               </p>
 
               <div>

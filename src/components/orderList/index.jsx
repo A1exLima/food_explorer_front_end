@@ -1,11 +1,19 @@
 import { Container } from "./style"
 import Button from "../button"
+import ButtonText from "../buttonText"
 
 import { api } from "../../services"
 import { useState, useEffect } from "react"
 
-export default function OrderList({ data }) {
+import { useAuth } from "../../hooks/auth"
+import { USER_ROLES } from "../../utils/roles"
+
+import { GiClick } from "react-icons/gi"
+
+export default function OrderList({ data, flagUpdateOrder }) {
+  const { user } = useAuth()
   const [dish, setDish] = useState([])
+  const [userName, setUserName] = useState("")
 
   async function handleItemsOrder() {
     const dishIdAndCount = data.itemsOrder.map((item) => {
@@ -30,17 +38,66 @@ export default function OrderList({ data }) {
     setDish(arrayItems)
   }
 
+  async function handleFinalizedOrder() {
+    try {
+      const response = await api.patch(`/checkout/${data.id}`)
+
+      if (response.data) {
+        flagUpdateOrder(true)
+      }
+    } catch (error) {
+      if (error) {
+        flagUpdateOrder(false)
+      }
+    }
+  }
+
   useEffect(() => {
     handleItemsOrder()
   }, [])
 
+  useEffect(() => {
+    if ([USER_ROLES.ADMIN].includes(user.role)) {
+      const fetchUser = async () => {
+        try {
+          const response = await api.get(`/users/${data.user_id}`)
+          setUserName(response.data.name)
+        } catch (error) {
+          setUserName("")
+        }
+      }
+
+      fetchUser()
+    }
+  }, [])
+
   return (
-    <Container>
+    <Container
+      $orderCompleted={data.orderCompleted}
+      $user={[USER_ROLES.ADMIN].includes(user.role)}
+    >
       <section>
-        <div>
-          <h2>{data.orderCompleted ? "Finalizado" : "Em andamento"}</h2>
-          <p>{`Ref. ${data.id}`}</p>
-        </div>
+        {[USER_ROLES.ADMIN].includes(user.role) ? (
+          <div className="check-order">
+            {data.orderCompleted ? (
+              <>
+                <p className="order-finalized">Pedido finalizado</p>
+              </>
+            ) : (
+              <div onClick={handleFinalizedOrder}>
+                <ButtonText title="Finalizar pedido" />
+                <GiClick />
+              </div>
+            )}
+            <p>{userName}</p>
+            <p>{`Ref. ${data.id}`}</p>
+          </div>
+        ) : (
+          <div>
+            <h2>{data.orderCompleted ? "Finalizado" : "Em andamento"}</h2>
+            <p>{`Ref. ${data.id}`}</p>
+          </div>
+        )}
 
         <div>
           <p>{`Data do pedido: ${data.created_at}`}</p>

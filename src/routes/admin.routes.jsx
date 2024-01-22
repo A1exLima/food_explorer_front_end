@@ -6,6 +6,8 @@ import { Dish } from "../pages/dish"
 import { NewDish } from "../pages/newDish"
 import { EditDish } from "../pages/editDish"
 import { Profile } from "../pages/profile"
+import { OrderStatus } from "../pages/orderStatus"
+import { DetailsOrder } from "../pages/detailsOrder"
 
 import { useAuth } from "../hooks/auth"
 
@@ -30,6 +32,8 @@ export function AdminRoutes() {
       <Route path="/new_dish" element={<NewDish />} />
       <Route path="/edit_dish/:id" element={<EditDish />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/order_status" element={<OrderStatus />} />
+      <Route path="/details_order/:id" element={<DetailsOrder />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )

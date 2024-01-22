@@ -12,10 +12,10 @@ export default function OrderButton({
 }) {
   return (
     <Link to={link}>
-      <Container {...rest}>
+      <Container {...rest} title="carrinho">
         {iconAndAmount && <img src={receipt} alt="Ícone pedidos" />}
-        {title}
-        {iconAndAmount && <p>({value})</p>}
+        <p>{title}</p>
+        {iconAndAmount && <p>{value}</p>}
       </Container>
     </Link>
   )

@@ -118,7 +118,7 @@ export const Content = styled.div`
     width: 100%;
     justify-content: space-between;
     padding: 2.4rem 2rem;
-    gap: ${({ $user }) => ($user === false ? "0rem" : "3.2rem")};
+    gap: ${({ $user }) => ($user === false ? "0rem" : "1rem")};
   }
 `
 
@@ -128,6 +128,7 @@ export const SideBar = styled.div`
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
     display: ${({ $user }) => ($user === false ? "none" : "block")};
+    padding-top: 0.3rem;
   }
 `
 
