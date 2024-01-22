@@ -5,23 +5,32 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
+  justify-content: space-between;
   position: relative;
+`
+export const Content = styled.div`
+  margin-top: 11.4rem;
   overflow-x: hidden;
+
+  > div {
+    width: 100%;
+    padding-top: 2.4rem;
+
+    > div {
+      width: 112rem;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+  }
 `
 
 export const Main = styled.main`
-  width: 100%;
-  margin-top: 11.4rem;
   flex-grow: 1;
-  overflow-x: hidden;
-`
-
-export const Content = styled.div`
+  padding: 0 2rem 2rem 2rem;
   max-width: 112rem;
-  margin: 0 auto;
-  padding: 2.4rem 2rem 0 2rem;
+  margin: 3.2rem auto 0;
+  margin-top: 3.2rem;
 
   > h2 {
     color: ${({ theme }) => theme.COLORS.Light300};
@@ -29,7 +38,7 @@ export const Content = styled.div`
     font-size: clamp(2.2rem, 4vw, 3.2rem);
     font-weight: 500;
     margin-top: 2.2rem;
-    margin-bottom: 3.2rem;
+   
   }
 
   > div:last-child {
@@ -69,7 +78,6 @@ export const ContentForm = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      //border: 1px solid red;
 
       > img {
         cursor: pointer;
@@ -80,7 +88,7 @@ export const ContentForm = styled.div`
       }
 
       @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
-        padding-bottom: 2.4rem;
+        padding-bottom: 1rem;
         > img {
           margin-bottom: 1.8rem;
         }
@@ -280,7 +288,7 @@ export const Form = styled.form`
 
     > textarea {
       width: 100%;
-      height: ${({ $heightValid }) => ($heightValid ? "12.6rem" : "14.6rem")};
+      height: ${({ $heightValid }) => ($heightValid ? "12.6rem" : "23.5rem")};
       padding: 1.4rem;
       border: 0.1rem solid ${({ theme }) => theme.COLORS.Dark800};
       border-radius: 0.8rem;

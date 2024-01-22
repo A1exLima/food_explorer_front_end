@@ -18,6 +18,7 @@ export const Content = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
+  
 
   > div {
     width: 100%;

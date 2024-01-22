@@ -63,11 +63,11 @@ export function NewDish() {
     }
   }
 
-   const handleChangeDish = (e) => {
-     const file = e.target.files[0]
-     setImgDishFile(file)
-     setValidImgDishFile(false)
-   }
+  const handleChangeDish = (e) => {
+    const file = e.target.files[0]
+    setImgDishFile(file)
+    setValidImgDishFile(false)
+  }
 
   const handleNewDish = async () => {
     setWaiting(false)
@@ -144,10 +144,12 @@ export function NewDish() {
 
       <Header />
 
-      <Main>
-        <Content>
+      <Content>
+        <div>
           <ToGoBack />
+        </div>
 
+        <Main>
           <h2>Adicionar Prato</h2>
 
           <Form $heightValid={validImgDishFile}>
@@ -248,10 +250,10 @@ export function NewDish() {
               onClick={waiting ? handleNewDish : null}
             />
           </div>
-        </Content>
-      <Footer />
-      </Main>
-
+        </Main>
+        
+        <Footer />
+      </Content>
     </Container>
   )
 }

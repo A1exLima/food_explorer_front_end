@@ -206,10 +206,12 @@ export function EditDish() {
 
       <Header />
 
-      <Main>
-        <Content>
+      <Content>
+        <div>
           <ToGoBack />
+        </div>
 
+        <Main>
           <h2>Editar Prato</h2>
 
           <ContentForm>
@@ -318,10 +320,10 @@ export function EditDish() {
               onClick={waiting ? handleEditDish : null}
             />
           </div>
-        </Content>
-      <Footer />
-      </Main>
-
+        </Main>
+        
+        <Footer />
+      </Content>
     </Container>
   )
 }

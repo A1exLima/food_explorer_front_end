@@ -4,24 +4,43 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`
-
-export const Main = styled.main`
-  width: 100%;
-  margin-top: 11.4rem;
-  flex-grow: 1;
-  overflow-x: hidden;
+  position: relative;
 
 `
 
 export const Content = styled.div`
+  //border: 1px solid blue;
+  margin-top: 11.4rem;
+  //width: 100%;
+  //flex-grow: 1;
+  
+  //display: flex;
+  //align-items: center;
+  //flex-direction: column;
+  //justify-content: space-between;
+  overflow-x: hidden;
+
+  > div {
+    width: 100%;
+    padding-top: 2.4rem;
+
+    > div {
+      width: 112rem;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+  }
+`
+
+export const Main = styled.main`
+  flex-grow: 1;
+  padding: 0 2rem 2rem 2rem;
   max-width: 112rem;
-  margin: 0 auto;
-  padding: 2.4rem 2rem 0 2rem;
+  margin: 3.2rem auto 0;
+  margin-top: 3.2rem;
 
   > h2 {
     color: ${({ theme }) => theme.COLORS.Light300};
@@ -214,7 +233,7 @@ export const Form = styled.form`
 
     > textarea {
       width: 100%;
-      height: ${({ $heightValid }) => ($heightValid ? "15.2rem" : "18.2rem")};
+      height: ${({ $heightValid }) => ($heightValid ? "15.2rem" : "20rem")};
       padding: 1.4rem;
       border: 0.1rem solid ${({ theme }) => theme.COLORS.Dark800};
       border-radius: 0.8rem;
