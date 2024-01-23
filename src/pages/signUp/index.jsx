@@ -57,7 +57,7 @@ export function SignUp() {
           setAlertMessage(response.data.message)
           setColor(true)
           setTimeout(() => {
-            return navigate("/")
+            return navigate("/login")
           }, messageDisplayTime)
         })
         .catch((error) => {

@@ -42,7 +42,7 @@ export function Favorites() {
         const dish_favorites = usersFavoriteDishes.map((dish) => {
           return {
             dish: dish.dish_id,
-            amount: dish.amount,
+            amount: dish.amount
           }
         })
 
@@ -66,14 +66,14 @@ export function Favorites() {
       try {
         const promises = dishFavorites.map(async (dishId) => {
           const response = await api.get(`/dish/${dishId.dish}`)
-
+          
           return {
             id: response.data.id,
             name: response.data.name,
             category: response.data.category,
             price: response.data.price,
             image: `${api.defaults.baseURL}/files_image/${response.data.image}`,
-            amount: dishId.amount ?? 0,
+            amount: dishId.amount ?? 0
           }
         })
 
@@ -112,11 +112,23 @@ export function Favorites() {
                   onClick={() => handleClickCartItem(dish.id)}
                 />
               ))
+            ) : [USER_ROLES.ADMIN].includes(user.role) ? (
+              <NoFavorites>
+                <h2>Nenhum prato favorito foi encontrado</h2>
+                <p>
+                  Aguarde os clientes clicarem no botão favorito <FaHeart /> para{" "}
+                  <strong>Adicionar</strong> a essa página.
+                </p>
+
+                <div>
+                  <Button title="Voltar a home" to="/" />
+                </div>
+              </NoFavorites>
             ) : (
               <NoFavorites>
                 <h2>Nenhum prato favorito foi encontrado</h2>
                 <p>
-                  Clique no botão favoritos <FaHeart /> para{" "}
+                  Clique no botão favorito <FaHeart /> para{" "}
                   <strong>Adicionar</strong> a essa página.
                 </p>
 
