@@ -141,6 +141,9 @@ export function Home() {
                       {dishesDessert.map((dish) => (
                         <SplideSlide key={String(dish.id)}>
                           <Card
+                            quantityOfItemsInTheCart={
+                              handleQuantityOfItemsInTheCart
+                            }
                             data={dish}
                             onClickCard={() => {
                               handleCard(dish.id)
@@ -168,6 +171,9 @@ export function Home() {
                       {dishesDrink.map((dish) => (
                         <SplideSlide key={String(dish.id)}>
                           <Card
+                            quantityOfItemsInTheCart={
+                              handleQuantityOfItemsInTheCart
+                            }
                             data={dish}
                             onClickCard={() => {
                               handleCard(dish.id)
