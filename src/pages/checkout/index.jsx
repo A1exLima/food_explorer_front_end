@@ -122,7 +122,7 @@ export function Checkout() {
 
     setTimeout(() => {
       setLoadingPix(false)
-    }, 500)
+    }, 1000)
   }
 
   function handleCheckBoxEconomicalShipping() {
@@ -273,8 +273,10 @@ export function Checkout() {
 
       try {
         const response = await api.post("/checkout", finalizedOrderForm)
-        setColor(true)
-        setAlertMessage("Pedido finalizado com sucesso")
+        if (response.data) {
+          setColor(true)
+          setAlertMessage("Pedido finalizado com sucesso")
+        }
 
         localStorage.removeItem("@foodExplorer:cartItems")
         localStorage.removeItem("@foodExplorer:shippingValue")
@@ -285,7 +287,7 @@ export function Checkout() {
           setColor(false)
           setAlertMessage(error.response.data.message)
           authorizeRedirection = false
-        }else{
+        } else {
           setColor(false)
           setAlertMessage("Não foi possível finalizar o pedido")
         }
@@ -316,8 +318,11 @@ export function Checkout() {
 
     try {
       const response = await api.post("/checkout", finalizedOrderForm)
-      setColor(true)
-      setAlertMessage("Pedido finalizado com sucesso")
+      
+      if(response.data){
+        setColor(true)
+        setAlertMessage("Pedido finalizado com sucesso")
+      }
       localStorage.removeItem("@foodExplorer:cartItems")
       localStorage.removeItem("@foodExplorer:shippingValue")
     } catch (error) {

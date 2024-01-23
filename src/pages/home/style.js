@@ -34,6 +34,21 @@ export const Main = styled.main`
     align-items: center;
     justify-content: center;
 
+    > svg {
+      font-size: 7rem;
+      animation: rotate 0.7s linear infinite;
+      color: ${({ theme }) => theme.COLORS.Light700};
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
     > img {
       width: 11.8rem;
     }

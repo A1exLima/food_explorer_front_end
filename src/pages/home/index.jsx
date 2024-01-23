@@ -16,6 +16,8 @@ import Card from "../../components/card"
 import notFound from "../../assets/icons/notFound.svg"
 import cookieFruit from "../../assets/images/cookieFruit.png"
 
+import { AiOutlineLoading3Quarters } from "react-icons/ai"
+
 export function Home() {
   const navigate = useNavigate()
 
@@ -27,6 +29,8 @@ export function Home() {
   const [dishesDrink, setDishesDrink] = useState([])
 
   const [quantityOfItemsInTheCart, setQuantityOfItemsInTheCart] = useState(0)
+
+  const [loading, setLoading] = useState(false)
 
   const handleSearchInputChange = (value) => {
     setSearchValue(value)
@@ -50,6 +54,7 @@ export function Home() {
   }
 
   useEffect(() => {
+    setLoading(true)
     const fetchDish = async () => {
       const response = await api.get(
         `/dish?name=${searchValue}&category=${category}`
@@ -67,6 +72,10 @@ export function Home() {
     }
 
     fetchDish()
+
+    setTimeout(() => {
+      setLoading(false)
+    }, 500)
   }, [searchValue, category])
 
   return (
@@ -86,10 +95,13 @@ export function Home() {
               <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
             </div>
           </Presentation>
-
-          {!dishesSnack.length &&
-          !dishesDessert.length &&
-          !dishesDrink.length ? (
+          {loading ? (
+            <div className="notFound">
+              <AiOutlineLoading3Quarters />
+            </div>
+          ) : !dishesSnack.length &&
+            !dishesDessert.length &&
+            !dishesDrink.length ? (
             <div className="notFound">
               <img src={notFound} alt="Não encontrado" />
               <p>pratos não encontrados</p>
@@ -97,93 +109,87 @@ export function Home() {
           ) : (
             <>
               {dishesSnack.length ? (
-                <>
-                  <Section title="Refeições">
-                    <Splide
-                      options={{
-                        fixedWidth: "fit-content",
-                        gap: "2.7rem",
-                        rewind: false,
-                        pagination: false,
-                      }}
-                      aria-label="dish carousel"
-                    >
-                      {dishesSnack.map((dish) => (
-                        <SplideSlide key={String(dish.id)}>
-                          <Card
-                            quantityOfItemsInTheCart={
-                              handleQuantityOfItemsInTheCart
-                            }
-                            data={dish}
-                            onClickCard={() => {
-                              handleCard(dish.id)
-                            }}
-                          />
-                        </SplideSlide>
-                      ))}
-                    </Splide>
-                  </Section>
-                </>
+                <Section title="Refeições">
+                  <Splide
+                    options={{
+                      fixedWidth: "fit-content",
+                      gap: "2.7rem",
+                      rewind: false,
+                      pagination: false,
+                    }}
+                    aria-label="dish carousel"
+                  >
+                    {dishesSnack.map((dish) => (
+                      <SplideSlide key={String(dish.id)}>
+                        <Card
+                          quantityOfItemsInTheCart={
+                            handleQuantityOfItemsInTheCart
+                          }
+                          data={dish}
+                          onClickCard={() => {
+                            handleCard(dish.id)
+                          }}
+                        />
+                      </SplideSlide>
+                    ))}
+                  </Splide>
+                </Section>
               ) : null}
 
               {dishesDessert.length ? (
-                <>
-                  <Section title="Sobremesas">
-                    <Splide
-                      options={{
-                        fixedWidth: "fit-content",
-                        gap: "2.7rem",
-                        rewind: false,
-                        pagination: false,
-                      }}
-                      aria-label="dish carousel"
-                    >
-                      {dishesDessert.map((dish) => (
-                        <SplideSlide key={String(dish.id)}>
-                          <Card
-                            quantityOfItemsInTheCart={
-                              handleQuantityOfItemsInTheCart
-                            }
-                            data={dish}
-                            onClickCard={() => {
-                              handleCard(dish.id)
-                            }}
-                          />
-                        </SplideSlide>
-                      ))}
-                    </Splide>
-                  </Section>
-                </>
+                <Section title="Sobremesas">
+                  <Splide
+                    options={{
+                      fixedWidth: "fit-content",
+                      gap: "2.7rem",
+                      rewind: false,
+                      pagination: false,
+                    }}
+                    aria-label="dish carousel"
+                  >
+                    {dishesDessert.map((dish) => (
+                      <SplideSlide key={String(dish.id)}>
+                        <Card
+                          quantityOfItemsInTheCart={
+                            handleQuantityOfItemsInTheCart
+                          }
+                          data={dish}
+                          onClickCard={() => {
+                            handleCard(dish.id)
+                          }}
+                        />
+                      </SplideSlide>
+                    ))}
+                  </Splide>
+                </Section>
               ) : null}
 
               {dishesDrink.length ? (
-                <>
-                  <Section title="Bebidas">
-                    <Splide
-                      options={{
-                        fixedWidth: "fit-content",
-                        gap: "2.7rem",
-                        rewind: false,
-                        pagination: false,
-                      }}
-                      aria-label="dish carousel"
-                    >
-                      {dishesDrink.map((dish) => (
-                        <SplideSlide key={String(dish.id)}>
-                          <Card
-                            quantityOfItemsInTheCart={
-                              handleQuantityOfItemsInTheCart
-                            }
-                            data={dish}
-                            onClickCard={() => {
-                              handleCard(dish.id)
-                            }}
-                          />
-                        </SplideSlide>
-                      ))}
-                    </Splide>
-                  </Section>
-                </>
+                <Section title="Bebidas">
+                  <Splide
+                    options={{
+                      fixedWidth: "fit-content",
+                      gap: "2.7rem",
+                      rewind: false,
+                      pagination: false,
+                    }}
+                    aria-label="dish carousel"
+                  >
+                    {dishesDrink.map((dish) => (
+                      <SplideSlide key={String(dish.id)}>
+                        <Card
+                          quantityOfItemsInTheCart={
+                            handleQuantityOfItemsInTheCart
+                          }
+                          data={dish}
+                          onClickCard={() => {
+                            handleCard(dish.id)
+                          }}
+                        />
+                      </SplideSlide>
+                    ))}
+                  </Splide>
+                </Section>
               ) : null}
             </>
           )}
