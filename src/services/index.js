@@ -1,7 +1,8 @@
 import axios from "axios"
 
 export const api = axios.create({
-  baseURL: "http://localhost:3310"
+  baseURL: "https://yearning-junie-devjunior.koyeb.app"
 })
 
 //https://yearning-junie-devjunior.koyeb.app
+//http://localhost:3310
