@@ -12,7 +12,7 @@ export const Container = styled.div`
     top: clamp(4rem, 4vw, 6.8rem);
     left: 0;
     z-index: 1;
-    width: 5.4rem;
+    width: 3.4rem;
     height: 92%;
     transform: scaleX(-1);
     background: ${({ theme }) => theme.COLORS.Gradients100};
@@ -23,7 +23,7 @@ export const Container = styled.div`
     top: clamp(4rem, 4vw, 6.8rem);
     right: 0rem;
     z-index: 0;
-    width: 5.4rem;
+    width: 2.4rem;
     height: 92%;
     background: ${({ theme }) => theme.COLORS.Gradients50};
   }

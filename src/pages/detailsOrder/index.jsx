@@ -20,19 +20,26 @@ import { useParams } from "react-router-dom"
 
 import { useEffect, useLayoutEffect, useState } from "react"
 
+import { useAuth } from "../../hooks/auth"
+import { USER_ROLES } from "../../utils/roles"
+
 export function DetailsOrder() {
+  const { user } = useAuth()
   const params = useParams()
   const { id } = params
 
   const [order, setOrder] = useState([])
   const [itemsOrder, setItemsOrder] = useState([])
   const [dish, setDish] = useState([])
+  const [userIdWithinThePurchaseOrder, setUserIdWithinThePurchaseOrder] =
+    useState("")
 
   const [totalPriceOfProducts, setTotalPriceOfProducts] = useState(0)
   const [discount, setDiscount] = useState(0)
   const [shipping, setShipping] = useState(0)
   const [totalOrderPrice, setTotalOrderPrice] = useState(0)
   const [address, setAddress] = useState({})
+  const [dataUser, setDataUser] = useState({})
 
   async function handleItemsOrder() {
     const dishIdAndCount = itemsOrder.map((item) => {
@@ -65,6 +72,7 @@ export function DetailsOrder() {
       const response = await api.get(`/checkout/${id}`)
       setOrder(response.data.order[0])
       setItemsOrder(response.data.itemsOrder)
+      setUserIdWithinThePurchaseOrder(response.data.order[0].user_id)
     }
 
     getOrderAndItemsOrderById()
@@ -113,14 +121,34 @@ export function DetailsOrder() {
     setTotalOrderPrice(total)
   }, [totalPriceOfProducts, discount, shipping])
 
-  useEffect(() => {
-    const address = async () => {
-      const response = await api.get(`/address/`)
-      setAddress(response.data)
+  useLayoutEffect(() => {
+    const fetchAddress = async () => {
+      try {
+        const response = await api.get(
+          `/address/${userIdWithinThePurchaseOrder}`
+        )
+        setAddress(response.data)
+      } catch (error) {
+        console.error(error.response.data.error, error.response.data.message)
+      }
     }
 
-    address()
-  }, [])
+    fetchAddress()
+  }, [userIdWithinThePurchaseOrder])
+
+  useLayoutEffect(() => {
+    const fetchDataUser = async () => {
+      try {
+        const response = await api.get(`/users/${userIdWithinThePurchaseOrder}`)
+        setDataUser(response.data)
+      } catch (error) {
+        console.error(error.response.data.error, error.response.data.message)
+      }
+    }
+    if ([USER_ROLES.ADMIN].includes(user.role)) {
+      fetchDataUser()
+    }
+  }, [userIdWithinThePurchaseOrder])
 
   return (
     <Container>
@@ -140,6 +168,8 @@ export function DetailsOrder() {
                 <h2>
                   {order.orderCompleted === 0 ? "Em andamento" : "Finalizado"}
                 </h2>
+                <p>{dataUser.name}</p>
+                <a href={`mailto:${dataUser.email}`}>{dataUser.email}</a>
                 <p>{`Ref. ${order.id}`}</p>
               </div>
 

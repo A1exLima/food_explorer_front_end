@@ -70,11 +70,25 @@ export const Status = styled.section`
             : theme.COLORS.TintsCarrot200};
       }
 
-      > p {
+      > p,
+      a {
         font-family: var(--poppins-font-family);
         font-size: 1.5rem;
         font-weight: 400;
         color: ${({ theme }) => theme.COLORS.Light300};
+      }
+
+      > p:nth-child(2), a {
+        font-size: clamp(1.3rem, 3vw, 1.4rem);
+      }
+
+      > a {
+        color: ${({ theme }) => theme.COLORS.Light300};
+        transition: color 0.4s ease-in-out;
+
+        &:hover {
+          color: ${({ theme }) => theme.COLORS.TintsCake200};
+        }
       }
     }
 

@@ -12,15 +12,7 @@ export const Container = styled.div`
 `
 
 export const Content = styled.div`
-  //border: 1px solid blue;
   margin-top: 11.4rem;
-  //width: 100%;
-  //flex-grow: 1;
-  
-  //display: flex;
-  //align-items: center;
-  //flex-direction: column;
-  //justify-content: space-between;
   overflow-x: hidden;
 
   > div {

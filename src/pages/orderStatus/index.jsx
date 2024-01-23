@@ -19,7 +19,7 @@ export function OrderStatus() {
   const [flagOrder, setFlagOrder] = useState(true)
   const [flagUpdateOrder, setFlagUpdateOrder] = useState(false)
 
-  function handleUpdateOrder(value){
+  function handleUpdateOrder(value) {
     setFlagUpdateOrder(value)
   }
 
@@ -46,7 +46,13 @@ export function OrderStatus() {
       <Content>
         <Main>
           {flagOrder ? <ToGoBack /> : null}
-          {flagOrder ? <h1>Meus Pedidos</h1> : null}
+          {flagOrder ? (
+            <h1>
+              {[USER_ROLES.ADMIN].includes(user.role)
+                ? "Todos os pedidos"
+                : "Meus pedidos"}
+            </h1>
+          ) : null}
 
           <ContainerOrderList>
             {flagOrder ? (

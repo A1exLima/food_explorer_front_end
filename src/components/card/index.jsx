@@ -29,7 +29,6 @@ export default function Card({
   const imageDishURL = data.image
     ? `${api.defaults.baseURL}/files_image/${data.image}`
     : null
-  const priceFormatted = data.price.toFixed(2).replace(".", ",")
   const navigate = useNavigate()
 
   const [countValue, setCountValue] = useState(1)
@@ -166,7 +165,7 @@ export default function Card({
       <h2>{`${dish.name} >`}</h2>
 
       <p>{dish.description}</p>
-      <p>R${priceFormatted}</p>
+      <p>{`R$${(data.price * countValue).toFixed(2).replace(".", ",")}`}</p>
 
       {[USER_ROLES.ADMIN].includes(user.role) ? null : user === false ? null : (
         <div>
