@@ -56,6 +56,7 @@ export const Brand = styled.div`
   display: flex;
   align-items: center;
   gap: clamp(0.5rem, 0.5vw, 1rem);
+  padding-bottom: .2rem;
 
   > img {
     width: clamp(2rem, 3vw, 3rem);

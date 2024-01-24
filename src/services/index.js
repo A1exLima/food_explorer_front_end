@@ -6,5 +6,3 @@ export const api = axios.create({
 
 //https://yearning-junie-devjunior.koyeb.app
 //http://localhost:3310
-
-
