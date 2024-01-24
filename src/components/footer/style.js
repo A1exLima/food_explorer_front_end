@@ -14,18 +14,35 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: .5rem;
+  gap: 0.5rem;
   margin: 0 auto;
 
-  > p {
+  > div:last-child {
     width: 100%;
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     text-align: center;
-    color: ${({ theme }) => theme.COLORS.Light200};
-    font-family: var(--roboto-font-family);
-    font-size: clamp(1.1rem, 2.6vw, 1.4rem);
-    font-weight: 400;
+    gap: 0.5rem;
+
+    > p {
+      color: ${({ theme }) => theme.COLORS.Light200};
+      font-family: var(--roboto-font-family);
+      font-size: clamp(1.1rem, 2.6vw, 1.4rem);
+      font-weight: 400;
+      user-select: none;
+    }
+
+    > a {
+      display: flex;
+      align-items: center;
+      padding-bottom: .3rem;
+
+      > svg {
+        color: ${({ theme }) => theme.COLORS.Light200};
+        font-size: 1.6rem;
+      }
+    }
   }
 
   @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
@@ -34,10 +51,11 @@ export const Content = styled.div`
 `
 
 export const Brand = styled.div`
+  user-select: none;
   width: fit-content;
   display: flex;
   align-items: center;
-  gap: clamp(.5rem, .5vw, 1rem);
+  gap: clamp(0.5rem, 0.5vw, 1rem);
 
   > img {
     width: clamp(2rem, 3vw, 3rem);

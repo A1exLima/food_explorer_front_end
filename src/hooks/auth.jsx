@@ -30,7 +30,15 @@ function AuthProvider({ children }) {
         setColor(true)
       }
 
-      localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
+      const userData = {
+        id: response.data.user.id,
+        name: response.data.user.name,
+        email: response.data.user.email,
+        avatar: response.data.user.avatar,
+        role: response.data.user.role,
+      }
+
+      localStorage.setItem("@foodExplorer:user", JSON.stringify(userData))
       localStorage.setItem("@foodExplorer:token", token)
 
       setTimeout(() => {
