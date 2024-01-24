@@ -75,7 +75,7 @@ export function Home() {
 
     setTimeout(() => {
       setLoading(false)
-    }, 1000)
+    }, 500)
   }, [searchValue, category])
 
   return (
