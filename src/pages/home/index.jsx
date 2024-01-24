@@ -30,7 +30,7 @@ export function Home() {
 
   const [quantityOfItemsInTheCart, setQuantityOfItemsInTheCart] = useState(0)
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const handleSearchInputChange = (value) => {
     setSearchValue(value)
