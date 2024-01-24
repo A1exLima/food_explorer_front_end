@@ -4,6 +4,7 @@ export const Container = styled.div`
   width: fit-content;
   display: flex;
   align-items: center;
+  user-select: none;
   cursor: pointer;
 
   color: ${({ theme }) => theme.COLORS.Light300};
