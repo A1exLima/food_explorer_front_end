@@ -66,16 +66,16 @@ export function Home() {
       )
       const drink = response.data.filter((dish) => dish.category === "Bebida")
 
+      setTimeout(() => {
+        setLoading(false)
+      }, 500)
+
       setDishesSnack(snack)
       setDishesDessert(dessert)
       setDishesDrink(drink)
     }
 
     fetchDish()
-
-    setTimeout(() => {
-      setLoading(false)
-    }, 500)
   }, [searchValue, category])
 
   return (
