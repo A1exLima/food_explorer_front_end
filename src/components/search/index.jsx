@@ -62,7 +62,7 @@ export default function Search({
       $openSearch={$openSearch}
     >
       <div>
-        <FaMagnifyingGlass onClick={$toAppearCloseButton ? research : null} />
+        <FaMagnifyingGlass onClick={research} />
       </div>
       <input {...rest} onKeyDown={handleKeyDown} />
 
@@ -71,7 +71,7 @@ export default function Search({
       <Category $hideCategoryMenu={hideCategoryMenu}>
         <FaTags onClick={handleCategory} />
 
-        <div>
+        <div >
           <label className="checkbox-container" onClick={handleCheckBoxSnack}>
             <input type="checkbox" />
             <span className="checkmark"></span>
