@@ -38,7 +38,6 @@ export const Container = styled.div`
 
       100% {
         transform: scale(1);
-
       }
     }
   }
@@ -102,13 +101,16 @@ export const Container = styled.div`
 
   > h2 {
     max-width: clamp(13.5rem, 23.5vw, 25.5rem);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     color: ${({ theme }) => theme.COLORS.Light300};
     font-family: var(--poppins-font-family);
     font-size: clamp(1.4rem, 2.2vw, 2.4rem);
     font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-align: center;
 
     @media (max-width: ${DEVICE_BREAKPOINTS.MD}) {
       white-space: wrap;

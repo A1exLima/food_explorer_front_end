@@ -92,16 +92,14 @@ export function Home() {
     setAlertMessage("")
 
     if (quantityOfItemsInTheCart !== 0) {
-      setTimeout(() => {
-        setColor(true)
-        setAlertMessage("Pedido adicionado ao carrinho")
-      }, 1000)
+      setColor(true)
+      setAlertMessage("Pedido adicionado ao carrinho")
     }
 
     setTimeout(() => {
       setColor(false)
       setAlertMessage("")
-    }, messageDisplayTime + 1250)
+    }, messageDisplayTime + 250)
   }, [quantityOfItemsInTheCart])
 
   return (
