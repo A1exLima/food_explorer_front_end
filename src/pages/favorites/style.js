@@ -1,5 +1,4 @@
 import { styled } from "styled-components"
-import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 
 export const Container = styled.div`
   width: 100%;
@@ -9,6 +8,32 @@ export const Container = styled.div`
   justify-content: space-between;
   overflow-x: visible;
   position: relative;
+
+  .notFound {
+    width: 100%;
+    height: 100%;
+    margin-top: 11.4rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    > svg {
+      font-size: 7rem;
+      animation: rotate 0.7s linear infinite;
+      color: ${({ theme }) => theme.COLORS.Light700};
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
 `
 
 export const Content = styled.div`
@@ -50,6 +75,7 @@ export const ContainerFavorites = styled.section`
       border: 1px solid ${({ theme }) => theme.COLORS.TintsCarrot200};
     }
   }
+
 `
 
 export const NoFavorites = styled.section`

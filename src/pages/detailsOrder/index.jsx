@@ -23,6 +23,8 @@ import { useEffect, useLayoutEffect, useState } from "react"
 import { useAuth } from "../../hooks/auth"
 import { USER_ROLES } from "../../utils/roles"
 
+import { AiOutlineLoading3Quarters } from "react-icons/ai"
+
 export function DetailsOrder() {
   const { user } = useAuth()
   const params = useParams()
@@ -40,6 +42,8 @@ export function DetailsOrder() {
   const [totalOrderPrice, setTotalOrderPrice] = useState(0)
   const [address, setAddress] = useState({})
   const [dataUser, setDataUser] = useState({})
+
+  const [loading, setLoading] = useState(true)
 
   async function handleItemsOrder() {
     const dishIdAndCount = itemsOrder.map((item) => {
@@ -68,8 +72,14 @@ export function DetailsOrder() {
   }
 
   useEffect(() => {
+    setLoading(true)
     const getOrderAndItemsOrderById = async () => {
       const response = await api.get(`/checkout/${id}`)
+
+      setTimeout(() => {
+        setLoading(false)
+      }, 500)
+      
       setOrder(response.data.order[0])
       setItemsOrder(response.data.itemsOrder)
       setUserIdWithinThePurchaseOrder(response.data.order[0].user_id)
@@ -140,6 +150,7 @@ export function DetailsOrder() {
     const fetchDataUser = async () => {
       try {
         const response = await api.get(`/users/${userIdWithinThePurchaseOrder}`)
+
         setDataUser(response.data)
       } catch (error) {
         console.error(error.response.data.error, error.response.data.message)
@@ -154,104 +165,110 @@ export function DetailsOrder() {
     <Container>
       <Header />
 
-      <Content>
-        <Main>
-          <ToGoBack />
+      {loading ? (
+        <div className="notFound">
+          <AiOutlineLoading3Quarters />
+        </div>
+      ) : (
+        <Content>
+          <Main>
+            <ToGoBack />
 
-          <h1>Detalhes do Pedido</h1>
+            <h1>Detalhes do Pedido</h1>
 
-          <Status $orderCompleted={order.orderCompleted}>
-            <h2>Status do pedido</h2>
-
-            <div>
-              <div>
-                <h2>
-                  {order.orderCompleted === 0 ? "Em andamento" : "Finalizado"}
-                </h2>
-                <p>{dataUser.name}</p>
-                <a href={`mailto:${dataUser.email}`}>{dataUser.email}</a>
-                <p>{`Ref. ${order.id}`}</p>
-              </div>
+            <Status $orderCompleted={order.orderCompleted}>
+              <h2>Status do pedido</h2>
 
               <div>
-                <p>
-                  <span>Data do pedido: </span>
-                  {order.created_at}
-                </p>
+                <div>
+                  <h2>
+                    {order.orderCompleted === 0 ? "Em andamento" : "Finalizado"}
+                  </h2>
+                  <p>{dataUser.name}</p>
+                  <a href={`mailto:${dataUser.email}`}>{dataUser.email}</a>
+                  <p>{`Ref. ${order.id}`}</p>
+                </div>
+
+                <div>
+                  <p>
+                    <span>Data do pedido: </span>
+                    {order.created_at}
+                  </p>
+                </div>
               </div>
-            </div>
-          </Status>
+            </Status>
 
-          <ContentItems>
-            <h2>Produtos comprados</h2>
+            <ContentItems>
+              <h2>Produtos comprados</h2>
 
-            {dish &&
-              dish.map((dish, index) => <CartItem key={index} data={dish} />)}
-          </ContentItems>
+              {dish &&
+                dish.map((dish, index) => <CartItem key={index} data={dish} />)}
+            </ContentItems>
 
-          <ContentOrderSummaryAndDeliveryAddress>
-            <DeliveryAddress>
-              <h2>Endereço de entrega</h2>
+            <ContentOrderSummaryAndDeliveryAddress>
+              <DeliveryAddress>
+                <h2>Endereço de entrega</h2>
 
-              <p>{`${address.city} - ${address.country}`}</p>
-              <p>{address.cep}</p>
-              <p>{`${address.street}, ${address.number}`}</p>
-              <p>{address.complement}</p>
-              <p>{address.district}</p>
-            </DeliveryAddress>
+                <p>{`${address.city} - ${address.country}`}</p>
+                <p>{address.cep}</p>
+                <p>{`${address.street}, ${address.number}`}</p>
+                <p>{address.complement}</p>
+                <p>{address.district}</p>
+              </DeliveryAddress>
 
-            <OrderSummary>
-              <h2>Resumo do pedido</h2>
+              <OrderSummary>
+                <h2>Resumo do pedido</h2>
 
-              <div className="credit-card">
-                <p>
-                  Pagamento{" "}
-                  {order.paymentType === "creditCard"
-                    ? "(Cartão de crédito)"
-                    : "(Pix)"}
-                </p>
-                <p>{`${
-                  order.paymentType === "creditCard"
-                    ? order.numberInstallments
-                    : "1"
-                } x R$${
-                  order.paymentType === "creditCard"
-                    ? (totalOrderPrice / order.numberInstallments)
-                        .toFixed(2)
-                        .replace(".", ",")
-                    : totalOrderPrice.toFixed(2).replace(".", ",")
-                }`}</p>
-              </div>
+                <div className="credit-card">
+                  <p>
+                    Pagamento{" "}
+                    {order.paymentType === "creditCard"
+                      ? "(Cartão de crédito)"
+                      : "(Pix)"}
+                  </p>
+                  <p>{`${
+                    order.paymentType === "creditCard"
+                      ? order.numberInstallments
+                      : "1"
+                  } x R$${
+                    order.paymentType === "creditCard"
+                      ? (totalOrderPrice / order.numberInstallments)
+                          .toFixed(2)
+                          .replace(".", ",")
+                      : totalOrderPrice.toFixed(2).replace(".", ",")
+                  }`}</p>
+                </div>
 
-              <div>
-                <p>Produtos</p>
-                <p>{`R$${totalPriceOfProducts
-                  .toFixed(2)
-                  .replace(".", ",")}`}</p>
-              </div>
-
-              <div>
-                <p>{`Desconto (${discount * 100}%)`}</p>
-                <p>
-                  {`- R$${(totalPriceOfProducts + shipping - totalOrderPrice)
+                <div>
+                  <p>Produtos</p>
+                  <p>{`R$${totalPriceOfProducts
                     .toFixed(2)
-                    .replace(".", ",")}`}
-                </p>
-              </div>
+                    .replace(".", ",")}`}</p>
+                </div>
 
-              <div>
-                <p>Frete {shipping > 0 ? "(econômico)" : "(grátis)"}</p>
-                <p>{`R$${shipping.toFixed(2).replace(".", ",")}`}</p>
-              </div>
+                <div>
+                  <p>{`Desconto (${discount * 100}%)`}</p>
+                  <p>
+                    {`- R$${(totalPriceOfProducts + shipping - totalOrderPrice)
+                      .toFixed(2)
+                      .replace(".", ",")}`}
+                  </p>
+                </div>
 
-              <div>
-                <p>Total do pedido</p>
-                <p>{`R$${totalOrderPrice.toFixed(2).replace(".", ",")}`}</p>
-              </div>
-            </OrderSummary>
-          </ContentOrderSummaryAndDeliveryAddress>
-        </Main>
-      </Content>
+                <div>
+                  <p>Frete {shipping > 0 ? "(econômico)" : "(grátis)"}</p>
+                  <p>{`R$${shipping.toFixed(2).replace(".", ",")}`}</p>
+                </div>
+
+                <div>
+                  <p>Total do pedido</p>
+                  <p>{`R$${totalOrderPrice.toFixed(2).replace(".", ",")}`}</p>
+                </div>
+              </OrderSummary>
+            </ContentOrderSummaryAndDeliveryAddress>
+          </Main>
+        </Content>
+      )}
       <Footer />
     </Container>
   )

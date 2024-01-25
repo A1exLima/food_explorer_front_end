@@ -13,6 +13,7 @@ import CartItem from "../../components/cartItemCheckout"
 import Button from "../../components/button"
 
 import { FaHeart } from "react-icons/fa"
+import { AiOutlineLoading3Quarters } from "react-icons/ai"
 
 import { api } from "../../services"
 
@@ -24,6 +25,8 @@ import { useNavigate } from "react-router-dom"
 
 export function Favorites() {
   const { user } = useAuth()
+
+  const [loading, setLoading] = useState(true)
 
   const [dishFavorites, setDishFavorites] = useState([])
   const [dataDishes, setDataDishes] = useState([])
@@ -42,7 +45,7 @@ export function Favorites() {
         const dish_favorites = usersFavoriteDishes.map((dish) => {
           return {
             dish: dish.dish_id,
-            amount: dish.amount
+            amount: dish.amount,
           }
         })
 
@@ -62,23 +65,29 @@ export function Favorites() {
   }, [])
 
   useEffect(() => {
+    setLoading(true)
     const getDataDish = async () => {
       try {
         const promises = dishFavorites.map(async (dishId) => {
           const response = await api.get(`/dish/${dishId.dish}`)
-          
+
           return {
             id: response.data.id,
             name: response.data.name,
             category: response.data.category,
             price: response.data.price,
             image: `${api.defaults.baseURL}/files_image/${response.data.image}`,
-            amount: dishId.amount ?? 0
+            amount: dishId.amount ?? 0,
           }
         })
 
         const dataDishesArray = await Promise.all(promises)
         dataDishesArray.sort((a, b) => b.amount - a.amount)
+
+        setTimeout(() => {
+          setLoading(false)
+        }, 500)
+
         setDataDishes(dataDishesArray)
       } catch (error) {
         console.error(error.message)
@@ -91,55 +100,60 @@ export function Favorites() {
   return (
     <Container>
       <Header />
-
-      <Content>
-        <Main>
-          {flagFavorites ? <ToGoBack /> : null}
-          {flagFavorites ? (
-            <h1>
-              {[USER_ROLES.ADMIN].includes(user.role)
-                ? "Todos favoritos"
-                : "Meus favoritos"}
-            </h1>
-          ) : null}
-
-          <ContainerFavorites>
+      {loading ? (
+        <div className="notFound">
+          <AiOutlineLoading3Quarters />
+        </div>
+      ) : (
+        <Content>
+          <Main>
+            {flagFavorites ? <ToGoBack /> : null}
             {flagFavorites ? (
-              dataDishes.map((dish, index) => (
-                <CartItem
-                  key={index}
-                  data={dish}
-                  onClick={() => handleClickCartItem(dish.id)}
-                />
-              ))
-            ) : [USER_ROLES.ADMIN].includes(user.role) ? (
-              <NoFavorites>
-                <h2>Nenhum prato favorito foi encontrado</h2>
-                <p>
-                  Aguarde os clientes clicarem no botão favorito <FaHeart /> para{" "}
-                  <strong>Adicionar</strong> a essa página.
-                </p>
+              <h1>
+                {[USER_ROLES.ADMIN].includes(user.role)
+                  ? "Todos favoritos"
+                  : "Meus favoritos"}
+              </h1>
+            ) : null}
 
-                <div>
-                  <Button title="Voltar a home" to="/" />
-                </div>
-              </NoFavorites>
-            ) : (
-              <NoFavorites>
-                <h2>Nenhum prato favorito foi encontrado</h2>
-                <p>
-                  Clique no botão favorito <FaHeart /> para{" "}
-                  <strong>Adicionar</strong> a essa página.
-                </p>
+            <ContainerFavorites>
+              {flagFavorites ? (
+                dataDishes.map((dish, index) => (
+                  <CartItem
+                    key={index}
+                    data={dish}
+                    onClick={() => handleClickCartItem(dish.id)}
+                  />
+                ))
+              ) : [USER_ROLES.ADMIN].includes(user.role) ? (
+                <NoFavorites>
+                  <h2>Nenhum prato favorito foi encontrado</h2>
+                  <p>
+                    Aguarde os clientes clicarem no botão favorito <FaHeart />{" "}
+                    para <strong>Adicionar</strong> a essa página.
+                  </p>
 
-                <div>
-                  <Button title="Voltar a home" to="/" />
-                </div>
-              </NoFavorites>
-            )}
-          </ContainerFavorites>
-        </Main>
-      </Content>
+                  <div>
+                    <Button title="Voltar a home" to="/" />
+                  </div>
+                </NoFavorites>
+              ) : (
+                <NoFavorites>
+                  <h2>Nenhum prato favorito foi encontrado</h2>
+                  <p>
+                    Clique no botão favorito <FaHeart /> para{" "}
+                    <strong>Adicionar</strong> a essa página.
+                  </p>
+
+                  <div>
+                    <Button title="Voltar a home" to="/" />
+                  </div>
+                </NoFavorites>
+              )}
+            </ContainerFavorites>
+          </Main>
+        </Content>
+      )}
       <Footer />
     </Container>
   )
