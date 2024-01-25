@@ -35,6 +35,7 @@ export function OrderStatus() {
         setOrderData(response.data.reverse())
       } catch (error) {
         if (error) {
+          setLoading(false)
           setFlagOrder(false)
         }
       }
