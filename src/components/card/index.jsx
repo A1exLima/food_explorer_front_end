@@ -110,6 +110,8 @@ export default function Card({
 
       quantityOfItemsInTheCart(sumCount)
     }
+
+    
   }
 
   function handleClickCounter(e) {

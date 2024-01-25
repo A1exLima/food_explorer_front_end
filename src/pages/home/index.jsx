@@ -18,7 +18,16 @@ import cookieFruit from "../../assets/images/cookieFruit.png"
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 
+import MessageAlert from "../../components/messageAlert"
+import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
+
 export function Home() {
+  const [alertMessage, setAlertMessage] = useState("")
+  const [color, setColor] = useState(false)
+  const [messageDisplayTime, setMessageDisplayTime] = useState(
+    configDisplayTimerMessageAlert.timer
+  )
+
   const navigate = useNavigate()
 
   const [searchValue, setSearchValue] = useState("")
@@ -78,8 +87,31 @@ export function Home() {
     fetchDish()
   }, [searchValue, category])
 
+  useEffect(() => {
+    setColor(false)
+    setAlertMessage("")
+
+    if (quantityOfItemsInTheCart !== 0) {
+      setTimeout(() => {
+        setColor(true)
+        setAlertMessage("Pedido adicionado ao carrinho")
+      }, 1000)
+    }
+
+    setTimeout(() => {
+      setColor(false)
+      setAlertMessage("")
+    }, messageDisplayTime + 1250)
+  }, [quantityOfItemsInTheCart])
+
   return (
     <Container>
+      <MessageAlert
+        message={alertMessage}
+        $color={color}
+        $messageDisplayTime={messageDisplayTime}
+      />
+
       <Header
         qtdOrders={quantityOfItemsInTheCart}
         search={handleSearchInputChange}
