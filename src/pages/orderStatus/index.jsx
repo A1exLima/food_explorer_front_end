@@ -27,12 +27,11 @@ export function OrderStatus() {
   }
 
   useEffect(() => {
-    setLoading(true)
     const fetchData = async () => {
       try {
         const response = await api.get("/checkout")
         setLoading(false)
-        
+
         setOrderData(response.data.reverse())
       } catch (error) {
         if (error) {
