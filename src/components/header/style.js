@@ -10,6 +10,7 @@ export const Container = styled.header`
   display: flex;
   justify-content: center;
   background: ${({ theme }) => theme.COLORS.Dark600};
+  user-select: none;
 `
 
 export const SideMenu = styled.div`

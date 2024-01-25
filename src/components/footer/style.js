@@ -4,6 +4,7 @@ import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakPoints"
 export const Container = styled.footer`
   width: 100%;
   background: ${({ theme }) => theme.COLORS.Dark600};
+  user-select: none;
 `
 
 export const Content = styled.div`
