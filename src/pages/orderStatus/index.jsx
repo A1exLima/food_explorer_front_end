@@ -34,7 +34,7 @@ export function OrderStatus() {
 
         setTimeout(() => {
           setLoading(false)
-        }, 500)
+        }, 800)
 
         setOrderData(response.data.reverse())
       } catch (error) {
