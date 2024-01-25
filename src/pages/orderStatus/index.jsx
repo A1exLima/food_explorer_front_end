@@ -31,11 +31,8 @@ export function OrderStatus() {
     const fetchData = async () => {
       try {
         const response = await api.get("/checkout")
-
-        setTimeout(() => {
-          setLoading(false)
-        }, 800)
-
+        setLoading(false)
+        
         setOrderData(response.data.reverse())
       } catch (error) {
         if (error) {

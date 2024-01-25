@@ -76,10 +76,8 @@ export function DetailsOrder() {
     const getOrderAndItemsOrderById = async () => {
       const response = await api.get(`/checkout/${id}`)
 
-      setTimeout(() => {
-        setLoading(false)
-      }, 500)
-      
+      setLoading(false)
+
       setOrder(response.data.order[0])
       setItemsOrder(response.data.itemsOrder)
       setUserIdWithinThePurchaseOrder(response.data.order[0].user_id)
