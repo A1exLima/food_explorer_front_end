@@ -137,6 +137,7 @@ export default function Header({
             placeholder="Busque por pratos ou ingredientes"
             onChange={handleSearch}
             onClick={clearSearch}
+            research={closeMenuSideBar}
             value={valueSearch}
             $toAppearCloseButton={valueSearch}
             $openSearch={toggleMenu}

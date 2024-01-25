@@ -23,7 +23,16 @@ export const Container = styled.div`
 
     > svg:first-child {
       font-size: 2.2rem;
-      color: ${({ theme }) => theme.COLORS.Light400};
+      color: ${({ theme, $toAppearCloseButton }) =>
+        $toAppearCloseButton
+          ? theme.COLORS.TintsCarrot200
+          : theme.COLORS.Light400};
+      cursor: pointer;
+
+      transition: all .4s ease-in-out;
+      &:hover{
+        transform: scale(1.1);
+      }
     }
   }
 
@@ -96,7 +105,8 @@ export const Category = styled.div`
     position: absolute;
     bottom: -2.7rem;
     left: 0;
-    display: ${({ $hideCategoryMenu }) => $hideCategoryMenu ? "none" : "flex"};
+    display: ${({ $hideCategoryMenu }) =>
+      $hideCategoryMenu ? "none" : "flex"};
     gap: 1rem;
 
     animation: blink 1s ease-in-out;

@@ -1,9 +1,6 @@
 import { Container, Category } from "./style"
-
-import { FaTags } from "react-icons/fa6"
-import { FaMagnifyingGlass } from "react-icons/fa6"
+import { FaTags, FaMagnifyingGlass } from "react-icons/fa6"
 import { IoClose } from "react-icons/io5"
-
 import { useEffect, useState } from "react"
 
 export default function Search({
@@ -12,10 +9,10 @@ export default function Search({
   $openSearch,
   onClick,
   changingCategoryValues,
+  research,
   ...rest
 }) {
   const [hideCategoryMenu, setHideCategoryMenu] = useState(true)
-
   const [snack, setSnack] = useState("")
   const [dessert, setDessert] = useState("")
   const [drink, setDrink] = useState("")
@@ -52,6 +49,12 @@ export default function Search({
     changingCategoryValues({ snack, dessert, drink })
   }, [snack, dessert, drink])
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      research()
+    }
+  }
+
   return (
     <Container
       $user={$user}
@@ -59,9 +62,9 @@ export default function Search({
       $openSearch={$openSearch}
     >
       <div>
-        <FaMagnifyingGlass />
+        <FaMagnifyingGlass onClick={$toAppearCloseButton ? research : null} />
       </div>
-      <input {...rest} />
+      <input {...rest} onKeyDown={handleKeyDown} />
 
       <IoClose onClick={onClick} />
 
