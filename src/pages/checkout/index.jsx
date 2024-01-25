@@ -90,6 +90,8 @@ export function Checkout() {
     useState("")
 
   const [commentsRequest, setCommentsRequest] = useState("")
+  
+  const [loading, setLoading] = useState(true)
 
   const navigate = useNavigate()
 
@@ -318,8 +320,8 @@ export function Checkout() {
 
     try {
       const response = await api.post("/checkout", finalizedOrderForm)
-      
-      if(response.data){
+
+      if (response.data) {
         setColor(true)
         setAlertMessage("Pedido finalizado com sucesso")
       }
@@ -388,6 +390,7 @@ export function Checkout() {
     const fetchAddress = async () => {
       try {
         const response = await api.get("/address")
+        setLoading(false)
         setAddress(response.data)
       } catch (error) {
         setAddress(false)
@@ -412,6 +415,11 @@ export function Checkout() {
 
       <Header />
 
+      {loading ? (
+        <div className="notFound">
+          <AiOutlineLoading3Quarters />
+        </div>
+      ) : (
       <Content>
         <Main>
           <ContentCheckout>
@@ -708,7 +716,7 @@ export function Checkout() {
             </ContentForm>
           </ContentCheckout>
         </Main>
-      </Content>
+      </Content>)}
       <Footer />
     </Container>
   )

@@ -17,6 +17,7 @@ import MessageAlert from "../../components/messageAlert"
 import { configDisplayTimerMessageAlert } from "../../configs/messageAlert"
 
 import { FaRegAddressCard } from "react-icons/fa"
+import { AiOutlineLoading3Quarters } from "react-icons/ai"
 
 import { Link, useNavigate } from "react-router-dom"
 
@@ -29,7 +30,8 @@ export function Orders() {
   const [subtotal, setSubtotal] = useState(0)
   const [flagSubtotal, setFlagSubtotal] = useState(false)
   const [flagDeleteItem, setFlagDeleteItem] = useState(false)
-  const [quantityOfItemsInTheCart, setQuantityOfItemsInTheCart] = useState(false)
+  const [quantityOfItemsInTheCart, setQuantityOfItemsInTheCart] =
+    useState(false)
   const [economicShippingOption, setEconomicShippingOption] = useState(true)
   const [freeShippingOption, setFreeShippingOption] = useState(false)
   const [shippingValue, setShippingValue] = useState(9.9)
@@ -41,8 +43,9 @@ export function Orders() {
   const [messageDisplayTime, setMessageDisplayTime] = useState(
     configDisplayTimerMessageAlert.timer
   )
-
   const [waiting, setWaiting] = useState(true)
+
+  const [loading, setLoading] = useState(true)
 
   const navigate = useNavigate()
 
@@ -99,30 +102,33 @@ export function Orders() {
         setWaiting(true)
         setAlertMessage("")
 
-        localStorage.setItem("@foodExplorer:shippingValue", JSON.stringify(shippingValue))
+        localStorage.setItem(
+          "@foodExplorer:shippingValue",
+          JSON.stringify(shippingValue)
+        )
         navigate(`/checkout`)
       }, 250)
     }
   }
 
-  useLayoutEffect(()=> {
+  useLayoutEffect(() => {
     const shippingValue = localStorage.getItem("@foodExplorer:shippingValue")
 
-    if(shippingValue == null || shippingValue > 0 ){
+    if (shippingValue == null || shippingValue > 0) {
       setEconomicShippingOption(true)
       setFreeShippingOption(false)
-    }else{
+    } else {
       setFreeShippingOption(true)
       setEconomicShippingOption(false)
       setShippingValue(0)
     }
-
   }, [])
 
   useEffect(() => {
     const fetchAddress = async () => {
       try {
         const response = await api.get("/address")
+        setLoading(false)
         setAddress(response.data)
       } catch (error) {
         setAddress(false)
@@ -167,6 +173,12 @@ export function Orders() {
       />
 
       <Header qtdOrders={quantityOfItemsInTheCart} />
+
+      {loading ? (
+        <div className="notFound">
+          <AiOutlineLoading3Quarters />
+        </div>
+      ) : (
 
       <Content>
         <Main>
@@ -320,8 +332,9 @@ export function Orders() {
             <EmptyCart>
               <h2>Seu Carrinho está vazio</h2>
               <p>
-                Adicione pratos clicando no botão <strong>Pedir ou Incluir</strong> na
-                página de pratos ou na home.
+                Adicione pratos clicando no botão{" "}
+                <strong>Pedir ou Incluir</strong> na página de pratos ou na
+                home.
               </p>
 
               <div>
@@ -330,7 +343,7 @@ export function Orders() {
             </EmptyCart>
           )}
         </Main>
-      </Content>
+      </Content>)}
       <Footer />
     </Container>
   )
