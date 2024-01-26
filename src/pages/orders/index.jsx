@@ -163,6 +163,7 @@ export function Orders() {
       )
       setSubtotal(subtotal.toFixed(2).replace(".", ","))
       setQuantityOfItemsInTheCart(cartItems)
+      setLoading(false)
     }
   }, [flagSubtotal, flagDeleteItem])
 
