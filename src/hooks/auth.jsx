@@ -79,7 +79,16 @@ function AuthProvider({ children }) {
     try {
       const response = await api.put("/users", formUser)
       const user = response.data
-      localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
+
+      const userUpdateData = {
+        id: response.data.id,
+        name: response.data.name,
+        email: response.data.email,
+        avatar: response.data.avatar,
+        role: response.data.role,
+      }
+      
+      localStorage.setItem("@foodExplorer:user", JSON.stringify(userUpdateData))
 
       setTimeout(() => {
         setData({ user, token: data.token })
