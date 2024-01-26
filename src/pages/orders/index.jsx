@@ -132,6 +132,7 @@ export function Orders() {
         setAddress(response.data)
       } catch (error) {
         setAddress(false)
+        setLoading(false)
       }
     }
 
@@ -179,171 +180,171 @@ export function Orders() {
           <AiOutlineLoading3Quarters />
         </div>
       ) : (
+        <Content>
+          <Main>
+            {cartItems.length > 0 ? (
+              <FullCart>
+                <h1>Meu Carrinho</h1>
 
-      <Content>
-        <Main>
-          {cartItems.length > 0 ? (
-            <FullCart>
-              <h1>Meu Carrinho</h1>
+                {cartItems.map((item, index) => (
+                  <CartItem
+                    key={index}
+                    data={item}
+                    onValueChangeSubtotal={handleValueChangeSubtotal}
+                    flagDeleteItem={handleValueChangeDelete}
+                  />
+                ))}
 
-              {cartItems.map((item, index) => (
-                <CartItem
-                  key={index}
-                  data={item}
-                  onValueChangeSubtotal={handleValueChangeSubtotal}
-                  flagDeleteItem={handleValueChangeDelete}
-                />
-              ))}
+                <ContainerPricesAndShipping>
+                  <div>
+                    <div className="shipping-method">
+                      <h2>Confirme o endereço</h2>
 
-              <ContainerPricesAndShipping>
-                <div>
-                  <div className="shipping-method">
-                    <h2>Confirme o endereço</h2>
-
-                    <div>
                       <div>
-                        {address.cep === "" || address === false ? (
+                        <div>
+                          {address.cep === "" || address === false ? (
+                            <>
+                              <Link to="/profile">
+                                <FaRegAddressCard />
+                              </Link>
+                            </>
+                          ) : (
+                            <>
+                              <p>{`${address.city} - ${address.country}`}</p>
+                              <p>{`${address.street}, ${address.number}`}</p>
+                              <p>{address.complement}</p>
+                              <p>{address.cep}</p>
+                            </>
+                          )}
+                        </div>
+
+                        <ButtonText
+                          title={
+                            address.cep === "" || address === false
+                              ? "cadastre um endereço"
+                              : "atualize o endereço"
+                          }
+                          to={"/profile"}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="price-summary">
+                      <h2>Resumo do pedido</h2>
+                      <div>
+                        <p>Subtotal</p>
+                        <p>{`R$ ${subtotal}`}</p>
+                      </div>
+                      <div>
+                        {economicShippingOption ? (
                           <>
-                            <Link to="/profile">
-                              <FaRegAddressCard />
-                            </Link>
+                            <p>Frete (econômico)</p>
+                            <p>{`R$ ${shippingValue
+                              .toFixed(2)
+                              .replace(".", ",")}`}</p>
                           </>
                         ) : (
                           <>
-                            <p>{`${address.city} - ${address.country}`}</p>
-                            <p>{`${address.street}, ${address.number}`}</p>
-                            <p>{address.complement}</p>
-                            <p>{address.cep}</p>
+                            <p>Frete (grátis)</p>
+                            <p>{`R$ ${shippingValue
+                              .toFixed(2)
+                              .replace(".", ",")}`}</p>
                           </>
                         )}
                       </div>
-
-                      <ButtonText
-                        title={
-                          address.cep === "" || address === false
-                            ? "cadastre um endereço"
-                            : "atualize o endereço"
-                        }
-                        to={"/profile"}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="price-summary">
-                    <h2>Resumo do pedido</h2>
-                    <div>
-                      <p>Subtotal</p>
-                      <p>{`R$ ${subtotal}`}</p>
-                    </div>
-                    <div>
-                      {economicShippingOption ? (
-                        <>
-                          <p>Frete (econômico)</p>
-                          <p>{`R$ ${shippingValue
-                            .toFixed(2)
-                            .replace(".", ",")}`}</p>
-                        </>
-                      ) : (
-                        <>
-                          <p>Frete (grátis)</p>
-                          <p>{`R$ ${shippingValue
-                            .toFixed(2)
-                            .replace(".", ",")}`}</p>
-                        </>
-                      )}
-                    </div>
-                    <div>
-                      <p>Total do pedido</p>
-                      <p>{`R$ ${totalOrder}`}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="shipping">
-                  <h2>Selecione uma forma de envio</h2>
-
-                  <div
-                    className="economical-shipping"
-                    onClick={handleCheckBoxEconomicalShipping}
-                  >
-                    <label className="checkbox-container">
-                      <input
-                        type="checkbox"
-                        checked={economicShippingOption}
-                        disabled
-                      />
-                      <span className="checkmark"></span>
-                    </label>
-
-                    <div>
                       <div>
-                        <p>Econômico</p>
-                        <p>
-                          3 dias úteis.{" "}
-                          <span className="shipping-instructions">
-                            Obs: Pedidos realizados após as 14h30, é adicionado
-                            + 1 dia útil.
-                          </span>
-                        </p>
+                        <p>Total do pedido</p>
+                        <p>{`R$ ${totalOrder}`}</p>
                       </div>
-                      <p>R$9,90</p>
                     </div>
                   </div>
 
-                  <div
-                    className="free-shipping"
-                    onClick={handleFreeShippingOption}
-                  >
-                    <label className="checkbox-container">
-                      <input
-                        type="checkbox"
-                        checked={freeShippingOption}
-                        disabled
-                      />
-                      <span className="checkmark"></span>
-                    </label>
+                  <div className="shipping">
+                    <h2>Selecione uma forma de envio</h2>
 
-                    <div>
+                    <div
+                      className="economical-shipping"
+                      onClick={handleCheckBoxEconomicalShipping}
+                    >
+                      <label className="checkbox-container">
+                        <input
+                          type="checkbox"
+                          checked={economicShippingOption}
+                          disabled
+                        />
+                        <span className="checkmark"></span>
+                      </label>
+
                       <div>
-                        <p>Frete Grátis</p>
-                        <p>
-                          7 dias úteis.{" "}
-                          <span className="shipping-instructions">
-                            Obs: Pedidos realizados após as 14h30, é adicionado
-                            + 1 dia útil.
-                          </span>
-                        </p>
+                        <div>
+                          <p>Econômico</p>
+                          <p>
+                            3 dias úteis.{" "}
+                            <span className="shipping-instructions">
+                              Obs: Pedidos realizados após as 14h30, é
+                              adicionado + 1 dia útil.
+                            </span>
+                          </p>
+                        </div>
+                        <p>R$9,90</p>
                       </div>
-                      <p>Grátis</p>
+                    </div>
+
+                    <div
+                      className="free-shipping"
+                      onClick={handleFreeShippingOption}
+                    >
+                      <label className="checkbox-container">
+                        <input
+                          type="checkbox"
+                          checked={freeShippingOption}
+                          disabled
+                        />
+                        <span className="checkmark"></span>
+                      </label>
+
+                      <div>
+                        <div>
+                          <p>Frete Grátis</p>
+                          <p>
+                            7 dias úteis.{" "}
+                            <span className="shipping-instructions">
+                              Obs: Pedidos realizados após as 14h30, é
+                              adicionado + 1 dia útil.
+                            </span>
+                          </p>
+                        </div>
+                        <p>Grátis</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+
+                  <div>
+                    <Button
+                      $loading={!waiting}
+                      onClick={waiting ? handleOrderSaving : null}
+                      title={"Continuar"}
+                    />
+                  </div>
+                </ContainerPricesAndShipping>
+              </FullCart>
+            ) : (
+              <EmptyCart>
+                <h2>Seu Carrinho está vazio</h2>
+                <p>
+                  Adicione pratos clicando no botão{" "}
+                  <strong>Pedir ou Incluir</strong> na página de pratos ou na
+                  home.
+                </p>
 
                 <div>
-                  <Button
-                    $loading={!waiting}
-                    onClick={waiting ? handleOrderSaving : null}
-                    title={"Continuar"}
-                  />
+                  <Button title="Buscar Pratos" to="/" />
                 </div>
-              </ContainerPricesAndShipping>
-            </FullCart>
-          ) : (
-            <EmptyCart>
-              <h2>Seu Carrinho está vazio</h2>
-              <p>
-                Adicione pratos clicando no botão{" "}
-                <strong>Pedir ou Incluir</strong> na página de pratos ou na
-                home.
-              </p>
-
-              <div>
-                <Button title="Buscar Pratos" to="/" />
-              </div>
-            </EmptyCart>
-          )}
-        </Main>
-      </Content>)}
+              </EmptyCart>
+            )}
+          </Main>
+        </Content>
+      )}
       <Footer />
     </Container>
   )
