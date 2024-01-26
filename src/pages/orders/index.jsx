@@ -133,6 +133,7 @@ export function Orders() {
       } catch (error) {
         setAddress(false)
         setLoading(false)
+        console.error(error.response.data.message)
       }
     }
 
