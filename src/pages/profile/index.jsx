@@ -42,10 +42,10 @@ export function Profile() {
   const [email, setEmail] = useState(user.email)
   const [validEmail, setValidEmail] = useState(true)
 
-  const [oldPassword, setOldPassword] = useState(user.password)
+  const [oldPassword, setOldPassword] = useState(false)
   const [validOldPassword, setValidOldPassword] = useState(true)
 
-  const [newPassword, setNewPassword] = useState(user.password)
+  const [newPassword, setNewPassword] = useState(false)
   const [validNewPassword, setValidNewPassword] = useState(true)
 
   const [street, setStreet] = useState("")
@@ -153,7 +153,7 @@ export function Profile() {
     if (oldPassword === "") {
       setValidOldPassword(true)
       setValidNewPassword(true)
-      setOldPassword(user.password)
+      setOldPassword(false)
     } else {
       if (newPassword === user.password) {
         setValidNewPassword(false)
@@ -170,7 +170,7 @@ export function Profile() {
     if (newPassword === "") {
       setValidNewPassword(true)
       setValidOldPassword(true)
-      setNewPassword(user.password)
+      setNewPassword(false)
     } else {
       if (oldPassword === user.password) {
         setValidOldPassword(false)
@@ -242,9 +242,10 @@ export function Profile() {
         newPassword,
       }
 
+      console.log(oldPassword, newPassword)
+
       const user = await updateProfile(formUser, avatarFile)
       if (typeof user === "object") {
-        
         if (validCep && address) {
           const formAddress = {
             street,

@@ -7,7 +7,8 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     caret-color: transparent;
-  }
+    
+  } 
 
   :root{
     font-size: 62.5%;

@@ -30,15 +30,7 @@ function AuthProvider({ children }) {
         setColor(true)
       }
 
-      const userData = {
-        id: response.data.user.id,
-        name: response.data.user.name,
-        email: response.data.user.email,
-        avatar: response.data.user.avatar,
-        role: response.data.user.role,
-      }
-
-      localStorage.setItem("@foodExplorer:user", JSON.stringify(userData))
+      localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
       localStorage.setItem("@foodExplorer:token", token)
 
       setTimeout(() => {
@@ -68,6 +60,8 @@ function AuthProvider({ children }) {
   }
 
   async function updateProfile(formUser, avatarFile) {
+    console.log(formUser)
+     
     if (avatarFile) {
       const fileUploadForm = new FormData()
       fileUploadForm.append("avatar", avatarFile)
@@ -80,15 +74,7 @@ function AuthProvider({ children }) {
       const response = await api.put("/users", formUser)
       const user = response.data
 
-      const userUpdateData = {
-        id: response.data.id,
-        name: response.data.name,
-        email: response.data.email,
-        avatar: response.data.avatar,
-        role: response.data.role,
-      }
-      
-      localStorage.setItem("@foodExplorer:user", JSON.stringify(userUpdateData))
+      localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
 
       setTimeout(() => {
         setData({ user, token: data.token })
