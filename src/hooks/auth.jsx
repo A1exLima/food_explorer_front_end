@@ -6,7 +6,6 @@ export const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
-
   const [alertMessage, setAlertMessage] = useState("")
   const [color, setColor] = useState(false)
 
@@ -23,19 +22,16 @@ function AuthProvider({ children }) {
 
     try {
       const response = await api.post("/sessions", { email, password })
-      const { user, token } = response.data
-
-      if (user && token) {
+      const { user } = response.data
+      if (user) {
         setAlertMessage(`Bem vindo ${user.name}`)
         setColor(true)
       }
 
       localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
-      localStorage.setItem("@foodExplorer:token", token)
 
       setTimeout(() => {
-        api.defaults.headers.common["Authorization"] = `Bearer ${token}`
-        setData({ user, token })
+        setData({ user })
       }, configDisplayTimerMessageAlert.timer + 250)
     } catch (error) {
       if (error.response) {
@@ -48,10 +44,9 @@ function AuthProvider({ children }) {
 
   function signOut() {
     const user = localStorage.removeItem("@foodExplorer:user")
-    const token = localStorage.removeItem("@foodExplorer:token")
     localStorage.removeItem("@foodExplorer:cartItems")
 
-    setData({ user, token })
+    setData({ user })
 
     setTimeout(() => {
       setAlertMessage("Volte sempre !")
@@ -60,8 +55,6 @@ function AuthProvider({ children }) {
   }
 
   async function updateProfile(formUser, avatarFile) {
-    console.log(formUser)
-     
     if (avatarFile) {
       const fileUploadForm = new FormData()
       fileUploadForm.append("avatar", avatarFile)
@@ -77,7 +70,7 @@ function AuthProvider({ children }) {
       localStorage.setItem("@foodExplorer:user", JSON.stringify(user))
 
       setTimeout(() => {
-        setData({ user, token: data.token })
+        setData({ user })
       }, configDisplayTimerMessageAlert.timer + 250)
 
       return response.data
@@ -92,13 +85,9 @@ function AuthProvider({ children }) {
 
   useLayoutEffect(() => {
     const user = localStorage.getItem("@foodExplorer:user")
-    const token = localStorage.getItem("@foodExplorer:token")
 
-    if (token && user) {
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`
-
+    if (user) {
       setData({
-        token,
         user: JSON.parse(user),
       })
     }

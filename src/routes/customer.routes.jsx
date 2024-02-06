@@ -14,7 +14,7 @@ import { Favorites } from "../pages/favorites"
 import { useAuth } from "../hooks/auth"
 
 export function CustomerRoutes() {
-  const { user, dishRedirection, redirectionDish, setBack } = useAuth()
+  const { user, dishRedirection, redirectionDish } = useAuth()
   const dish = dishRedirection
 
   useEffect(() => {

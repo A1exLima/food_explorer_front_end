@@ -242,8 +242,6 @@ export function Profile() {
         newPassword,
       }
 
-      console.log(oldPassword, newPassword)
-
       const user = await updateProfile(formUser, avatarFile)
       if (typeof user === "object") {
         if (validCep && address) {
